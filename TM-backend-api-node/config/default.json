@@ -1,0 +1,5 @@
+{
+  "jwtPrivateKey": "secretKey_mihindu",
+  "db": "mongodb://localhost/TM",
+  "enableAuth": true
+}
