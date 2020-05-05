@@ -1,39 +1,39 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { getProjects } from "../services/fake1ProjectService";
-class MyProjects extends Component {
+import { getBaskets } from "../services/fake2BasketService";
+
+class Project extends Component {
   state = {
-    projects: [],
+    baskets: [],
   };
   componentDidMount() {
-    this.setState({ projects: getProjects() });
+    //this.setState({ baskets: getBaskets() });
+    var baskets = getBaskets();
+    var filtered = baskets.filter((basket) => {
+      return basket.project._id == this.props.match.params.id;
+    });
+    this.setState({ baskets: filtered });
   }
+
   render() {
-    if (this.state.projects.length === 0)
-      return <p>There are no Projects yet</p>;
+    if (this.state.baskets.length === 0) return <p>There are no baskets yet</p>;
     return (
       <div>
-        <h1>My Projects</h1>
+        <h1>Current Projects</h1>
         <div className="row">
           <table className="table container">
             <thead>
               <tr>
-                <th>Name</th>
-                <th>Description</th>
-                {/* <th>Moderators</th>
-                <th>Members</th> */}
-                <th></th>
+                <th>Baskets</th>
               </tr>
             </thead>
             <tbody>
-              {this.state.projects.map((project) => (
-                <tr key={project._id}>
+              {this.state.baskets.map((basket) => (
+                <tr key={basket._id}>
                   <td>
-                    <Link to={`/myprojects/${project._id}`}>
-                      {project.name}
-                    </Link>
+                    <Link to={`/mybaskets/${basket._id}`}>{basket.name}</Link>
                   </td>
-                  <td>{project.description}</td>
+
                   <td>
                     <button
                       //   onClick={() => this.handleEdit(project)}
@@ -60,4 +60,4 @@ class MyProjects extends Component {
   }
 }
 
-export default MyProjects;
+export default Project;

@@ -1,8 +1,10 @@
 import React from "react";
 //import logo from "./logo.svg";
 import { Route, Switch, Redirect } from "react-router-dom";
-import MyProjects from "./components/myprojects";
 import NavBar from "./components/navBar";
+import MyProjects from "./components/myprojects";
+import Project from "./components/project";
+import NotFound from "./components/notFound";
 
 import "./App.css";
 
@@ -12,8 +14,12 @@ function App() {
       <NavBar />
       <header className="App-header">
         <Switch>
-          <Route path="/myprojects" component={MyProjects} />
+          <Route exact path="/myprojects" component={MyProjects} />
+          <Route path="/myprojects/:id" component={Project} />
           <Redirect exact from="/" to="/myprojects" />
+          <Route path="/notFound" component={NotFound} />
+
+          <Redirect to="notFound" />
         </Switch>
       </header>
     </div>

@@ -42,7 +42,7 @@ export function saveBasket(basket) {
   let basketInDb = baskets.find((m) => m._id === basket._id) || {};
   basketInDb.name = basket.name;
   basketInDb.project = projectsAPI.projects.find(
-    (g) => g._id === project.projectId
+    (g) => g._id === basket.projectId
   );
 
   if (!basketInDb._id) {
