@@ -2,3 +2,7 @@
 {"level":"info","message":"Connected to mongodb://localhost/TM...","timestamp":"2020-05-04T09:36:04.376Z"}
 {"level":"info","message":"Listening on port 3700...","timestamp":"2020-05-04T09:42:41.890Z"}
 {"level":"info","message":"Connected to mongodb://localhost/TM...","timestamp":"2020-05-04T09:42:43.909Z"}
+{"level":"info","message":"Listening on port 3700...","timestamp":"2020-05-05T17:19:53.912Z"}
+{"level":"info","message":"Connected to mongodb://localhost/TM...","timestamp":"2020-05-05T17:19:55.940Z"}
+{"level":"info","message":"Listening on port 3700...","timestamp":"2020-05-05T17:21:00.608Z"}
+{"level":"info","message":"Connected to mongodb://localhost/TM...","timestamp":"2020-05-05T17:21:02.631Z"}

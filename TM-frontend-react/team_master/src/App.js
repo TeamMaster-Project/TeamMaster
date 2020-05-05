@@ -18,6 +18,7 @@ import "./App.css";
 function App() {
   return (
     <div>
+      <ToastContainer />
       <NavBar />
       <header className="container">
         <Switch>
