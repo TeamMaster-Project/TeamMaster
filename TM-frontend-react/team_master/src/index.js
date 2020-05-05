@@ -3,13 +3,17 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
+import { BrowserRouter } from "react-router-dom";
+import * as ReactBootstrap from "react-bootstrap";
 import "font-awesome/css/font-awesome.css";
 import "bootstrap/dist/css/bootstrap.css";
+//import "../node_modules/jquery/dist/jquery.min.js";
+//import "bootstrap/js/dist/collapse.js";
 
 ReactDOM.render(
-  <React.StrictMode>
+  <BrowserRouter>
     <App />
-  </React.StrictMode>,
+  </BrowserRouter>,
   document.getElementById("root")
 );
 
