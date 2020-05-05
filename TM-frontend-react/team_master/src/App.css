@@ -1,7 +1,10 @@
-.App {
+/* .App {
+  text-align: center;
+} */
+
+h1 {
   text-align: center;
 }
-
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -14,16 +17,25 @@
 }
 
 .App-header {
-  background-color: #e9eaec;
+  background-color: #f1f1f1;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: left;
+  align-items: center;
   /* justify-content: center; */
   font-size: calc(2px + 2vmin);
   color: black;
 }
 
+.newproject {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(2px + 2vmin);
+  color: black;
+}
 .projectName {
   color: blue;
 }

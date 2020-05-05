@@ -3,7 +3,7 @@ import * as projectsAPI from "./fake1ProjectService";
 const baskets = [
   {
     _id: "5b21ca3eeb7f6fbccd471815",
-    name: "TODO tasks",
+    name: "TODO Basket",
     project: {
       _id: "5b21ca3eeb7f6fbccd471818",
       name: "Design Project",
@@ -12,7 +12,7 @@ const baskets = [
   },
   {
     _id: "5b21ca3eeb7f6fbccd471816",
-    name: "DOING tasks",
+    name: "DOING Basket",
     project: {
       _id: "5b21ca3eeb7f6fbccd471818",
       name: "Design Project",
@@ -21,7 +21,7 @@ const baskets = [
   },
   {
     _id: "5b21ca3eeb7f6fbccd471819",
-    name: "DONE tasks",
+    name: "DONE Basket",
     project: {
       _id: "5b21ca3eeb7f6fbccd471818",
       name: "Design Project",
