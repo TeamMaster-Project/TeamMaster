@@ -1,9 +1,11 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { getBaskets } from "../services/fake2BasketService";
+import "../App.css";
 
 class Project extends Component {
   state = {
+    projectName: "",
     baskets: [],
   };
   componentDidMount() {
@@ -19,7 +21,10 @@ class Project extends Component {
     if (this.state.baskets.length === 0) return <p>There are no baskets yet</p>;
     return (
       <div>
-        <h1>Current Projects</h1>
+        <h1>
+          Project -{" "}
+          <span className="projectName">{this.props.match.params.name}</span>{" "}
+        </h1>
         <div className="row">
           <table className="table container">
             <thead>

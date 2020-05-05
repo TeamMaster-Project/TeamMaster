@@ -15,7 +15,7 @@ function App() {
       <header className="App-header">
         <Switch>
           <Route exact path="/myprojects" component={MyProjects} />
-          <Route path="/myprojects/:id" component={Project} />
+          <Route path="/myprojects/:id/:name" component={Project} />
           <Redirect exact from="/" to="/myprojects" />
           <Route path="/notFound" component={NotFound} />
 

@@ -29,7 +29,7 @@ class MyProjects extends Component {
               {this.state.projects.map((project) => (
                 <tr key={project._id}>
                   <td>
-                    <Link to={`/myprojects/${project._id}`}>
+                    <Link to={`/myprojects/${project._id}/${project.name}`}>
                       {project.name}
                     </Link>
                   </td>
