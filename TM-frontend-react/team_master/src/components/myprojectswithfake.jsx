@@ -1,38 +1,21 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-//import { getProjects } from "../services/fake1ProjectService";
-import { getProjects, deleteProject } from "../services/projectService";
-import { toast } from "react-toastify";
-
+import { getProjects } from "../services/fake1ProjectService";
 class MyProjects extends Component {
   state = {
     projects: [],
   };
-  async componentDidMount() {
-    const { data: projects } = await getProjects();
-    this.setState({ projects });
+  componentDidMount() {
+    this.setState({ projects: getProjects() });
   }
-
-  handleDelete = async (project) => {
-    //console.log(project);//Delete Projects
-    const originalProjects = this.state.projects;
-    const projects = originalProjects.filter((m) => m._id !== project._id);
+  handleDelete = (project) => {
+    //console.log(project);
+    const projects = this.state.projects.filter((m) => m._id !== project._id);
     this.setState({ projects: projects }); //projects object array override by projects
-
-    try {
-      await deleteProject(project._id);
-    } catch (ex) {
-      if (ex.response && ex.response.status === 404)
-        toast.error("This Project Is Already Deleted");
-
-      this.setState({ projects: originalProjects });
-    }
   };
   render() {
     if (this.state.projects.length === 0)
       return <p>There are no Projects yet</p>;
-
-    console.log(this.state.projects);
     return (
       <div className="container">
         <h1>My Projects</h1>
@@ -45,6 +28,22 @@ class MyProjects extends Component {
             New Project
           </Link>
         </h1>
+        {/* <div className="row">
+          <div
+            className="card text-white bg-primary mb-3 m-2 col-sm col-md-4"
+            style={{ maxWidth: "18rem" }}
+          >
+            <div className="card-header">Header</div>
+            <div className="card-body">
+              <h5 className="card-title">Primary card title</h5>
+              <p className="card-text">
+                Some quick example text to build on the card title and make up
+                the bulk of the card's content.
+              </p>
+            </div>
+          </div>
+        </div> */}
+
         <div className="row">
           <table className="table">
             <thead>

@@ -48,6 +48,6 @@ function validateProject(project) {
   return Joi.validate(project, schema);
 }
 
-exports.projectSchema = projectSchema;
 exports.Project = Project;
 exports.validate = validateProject;
+exports.projectSchema = projectSchema;

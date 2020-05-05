@@ -5,6 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 
 import NavBar from "./components/navBar";
+// import MyProjects from "./components/myprojectswithfake";
 import MyProjects from "./components/myprojects";
 import Project from "./components/project";
 import NotFound from "./components/notFound";
