@@ -14,3 +14,5 @@
 {"level":"info","message":"Connected to mongodb://localhost/TM...","timestamp":"2020-05-05T18:41:18.743Z"}
 {"level":"info","message":"Listening on port 3700...","timestamp":"2020-05-05T18:50:50.296Z"}
 {"level":"info","message":"Connected to mongodb://localhost/TM...","timestamp":"2020-05-05T18:50:52.317Z"}
+{"level":"info","message":"Listening on port 3700...","timestamp":"2020-05-05T18:52:52.286Z"}
+{"level":"info","message":"Connected to mongodb://localhost/TM...","timestamp":"2020-05-05T18:52:54.308Z"}

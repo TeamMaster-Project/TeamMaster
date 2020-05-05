@@ -10,7 +10,7 @@ class MyProjects extends Component {
   };
   async componentDidMount() {
     const { data: projects } = await getProjects();
-    this.setState({ projects });
+    this.setState({ projects: projects });
   }
 
   handleDelete = async (project) => {

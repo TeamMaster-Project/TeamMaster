@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { getBaskets, deleteBasket } from "../services/basketService";
-import { toast } from "react-toastify";
+import { getBaskets } from "../services/fake2BasketService";
 import "../App.css";
 
 class Project extends Component {
@@ -9,32 +8,16 @@ class Project extends Component {
     projectName: "",
     baskets: [],
   };
-  async componentDidMount() {
-    const { data: baskets } = await getBaskets();
-
-    const filtered = baskets.filter((basket) => {
+  componentDidMount() {
+    //this.setState({ baskets: getBaskets() });
+    var baskets = getBaskets();
+    var filtered = baskets.filter((basket) => {
       return basket.project._id == this.props.match.params.id;
     });
     this.setState({ baskets: filtered });
   }
 
-  handleDelete = async (basket) => {
-    const originalBaskets = this.state.baskets;
-    const baskets = originalBaskets.filter((m) => m._id !== basket._id);
-    this.setState({ baskets: baskets }); //Baskets object override by baskets without the one we selected to delete
-
-    try {
-      await deleteBasket(basket._id);
-    } catch (ex) {
-      if (ex.response && ex.response.status === 404)
-        toast.error("This basket is already deleted"); //Expected error handle
-
-      this.setState({ basket: originalBaskets });
-    }
-  };
-
   render() {
-    console.log(this.state.baskets);
     if (this.state.baskets.length === 0) return <p>There are no baskets yet</p>;
     return (
       <div>
@@ -55,20 +38,21 @@ class Project extends Component {
                   <td>
                     <Link to={`/mybaskets/${basket._id}`}>{basket.name}</Link>
                   </td>
+
                   <td>
                     <button
                       //   onClick={() => this.handleEdit(project)}
                       className="btn btn-success btn-sm"
                     >
-                      Edit Basket
+                      Edit Project
                     </button>
                   </td>
                   <td>
                     <button
-                      onClick={() => this.handleDelete(basket)}
+                      //   onClick={() => this.handleDelete(project)}
                       className="btn btn-danger btn-sm"
                     >
-                      Delete Basket
+                      Delete
                     </button>
                   </td>
                 </tr>
