@@ -10,7 +10,7 @@ const NavBar = () => {
       bg="dark"
       variant="dark"
     >
-      <ReactBootstrap.Navbar.Brand href="#">
+      <ReactBootstrap.Navbar.Brand href="/">
         TeamMaster
       </ReactBootstrap.Navbar.Brand>
       <ReactBootstrap.Navbar.Toggle aria-controls="responsive-navbar-nav" />
