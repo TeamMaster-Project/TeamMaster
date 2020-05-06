@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { getBaskets, deleteBasket } from "../services/basketService";
 import { toast } from "react-toastify";
-import "../App.css";
+import "../styles/buttons/liquidbutton.css";
 
 class Project extends Component {
   state = {
@@ -10,12 +10,13 @@ class Project extends Component {
     baskets: [],
   };
   async componentDidMount() {
+    const projectName = this.props.location.projectName;
     const { data: baskets } = await getBaskets();
 
     const filtered = baskets.filter((basket) => {
       return basket.project._id == this.props.match.params.id;
     });
-    this.setState({ baskets: filtered });
+    this.setState({ baskets: filtered, projectName: projectName });
   }
 
   handleDelete = async (basket) => {
@@ -34,15 +35,49 @@ class Project extends Component {
   };
 
   render() {
-    console.log(this.state.baskets);
     if (this.state.baskets.length === 0) return <p>There are no baskets yet</p>;
     return (
       <div>
-        <h1>
-          Project -{" "}
-          <span className="projectName">{this.props.match.params.name}</span>{" "}
-        </h1>
-        <div className="row">
+        <div className="card text-center my-3 mx-5 projectsummery">
+          <div className="card-header">
+            <h3>{this.props.match.params.name}</h3>
+          </div>
+          <div className="card-body">
+            <p className="card-text">{this.props.location.description}</p>
+            <a href="#" className="btn btn-primary disabled">
+              Edit Project
+            </a>
+          </div>
+        </div>
+        <div className="container">
+          <div className="row">
+            <div className="col-md-4">
+              <button className="button instagram">
+                <span className="gradient"></span>
+                <Link
+                  to={{
+                    pathname: `/myprojects/${this.props.match.params.id}/${this.props.match.params.name}/new`,
+                  }}
+                  style={{ color: "white" }}
+                >
+                  New Task
+                </Link>
+              </button>
+            </div>
+            <div className="col-md-4">
+              <button className="button greenish">
+                <span className="gradient"></span>Add New Basket
+              </button>
+            </div>
+            <div className="col-md-4">
+              <button className="button greenish">
+                <span className="gradient"></span>Edit Baskets
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div className="container">
           <table className="table container">
             <thead>
               <tr>
@@ -52,16 +87,15 @@ class Project extends Component {
             <tbody>
               {this.state.baskets.map((basket) => (
                 <tr key={basket._id}>
+                  <td>{basket.name}</td>
                   <td>
-                    <Link to={`/mybaskets/${basket._id}`}>{basket.name}</Link>
-                  </td>
-                  <td>
-                    <button
-                      //   onClick={() => this.handleEdit(project)}
-                      className="btn btn-success btn-sm"
+                    <Link
+                      to={{
+                        pathname: `/myprojects/${this.props.match.params.id}/${this.props.match.params.name}/${basket._id}`,
+                      }}
                     >
-                      Edit Basket
-                    </button>
+                      Edit
+                    </Link>
                   </td>
                   <td>
                     <button

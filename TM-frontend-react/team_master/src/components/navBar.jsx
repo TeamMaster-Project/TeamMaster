@@ -1,14 +1,16 @@
 import React from "react";
 import * as ReactBootstrap from "react-bootstrap";
 import { Link, NavLink } from "react-router-dom";
+import "../App.css";
 
 const NavBar = () => {
   return (
     <ReactBootstrap.Navbar
       collapseOnSelect
-      expand="lg"
+      expand="md"
       bg="dark"
       variant="dark"
+      className="navbar"
     >
       <ReactBootstrap.Navbar.Brand href="/">
         TeamMaster
