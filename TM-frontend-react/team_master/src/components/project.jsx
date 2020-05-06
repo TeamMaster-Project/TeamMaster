@@ -53,6 +53,11 @@ class Project extends Component {
           <div className="row">
             <div className="col-md-4">
               <button className="button instagram">
+                <span className="gradient"></span>New Task
+              </button>
+            </div>
+            <div className="col-md-4">
+              <button className="button greenish">
                 <span className="gradient"></span>
                 <Link
                   to={{
@@ -60,13 +65,8 @@ class Project extends Component {
                   }}
                   style={{ color: "white" }}
                 >
-                  New Task
+                  Add New Basket
                 </Link>
-              </button>
-            </div>
-            <div className="col-md-4">
-              <button className="button greenish">
-                <span className="gradient"></span>Add New Basket
               </button>
             </div>
             <div className="col-md-4">
@@ -77,6 +77,7 @@ class Project extends Component {
           </div>
         </div>
 
+        <h3>Edit Baskets</h3>
         <div className="container">
           <table className="table container">
             <thead>
@@ -90,6 +91,7 @@ class Project extends Component {
                   <td>{basket.name}</td>
                   <td>
                     <Link
+                      className="btn btn-sm btn-light"
                       to={{
                         pathname: `/myprojects/${this.props.match.params.id}/${this.props.match.params.name}/${basket._id}`,
                       }}
@@ -110,6 +112,16 @@ class Project extends Component {
             </tbody>
           </table>
         </div>
+        <h3>Baskets With Tasks</h3>
+        {this.state.baskets.map((basket) => (
+          <table className="table container" key={basket._id}>
+            <thead>
+              <tr>
+                <th>{basket.name}</th>
+              </tr>
+            </thead>
+          </table>
+        ))}
       </div>
     );
   }
