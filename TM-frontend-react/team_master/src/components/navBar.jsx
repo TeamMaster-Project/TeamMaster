@@ -7,7 +7,7 @@ const NavBar = () => {
   return (
     <ReactBootstrap.Navbar
       collapseOnSelect
-      expand="md"
+      expand="lg"
       bg="dark"
       variant="dark"
       className="navbar"

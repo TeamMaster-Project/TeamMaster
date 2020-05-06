@@ -51,12 +51,12 @@ class Project extends Component {
         </div>
         <div className="container">
           <div className="row">
-            <div className="col-md-4">
+            <div className="col-md-4 col-sm-4">
               <button className="button instagram">
                 <span className="gradient"></span>New Task
               </button>
             </div>
-            <div className="col-md-4">
+            <div className="col-md-4 col-sm-4">
               <button className="button greenish">
                 <span className="gradient"></span>
                 <Link
@@ -65,19 +65,35 @@ class Project extends Component {
                   }}
                   style={{ color: "white" }}
                 >
-                  Add New Basket
+                  New Basket
                 </Link>
               </button>
             </div>
-            <div className="col-md-4">
+            <div className="col-md-4 col-sm-4">
               <button className="button greenish">
                 <span className="gradient"></span>Edit Baskets
               </button>
             </div>
           </div>
         </div>
-
-        <h3>Edit Baskets</h3>
+        <br /> <h6>Baskets With Tasks</h6>
+        <div className="">
+          <div className="row">
+            {this.state.baskets.map((basket) => (
+              <div className="col-lg-3 col-md-4 col-sm-6 col-sm">
+                <table className="table" key={basket._id}>
+                  <thead>
+                    <tr>
+                      <th>{basket.name}</th>
+                    </tr>
+                  </thead>
+                </table>
+              </div>
+            ))}
+          </div>
+        </div>
+        <br />
+        <h6>Edit Baskets</h6>
         <div className="container">
           <table className="table container">
             <thead>
@@ -112,16 +128,6 @@ class Project extends Component {
             </tbody>
           </table>
         </div>
-        <h3>Baskets With Tasks</h3>
-        {this.state.baskets.map((basket) => (
-          <table className="table container" key={basket._id}>
-            <thead>
-              <tr>
-                <th>{basket.name}</th>
-              </tr>
-            </thead>
-          </table>
-        ))}
       </div>
     );
   }
