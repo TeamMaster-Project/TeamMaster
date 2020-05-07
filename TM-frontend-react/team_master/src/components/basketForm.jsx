@@ -31,6 +31,14 @@ class BasketForm extends Form {
       }
 
       const { data: basket } = await getBasket(basketId);
+      //   this.setState({
+      //     data: {
+      //       _id: basket._id,
+      //       name: basket.name,
+      //       projectId: basket.project._id,
+      //     },
+      //   });
+
       this.setState({
         data: this.mapToViewModel(basket),
       });
@@ -48,8 +56,9 @@ class BasketForm extends Form {
     };
   }
 
-  doSubmit = () => {
-    saveBasket(this.state.data);
+  doSubmit = async () => {
+    await saveBasket(this.state.data);
+
     this.props.history.push(
       `/myprojects/${this.props.match.params.id}/${this.props.match.params.name}`
     );

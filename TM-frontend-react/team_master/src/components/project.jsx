@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { getBaskets, deleteBasket } from "../services/basketService";
 import { getTasks, deleteTask } from "../services/taskService";
 import { toast } from "react-toastify";
-
 import "../styles/buttons/liquidbutton.css";
 
 class Project extends Component {

@@ -66,8 +66,8 @@ class TaskForm extends Form {
     }
   }
 
-  doSubmit = () => {
-    saveTask(this.state.data);
+  doSubmit = async () => {
+    await saveTask(this.state.data);
     this.props.history.push(
       `/myprojects/${this.props.match.params.id}/${this.props.match.params.name}`
     );
