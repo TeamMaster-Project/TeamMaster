@@ -4,6 +4,10 @@ import { getBaskets, deleteBasket } from "../services/basketService";
 import { getTasks, deleteTask } from "../services/taskService";
 import { toast } from "react-toastify";
 import "../styles/buttons/liquidbutton.css";
+import EditBaskets from "./project_page/editBaskets";
+import ProjectSummary from "./project_page/projectSummary";
+import MainButtons from "./project_page/mainButtons";
+import BasketsCardView from "./project_page/basketsCardView";
 
 class Project extends Component {
   state = {
@@ -80,154 +84,29 @@ class Project extends Component {
 
     return (
       <div>
-        <div className="card text-center my-3 mx-5 projectsummery">
-          <div className="card-header">
-            <h3>
-              {this.props.match.params.name}{" "}
-              <span>
-                <Link to="#" className="btn btn-sm btn-light ">
-                  <i className="fa fa-pencil-square-o" aria-hidden="true"></i>
-                  {/* edit mark */}
-                </Link>
-              </span>
-            </h3>
-          </div>
-          <div className="card-body">
-            <p className="card-text">{this.props.location.description}</p>
-          </div>
-        </div>
+        <ProjectSummary
+          name={this.props.match.params.name}
+          description={this.props.location.description}
+        />
         {infoBox}
-        <div className="container">
-          <div className="row">
-            <div className="col-md-3 sm-6"></div>
-            <div className="col-md-3 col-sm-6">
-              <button className="button instagram">
-                <span className="gradient"></span>
-                <Link
-                  to={{
-                    pathname: `/myprojects/${this.props.match.params.id}/${this.props.match.params.name}/newtask/new`,
-                  }}
-                  style={{ color: "white" }}
-                >
-                  New Task
-                </Link>
-              </button>
-            </div>
-            <div className="col-md-3 col-sm-6">
-              <button className="button greenish">
-                <span className="gradient"></span>
-                <Link
-                  to={{
-                    pathname: `/myprojects/${this.props.match.params.id}/${this.props.match.params.name}/new`,
-                  }}
-                  style={{ color: "white" }}
-                >
-                  New Basket
-                </Link>
-              </button>
-            </div>
-            <div className="col-md-3 sm-6"></div>
-          </div>
-        </div>
+        <MainButtons
+          id={this.props.match.params.id}
+          name={this.props.match.params.name}
+        />
         <br /> <h6>Baskets With Tasks</h6>
-        <div className="">
-          <div className="row">
-            {this.state.baskets.map((basket) => (
-              <div
-                className="col-lg-3 col-md-4 col-sm-6 col-sm"
-                key={basket._id}
-              >
-                <table className="table">
-                  <thead>
-                    <tr>
-                      <th>{basket.name}</th>
-                    </tr>
-                  </thead>
-
-                  <tbody>
-                    {this.state.tasks.map((task) => {
-                      if (task.basket._id == basket._id) {
-                        return (
-                          <tr key={task._id}>
-                            <td>
-                              <i>{task.title}</i>
-                            </td>
-                            {/* <td>
-                              <i>{task.deadline}</i>
-                            </td> */}
-                            <td style={{ width: "25px" }}>
-                              <Link
-                                className="btn btn-sm btn-light"
-                                to={{
-                                  pathname: `/myprojects/${this.props.match.params.id}/${this.props.match.params.name}/${basket._id}/${task._id}`,
-                                }}
-                              >
-                                <i
-                                  className="fa fa-pencil-square-o"
-                                  aria-hidden="true"
-                                ></i>
-                                {/* edit mark */}
-                              </Link>
-                            </td>
-
-                            <td style={{ width: "25px" }}>
-                              <button
-                                onClick={() => this.handleDeleteTask(task)}
-                                className="btn btn-light btn-sm"
-                              >
-                                <i
-                                  className="fa fa-trash-o"
-                                  aria-hidden="true"
-                                ></i>
-                                {/* Delete icon */}
-                              </button>
-                            </td>
-                          </tr>
-                        );
-                      }
-                    })}
-                  </tbody>
-                </table>
-              </div>
-            ))}
-          </div>
-        </div>
+        <BasketsCardView
+          baskets={this.state.baskets}
+          tasks={this.state.tasks}
+          projectId={this.props.match.params.id}
+          name={this.props.match.params.name}
+        />
         <br />
         <h6>Edit Baskets</h6>
-        <div className="container">
-          <table className="table container">
-            <thead>
-              <tr>
-                <th>Baskets</th>
-              </tr>
-            </thead>
-            <tbody>
-              {this.state.baskets.map((basket) => (
-                <tr key={basket._id}>
-                  <td>{basket.name}</td>
-                  <td style={{ width: "25px" }}>
-                    <Link
-                      className="btn btn-sm btn-light"
-                      to={{
-                        pathname: `/myprojects/${this.props.match.params.id}/${this.props.match.params.name}/${basket._id}`,
-                      }}
-                    >
-                      Edit
-                    </Link>
-                  </td>
-                  <td style={{ width: "50px" }}>
-                    <button
-                      onClick={() => this.handleDeleteBasket(basket)}
-                      className="btn btn-danger btn-sm"
-                    >
-                      Delete
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+        <EditBaskets //display all baskets and edit, delete them
+          baskets={this.state.baskets}
+          projectId={this.props.match.params.id}
+          name={this.props.match.params.name}
+        />
       </div>
     );
   }
