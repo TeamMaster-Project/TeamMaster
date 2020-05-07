@@ -8,12 +8,12 @@ const mongoose = require("mongoose");
 const express = require("express");
 const router = express.Router();
 
-router.get("/", async (req, res) => {
+router.get("/", [auth], async (req, res) => {
   const tasks = await Task.find().sort("title");
   res.send(tasks);
 });
 
-router.post("/", async (req, res) => {
+router.post("/", [auth], async (req, res) => {
   const { error } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
@@ -25,6 +25,7 @@ router.post("/", async (req, res) => {
 
   const task = new Task({
     title: req.body.title,
+    deadline: req.body.deadline,
     basket: {
       _id: basket._id,
       name: basket.name,
@@ -34,8 +35,6 @@ router.post("/", async (req, res) => {
         description: project.description,
       },
     },
-
-    deadline: req.body.deadline,
   });
   await task.save();
 
@@ -78,7 +77,7 @@ router.delete("/:id", [auth, admin, validateObjectId], async (req, res) => {
   res.send(task);
 });
 
-router.get("/:id", validateObjectId, async (req, res) => {
+router.get("/:id", [auth], validateObjectId, async (req, res) => {
   const task = await Task.findById(req.params.id);
 
   if (!task)

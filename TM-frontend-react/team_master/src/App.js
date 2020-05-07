@@ -1,11 +1,9 @@
 import React from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
-
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 
 import NavBar from "./components/navBar";
-// import MyProjects from "./components/myprojectswithfake";
 import MyProjects from "./components/myprojects";
 import Project from "./components/project";
 import NotFound from "./components/notFound";
@@ -14,6 +12,7 @@ import NewProject from "./components/newProject";
 import Register from "./components/registerForm";
 import LoginForm from "./components/loginForm";
 import BasketForm from "./components/basketForm";
+import TaskForm from "./components/taskForm";
 //import logo from "./logo.svg";
 import "./App.css";
 
@@ -35,6 +34,11 @@ function App() {
             exact
             path="/myprojects/:id/:name/:basketid"
             component={BasketForm}
+          />
+          <Route
+            exact
+            path="/myprojects/:id/:name/:basketid/:taskid"
+            component={TaskForm}
           />
           <Route path="/myprojects/:id" component={ProjectForm} />
           <Redirect exact from="/" to="/myprojects" />

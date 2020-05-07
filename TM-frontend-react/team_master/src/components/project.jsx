@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { getBaskets, deleteBasket } from "../services/basketService";
-import { getTasks, deleteTasks } from "../services/taskService";
+import { getTasks, deleteTask } from "../services/taskService";
 import { toast } from "react-toastify";
 import "../styles/buttons/liquidbutton.css";
 
@@ -39,7 +39,7 @@ class Project extends Component {
     });
   }
 
-  handleDelete = async (basket) => {
+  handleDeleteBasket = async (basket) => {
     const originalBaskets = this.state.baskets;
     const baskets = originalBaskets.filter((m) => m._id !== basket._id);
     this.setState({ baskets: baskets }); //Baskets object override by baskets without the one we selected to delete
@@ -50,7 +50,22 @@ class Project extends Component {
       if (ex.response && ex.response.status === 404)
         toast.error("This basket is already deleted"); //Expected error handle
 
-      this.setState({ basket: originalBaskets });
+      this.setState({ baskets: originalBaskets });
+    }
+  };
+
+  handleDeleteTask = async (task) => {
+    const originalTasks = this.state.tasks;
+    const tasks = originalTasks.filter((m) => m._id !== task._id);
+    this.setState({ tasks: tasks }); //Tasks object override by tasks without the one we selected to delete
+
+    try {
+      await deleteTask(task._id);
+    } catch (ex) {
+      if (ex.response && ex.response.status === 404)
+        toast.error("This task is already deleted"); //Expected error handle
+
+      this.setState({ tasks: originalTasks });
     }
   };
 
@@ -81,7 +96,15 @@ class Project extends Component {
           <div className="row">
             <div className="col-md-4 col-sm-4">
               <button className="button instagram">
-                <span className="gradient"></span>New Task
+                <span className="gradient"></span>
+                <Link
+                  to={{
+                    pathname: `/myprojects/${this.props.match.params.id}/${this.props.match.params.name}/newtask/new`,
+                  }}
+                  style={{ color: "white" }}
+                >
+                  New Task
+                </Link>
               </button>
             </div>
             <div className="col-md-4 col-sm-4">
@@ -125,6 +148,33 @@ class Project extends Component {
                         return (
                           <tr key={task._id}>
                             <td>{task.title}</td>
+                            <td style={{ width: "25px" }}>
+                              <Link
+                                className="btn btn-sm btn-light"
+                                to={{
+                                  pathname: `/myprojects/${this.props.match.params.id}/${this.props.match.params.name}/${basket._id}/${task._id}`,
+                                }}
+                              >
+                                <i
+                                  className="fa fa-pencil-square-o"
+                                  aria-hidden="true"
+                                ></i>
+                                {/* edit mark */}
+                              </Link>
+                            </td>
+
+                            <td style={{ width: "25px" }}>
+                              <button
+                                onClick={() => this.handleDeleteTask(task)}
+                                className="btn btn-light btn-sm"
+                              >
+                                <i
+                                  className="fa fa-trash-o"
+                                  aria-hidden="true"
+                                ></i>
+                                {/* Delete icon */}
+                              </button>
+                            </td>
                           </tr>
                         );
                       }
@@ -160,7 +210,7 @@ class Project extends Component {
                   </td>
                   <td>
                     <button
-                      onClick={() => this.handleDelete(basket)}
+                      onClick={() => this.handleDeleteBasket(basket)}
                       className="btn btn-danger btn-sm"
                     >
                       Delete Basket

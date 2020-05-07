@@ -7,12 +7,12 @@ const mongoose = require("mongoose");
 const express = require("express");
 const router = express.Router();
 
-router.get("/", async (req, res) => {
+router.get("/", [auth], async (req, res) => {
   const baskets = await Basket.find().sort("name");
   res.send(baskets);
 });
 
-router.post("/", async (req, res) => {
+router.post("/", [auth], async (req, res) => {
   const { error } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
@@ -20,12 +20,12 @@ router.post("/", async (req, res) => {
   if (!project) return res.status(400).send("Invalid project.");
 
   let basket = new Basket({
+    name: req.body.name,
     project: {
       _id: project._id,
       name: project.name,
       description: project.description,
     },
-    name: req.body.name,
   });
   basket = await basket.save();
 
@@ -59,7 +59,7 @@ router.delete("/:id", [auth, validateObjectId], async (req, res) => {
   res.send(basket);
 });
 
-router.get("/:id", validateObjectId, async (req, res) => {
+router.get("/:id", [auth], validateObjectId, async (req, res) => {
   const basket = await Basket.findById(req.params.id);
 
   if (!basket)
