@@ -17,8 +17,8 @@ router.post("/", async (req, res) => {
   const { error } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
-  const baskets = await Basket.find({ _id: { $in: req.body.basketId } });
-  if (!baskets) return res.status(400).send("Invalid basket.");
+  // const baskets = await Basket.find({ _id: { $in: req.body.basketId } });
+  // if (!baskets) return res.status(400).send("Invalid basket.");
   //console.log("baskets array:", baskets);
 
   const moderators = await User.find({
@@ -36,7 +36,7 @@ router.post("/", async (req, res) => {
   const project = new Project({
     name: req.body.name,
     description: req.body.description,
-    baskets: baskets,
+    //baskets: baskets,
     moderators: moderators,
     members: members,
   });

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { getBaskets, deleteBasket } from "../services/basketService";
+import { getTasks, deleteTasks } from "../services/taskService";
 import { toast } from "react-toastify";
 import "../styles/buttons/liquidbutton.css";
 
@@ -8,15 +9,41 @@ class Project extends Component {
   state = {
     projectName: "",
     baskets: [],
+    filteredBasketIds: [],
+    tasks: [],
   };
   async componentDidMount() {
     const projectName = this.props.location.projectName;
+
     const { data: baskets } = await getBaskets();
 
-    const filtered = baskets.filter((basket) => {
+    const filteredBaskets = await baskets.filter((basket) => {
       return basket.project._id == this.props.match.params.id;
     });
-    this.setState({ baskets: filtered, projectName: projectName });
+
+    var filteredBasketIds = [];
+    filteredBaskets.map((filteredBasket) =>
+      filteredBasketIds.push(filteredBasket._id)
+    );
+
+    const { data: tasks } = await getTasks();
+
+    this.setState({
+      baskets: filteredBaskets,
+      projectName: projectName,
+      filteredBasketIds: filteredBasketIds,
+      tasks: tasks,
+    });
+
+    const filteredTasks = this.state.tasks.filter((task) =>
+      filteredBasketIds.includes(task.basket._id)
+    );
+    this.setState({
+      tasks: filteredTasks,
+    });
+    // const filteredTasks = await tasks.find({
+    //   _id: { $in: filteredBasketIds },
+    // });
   }
 
   handleDelete = async (basket) => {
@@ -35,7 +62,14 @@ class Project extends Component {
   };
 
   render() {
-    if (this.state.baskets.length === 0) return <p>There are no baskets yet</p>;
+    console.log(this.state.baskets);
+    console.log(this.state.filteredBasketIds);
+    console.log(this.state.tasks);
+    //if (this.state.baskets.length === 0) return <p>There are no baskets yet</p>;
+    let infoBox;
+    if (this.state.baskets.length === 0)
+      infoBox = <h5 style={{ color: "purple" }}>There are no baskets yet</h5>;
+
     return (
       <div>
         <div className="card text-center my-3 mx-5 projectsummery">
@@ -49,6 +83,7 @@ class Project extends Component {
             </a>
           </div>
         </div>
+        {infoBox}
         <div className="container">
           <div className="row">
             <div className="col-md-4 col-sm-4">
@@ -80,8 +115,11 @@ class Project extends Component {
         <div className="">
           <div className="row">
             {this.state.baskets.map((basket) => (
-              <div className="col-lg-3 col-md-4 col-sm-6 col-sm">
-                <table className="table" key={basket._id}>
+              <div
+                className="col-lg-3 col-md-4 col-sm-6 col-sm"
+                key={basket._id}
+              >
+                <table className="table">
                   <thead>
                     <tr>
                       <th>{basket.name}</th>

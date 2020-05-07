@@ -3,6 +3,7 @@ const admin = require("../middleware/admin");
 const validateObjectId = require("../middleware/validateObjectId"); // validationg ID of the records you get
 const { Task, validate } = require("../models/task");
 const { Basket } = require("../models/basket");
+const { Project } = require("../models/project");
 const mongoose = require("mongoose");
 const express = require("express");
 const router = express.Router();
@@ -17,13 +18,21 @@ router.post("/", async (req, res) => {
   if (error) return res.status(400).send(error.details[0].message);
 
   const basket = await Basket.findById(req.body.basketId);
-  if (!basket) return res.status(400).send("Invalid genre.");
+  if (!basket) return res.status(400).send("Invalid basket.");
+
+  const project = await Project.findById(req.body.projectId);
+  if (!project) return res.status(400).send("Invalid project.");
 
   const task = new Task({
     title: req.body.title,
     basket: {
       _id: basket._id,
       name: basket.name,
+      project: {
+        _id: project._id,
+        name: project.name,
+        description: project.description,
+      },
     },
 
     deadline: req.body.deadline,

@@ -1,6 +1,7 @@
 const Joi = require("joi");
 const mongoose = require("mongoose");
 const { basketSchema } = require("./basket");
+// const { projectSchema } = require("./project");
 
 const Task = mongoose.model(
   "Tasks",
@@ -15,6 +16,11 @@ const Task = mongoose.model(
     basket: {
       type: basketSchema,
       required: true,
+
+      // project: {
+      //   type: projectSchema,
+      //   required: true,
+      // },
     },
 
     date: { type: Date, default: Date.now },
@@ -30,6 +36,7 @@ function validateTask(task) {
   const schema = {
     title: Joi.string().min(1).max(50).required(),
     basketId: Joi.objectId().required(),
+    projectId: Joi.objectId().required(),
     date: Joi.date(),
     deadline: Joi.date(),
   };
