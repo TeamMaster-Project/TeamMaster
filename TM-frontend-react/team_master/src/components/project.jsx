@@ -118,6 +118,18 @@ class Project extends Component {
                       <th>{basket.name}</th>
                     </tr>
                   </thead>
+
+                  <tbody>
+                    {this.state.tasks.map((task) => {
+                      if (task.basket._id == basket._id) {
+                        return (
+                          <tr key={task._id}>
+                            <td>{task.title}</td>
+                          </tr>
+                        );
+                      }
+                    })}
+                  </tbody>
                 </table>
               </div>
             ))}
