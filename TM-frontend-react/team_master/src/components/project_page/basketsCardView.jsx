@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 class BasketsCardView extends Component {
   render() {
-    const { baskets, tasks, projectId, name } = this.props;
+    const { baskets, tasks, projectId, name, onDelete } = this.props;
     return (
       <div className="">
         <div className="row">
@@ -43,7 +43,7 @@ class BasketsCardView extends Component {
 
                           <td style={{ width: "25px" }}>
                             <button
-                              onClick={() => this.handleDeleteTask(task)}
+                              onClick={() => onDelete(task)}
                               className="btn btn-light btn-sm"
                             >
                               <i

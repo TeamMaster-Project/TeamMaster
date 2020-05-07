@@ -99,6 +99,7 @@ class Project extends Component {
           tasks={this.state.tasks}
           projectId={this.props.match.params.id}
           name={this.props.match.params.name}
+          onDelete={this.handleDeleteTask}
         />
         <br />
         <h6>Edit Baskets</h6>
@@ -106,6 +107,7 @@ class Project extends Component {
           baskets={this.state.baskets}
           projectId={this.props.match.params.id}
           name={this.props.match.params.name}
+          onDelete={this.handleDeleteBasket}
         />
       </div>
     );

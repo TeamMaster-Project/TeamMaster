@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 class EditBaskets extends Component {
   render() {
-    const { baskets, projectId, name } = this.props;
+    const { baskets, projectId, name, onDelete } = this.props;
 
     return (
       <div className="container">
@@ -28,7 +28,7 @@ class EditBaskets extends Component {
                 </td>
                 <td style={{ width: "50px" }}>
                   <button
-                    onClick={() => this.handleDeleteBasket(basket)}
+                    onClick={() => onDelete(basket)}
                     className="btn btn-danger btn-sm"
                   >
                     Delete
