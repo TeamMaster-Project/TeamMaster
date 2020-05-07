@@ -25,25 +25,18 @@ class Project extends Component {
     filteredBaskets.map((filteredBasket) =>
       filteredBasketIds.push(filteredBasket._id)
     );
-
     const { data: tasks } = await getTasks();
 
-    this.setState({
-      baskets: filteredBaskets,
-      projectName: projectName,
-      filteredBasketIds: filteredBasketIds,
-      tasks: tasks,
-    });
-
-    const filteredTasks = this.state.tasks.filter((task) =>
+    const filteredTasks = await tasks.filter((task) =>
       filteredBasketIds.includes(task.basket._id)
     );
+
     this.setState({
+      projectName: projectName,
+      baskets: filteredBaskets,
+      filteredBasketIds: filteredBasketIds,
       tasks: filteredTasks,
     });
-    // const filteredTasks = await tasks.find({
-    //   _id: { $in: filteredBasketIds },
-    // });
   }
 
   handleDelete = async (basket) => {
