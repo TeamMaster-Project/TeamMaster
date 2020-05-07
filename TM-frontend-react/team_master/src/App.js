@@ -29,7 +29,7 @@ function App() {
           <Route exact path="/newproject" component={NewProject} />
           <Route exact path="/myprojects" component={MyProjects} />
           <Route exact path="/myprojects/:id/:name" component={Project} />
-
+          {/* <Route exact path="/myprojects/:id/:name/:description" component={Project} /> */}
           <Route
             exact
             path="/myprojects/:id/:name/:basketid"

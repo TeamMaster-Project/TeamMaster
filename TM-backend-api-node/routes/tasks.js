@@ -9,7 +9,7 @@ const express = require("express");
 const router = express.Router();
 
 router.get("/", [auth], async (req, res) => {
-  const tasks = await Task.find().sort("title");
+  const tasks = await Task.find().sort("date");
   res.send(tasks);
 });
 

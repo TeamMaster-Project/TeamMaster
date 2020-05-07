@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { getBaskets, deleteBasket } from "../services/basketService";
 import { getTasks, deleteTask } from "../services/taskService";
 import { toast } from "react-toastify";
+
 import "../styles/buttons/liquidbutton.css";
 
 class Project extends Component {
@@ -82,19 +83,25 @@ class Project extends Component {
       <div>
         <div className="card text-center my-3 mx-5 projectsummery">
           <div className="card-header">
-            <h3>{this.props.match.params.name}</h3>
+            <h3>
+              {this.props.match.params.name}{" "}
+              <span>
+                <Link to="#" className="btn btn-sm btn-light ">
+                  <i className="fa fa-pencil-square-o" aria-hidden="true"></i>
+                  {/* edit mark */}
+                </Link>
+              </span>
+            </h3>
           </div>
           <div className="card-body">
             <p className="card-text">{this.props.location.description}</p>
-            <a href="#" className="btn btn-primary disabled">
-              Edit Project
-            </a>
           </div>
         </div>
         {infoBox}
         <div className="container">
           <div className="row">
-            <div className="col-md-4 col-sm-4">
+            <div className="col-md-3 sm-6"></div>
+            <div className="col-md-3 col-sm-6">
               <button className="button instagram">
                 <span className="gradient"></span>
                 <Link
@@ -107,7 +114,7 @@ class Project extends Component {
                 </Link>
               </button>
             </div>
-            <div className="col-md-4 col-sm-4">
+            <div className="col-md-3 col-sm-6">
               <button className="button greenish">
                 <span className="gradient"></span>
                 <Link
@@ -120,11 +127,7 @@ class Project extends Component {
                 </Link>
               </button>
             </div>
-            <div className="col-md-4 col-sm-4">
-              <button className="button greenish">
-                <span className="gradient"></span>Edit Baskets
-              </button>
-            </div>
+            <div className="col-md-3 sm-6"></div>
           </div>
         </div>
         <br /> <h6>Baskets With Tasks</h6>
@@ -147,7 +150,12 @@ class Project extends Component {
                       if (task.basket._id == basket._id) {
                         return (
                           <tr key={task._id}>
-                            <td>{task.title}</td>
+                            <td>
+                              <i>{task.title}</i>
+                            </td>
+                            {/* <td>
+                              <i>{task.deadline}</i>
+                            </td> */}
                             <td style={{ width: "25px" }}>
                               <Link
                                 className="btn btn-sm btn-light"
@@ -198,7 +206,7 @@ class Project extends Component {
               {this.state.baskets.map((basket) => (
                 <tr key={basket._id}>
                   <td>{basket.name}</td>
-                  <td>
+                  <td style={{ width: "25px" }}>
                     <Link
                       className="btn btn-sm btn-light"
                       to={{
@@ -208,12 +216,12 @@ class Project extends Component {
                       Edit
                     </Link>
                   </td>
-                  <td>
+                  <td style={{ width: "50px" }}>
                     <button
                       onClick={() => this.handleDeleteBasket(basket)}
                       className="btn btn-danger btn-sm"
                     >
-                      Delete Basket
+                      Delete
                     </button>
                   </td>
                 </tr>

@@ -174,3 +174,7 @@
 {"level":"info","message":"Connected to mongodb://localhost/TM...","timestamp":"2020-05-07T06:43:47.961Z"}
 {"level":"info","message":"Listening on port 3700...","timestamp":"2020-05-07T06:44:46.661Z"}
 {"level":"info","message":"Connected to mongodb://localhost/TM...","timestamp":"2020-05-07T06:44:48.702Z"}
+{"level":"info","message":"Listening on port 3700...","timestamp":"2020-05-07T13:06:41.369Z"}
+{"level":"info","message":"Connected to mongodb://localhost/TM...","timestamp":"2020-05-07T13:06:43.389Z"}
+{"level":"info","message":"Listening on port 3700...","timestamp":"2020-05-07T13:06:52.814Z"}
+{"level":"info","message":"Connected to mongodb://localhost/TM...","timestamp":"2020-05-07T13:06:54.835Z"}

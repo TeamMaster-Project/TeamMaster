@@ -50,26 +50,20 @@ class BasketForm extends Form {
 
   doSubmit = () => {
     saveBasket(this.state.data);
-    this.props.history.push("/myprojects");
+    this.props.history.push(
+      `/myprojects/${this.props.match.params.id}/${this.props.match.params.name}`
+    );
   };
 
   render() {
     console.log(this.state.data);
     return (
       <div className="container">
-        <h1>Add New Basket</h1>
+        <h1>Save Basket</h1>
         <div>
           <form onSubmit={this.handleSubmit}>
             {/* name, label, datatype */}
-            {/* <div className="form-group">
-              <label htmlFor="project">Project</label>
-              <input
-                id="project"
-                name="project"
-                className="form-control"
-                value={this.state.projectId || ""}
-              />
-            </div> */}
+
             {this.renderInputs("name", "Name", "text")}
             {this.renderButton("Save")}
           </form>

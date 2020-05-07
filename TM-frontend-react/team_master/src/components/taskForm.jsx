@@ -22,6 +22,7 @@ class TaskForm extends Form {
     title: Joi.string().min(1).required().label("Title"),
     projectId: Joi.string().required().label("Project"),
     basketId: Joi.string().required().label("Baskets"),
+    //deadline: Joi.date().label("Basket"),
   };
 
   async populateBaskets() {
@@ -55,6 +56,7 @@ class TaskForm extends Form {
           _id: task._id,
           title: task.title,
           projectId: projectId,
+          //deadline: task.deadline,
           basketId: task.basket._id,
         },
       });
@@ -76,7 +78,7 @@ class TaskForm extends Form {
     //console.log(this.state.task);
     return (
       <div className="container">
-        <h1>Add New Task</h1>
+        <h1>Save Task</h1>
         <div>
           <form onSubmit={this.handleSubmit}>
             {/* name label datatype */}
@@ -86,6 +88,7 @@ class TaskForm extends Form {
               "Relevent Basket",
               this.state.baskets
             )}
+            {/* {this.renderInputs("deadline", "Deadline", "date")} */}
             {this.renderButton("Save")}
           </form>
         </div>
