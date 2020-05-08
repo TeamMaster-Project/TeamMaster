@@ -4,6 +4,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 
 import NavBar from "./components/navBar";
+import Home from "./components/home";
 import MyProjects from "./components/myprojects";
 import Project from "./components/project";
 import NotFound from "./components/notFound";
@@ -27,9 +28,14 @@ function App() {
           <Route path="/register" component={Register} />
           <Route path="/login" component={LoginForm} />
           <Route path="/notFound" component={NotFound} />
+          <Route path="/home" component={Home} />
           <ProtectedRoute exact path="/newproject" component={NewProject} />
-          <Route exact path="/myprojects" component={MyProjects} />
-          <Route exact path="/myprojects/:id/:name" component={Project} />
+          <ProtectedRoute exact path="/myprojects" component={MyProjects} />
+          <ProtectedRoute
+            exact
+            path="/myprojects/:id/:name"
+            component={Project}
+          />
           {/* <Route exact path="/myprojects/:id/:name/:description" component={Project} /> */}
           <ProtectedRoute
             exact
@@ -42,7 +48,7 @@ function App() {
             component={TaskForm}
           />
           <ProtectedRoute path="/myprojects/:id" component={ProjectForm} />
-          <Redirect exact from="/" to="/myprojects" />
+          <Redirect exact from="/" to="/home" />
           <Redirect to="notFound" />
         </Switch>
       </main>
