@@ -17,7 +17,13 @@ class ProjectSummary extends Component {
           </h3>
         </div>
         <div className="card-body">
-          <p className="card-text">{description}</p>
+          {/* <p className="card-text">{description}</p> */}
+          <p className="card-text">
+            <i>
+              {" "}
+              You will never miss any important schedules with TeamMaster...
+            </i>
+          </p>
         </div>
       </div>
     );

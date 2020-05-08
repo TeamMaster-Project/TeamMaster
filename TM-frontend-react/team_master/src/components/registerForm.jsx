@@ -22,16 +22,11 @@ class Register extends Form {
     try {
       const response = await userService.register(this.state.data);
       console.log("Registered Successfully", response);
-
       //Log in user soon after registration
 
-      /*refactored and set this as a function in authService.js
-      localStorage.setItem("token", response.headers["x-auth-token"]); //Store the token in localStorage when after creating a new user
-      */
-
       auth.loginWithJwt("token", response.headers["x-auth-token"]); //Store the token in localStorage when after creating a new user
-      //this.props.history.push("/"); //Redirecting to main home page
-      window.location = "/"; //full Reload and redirecting to homepage to get current user loged in
+      this.props.history.push("/newproject"); //Redirecting to main home page to get current user loged in
+      //window.location = "/"; //full Reload and redirecting to homepage
     } catch (ex) {
       if (ex.response && ex.response.status === 400) {
         //handle user already registered error
