@@ -10,7 +10,8 @@ import NotFound from "./components/notFound";
 import ProjectForm from "./components/projectForm";
 import NewProject from "./components/newProject";
 import Register from "./components/registerForm";
-
+import LoginForm from "./components/loginForm";
+import ProtectedRoute from "./components/common/protectedRoute";
 import BasketForm from "./components/basketForm";
 import TaskForm from "./components/taskForm";
 //import logo from "./logo.svg";
@@ -24,22 +25,23 @@ function App() {
       <main className="">
         <Switch>
           <Route path="/register" component={Register} />
+          <Route path="/login" component={LoginForm} />
           <Route path="/notFound" component={NotFound} />
-          <Route exact path="/newproject" component={NewProject} />
+          <ProtectedRoute exact path="/newproject" component={NewProject} />
           <Route exact path="/myprojects" component={MyProjects} />
           <Route exact path="/myprojects/:id/:name" component={Project} />
           {/* <Route exact path="/myprojects/:id/:name/:description" component={Project} /> */}
-          <Route
+          <ProtectedRoute
             exact
             path="/myprojects/:id/:name/:basketid"
             component={BasketForm}
           />
-          <Route
+          <ProtectedRoute
             exact
             path="/myprojects/:id/:name/:basketid/:taskid"
             component={TaskForm}
           />
-          <Route path="/myprojects/:id" component={ProjectForm} />
+          <ProtectedRoute path="/myprojects/:id" component={ProjectForm} />
           <Redirect exact from="/" to="/myprojects" />
           <Redirect to="notFound" />
         </Switch>

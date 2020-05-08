@@ -2,7 +2,7 @@ import React from "react";
 import Form from "./common/form";
 import Joi from "joi-browser";
 import * as userService from "../services/userService";
-//import auth from "../services/authService";
+import auth from "../services/authService";
 
 class Register extends Form {
   state = {
@@ -23,6 +23,14 @@ class Register extends Form {
       const response = await userService.register(this.state.data);
       console.log("Registered Successfully", response);
 
+      //Log in user soon after registration
+
+      /*refactored and set this as a function in authService.js
+      localStorage.setItem("token", response.headers["x-auth-token"]); //Store the token in localStorage when after creating a new user
+      */
+
+      auth.loginWithJwt("token", response.headers["x-auth-token"]); //Store the token in localStorage when after creating a new user
+      //this.props.history.push("/"); //Redirecting to main home page
       window.location = "/"; //full Reload and redirecting to homepage to get current user loged in
     } catch (ex) {
       if (ex.response && ex.response.status === 400) {
