@@ -10,3 +10,25 @@ export function register(user) {
     name: user.name,
   });
 }
+
+// export function saveUsers(basket) {
+//   if (basket._id) {
+//     const body = { ...basket };
+//     delete body._id;
+//     return http.put(basketApiEndPoint + basket._id, body);
+//   }
+
+//   return http.post(basketApiEndPoint, basket);
+// }
+
+export function getUsers() {
+  return http.get(userApiEndPoint);
+}
+
+export function getUser(userId) {
+  return http.get(userApiEndPoint + userId);
+}
+
+export function deleteUser(userId) {
+  return http.delete(userApiEndPoint + userId);
+}

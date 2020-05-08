@@ -10,7 +10,7 @@ import NotFound from "./components/notFound";
 import ProjectForm from "./components/projectForm";
 import NewProject from "./components/newProject";
 import Register from "./components/registerForm";
-import LoginForm from "./components/loginForm";
+
 import BasketForm from "./components/basketForm";
 import TaskForm from "./components/taskForm";
 //import logo from "./logo.svg";
@@ -21,11 +21,10 @@ function App() {
     <React.Fragment>
       <ToastContainer />
       <NavBar />
-      <header className="">
+      <main className="">
         <Switch>
+          <Route path="/register" component={Register} />
           <Route path="/notFound" component={NotFound} />
-          <Route exact path="/login" component={LoginForm} />
-          <Route exact path="/signup" component={Register} />
           <Route exact path="/newproject" component={NewProject} />
           <Route exact path="/myprojects" component={MyProjects} />
           <Route exact path="/myprojects/:id/:name" component={Project} />
@@ -44,7 +43,7 @@ function App() {
           <Redirect exact from="/" to="/myprojects" />
           <Redirect to="notFound" />
         </Switch>
-      </header>
+      </main>
     </React.Fragment>
   );
 }

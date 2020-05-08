@@ -38,8 +38,8 @@ const NavBar = () => {
           <NavLink className="nav-link" to="/login">
             Log In
           </NavLink>
-          <NavLink className="nav-link" to="/signup">
-            Sign Up
+          <NavLink className="nav-link" to="/register">
+            Register
           </NavLink>
         </ReactBootstrap.Nav>
       </ReactBootstrap.Navbar.Collapse>
