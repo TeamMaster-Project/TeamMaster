@@ -4,6 +4,7 @@ import { Link, NavLink } from "react-router-dom";
 import "../App.css";
 
 const NavBar = (props) => {
+  //console.log(props.currentUser);
   return (
     <ReactBootstrap.Navbar
       collapseOnSelect

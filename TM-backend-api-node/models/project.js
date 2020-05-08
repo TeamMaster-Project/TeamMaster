@@ -32,16 +32,18 @@ const projectSchema = new mongoose.Schema({
     type: [userSchema], //userSchema type array
     required: true,
   },
+  date: { type: Date, default: Date.now },
 });
 
 const Project = mongoose.model("Project", projectSchema);
 
 function validateProject(project) {
   const schema = {
-    name: Joi.string().min(5).max(50).required(),
+    name: Joi.string().min(1).max(50).required(),
     description: Joi.string().min(0).max(255).required(),
     //basketId: Joi.array().required(),
     moderater_userId: Joi.array(),
+    date: Joi.date(),
     member_userId: Joi.array(),
   };
 

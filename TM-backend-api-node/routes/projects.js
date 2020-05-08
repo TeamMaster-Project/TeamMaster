@@ -9,7 +9,7 @@ const express = require("express");
 const router = express.Router();
 
 router.get("/", async (req, res) => {
-  const projects = await Project.find().sort("name");
+  const projects = await Project.find().sort("date");
   res.send(projects);
 });
 
@@ -49,10 +49,12 @@ router.put("/:id", [auth], async (req, res) => {
   const { error } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
-  const basket = await Basket.findById(req.body.basketId);
-  if (!basket) return res.status(400).send("Invalid genre.");
+  // const basket = await Basket.findById(req.body.basketId);
+  // if (!basket) return res.status(400).send("Invalid genre.");
 
-  const user = await User.findById(req.body.userId);
+  const user = await User.find({
+    _id: { $in: req.body.moderater_userId },
+  });
   if (!user) return res.status(400).send("Invalid user.");
 
   const project = await Project.findByIdAndUpdate(
@@ -60,10 +62,6 @@ router.put("/:id", [auth], async (req, res) => {
     {
       name: req.body.name,
       description: req.body.description,
-      basket: {
-        _id: basket._id,
-        name: basket.name,
-      },
       moderators: {
         _id: user._id,
         name: user.name,

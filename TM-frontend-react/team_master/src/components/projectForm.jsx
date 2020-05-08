@@ -1,54 +1,72 @@
 import React, { Component } from "react";
+import auth from "../services/authService";
 import Form from "./common/form";
 import Joi from "joi-browser";
-import { getProject, saveProject } from "../services/fake1ProjectService";
+import { getProject, saveProject } from "../services/projectService";
 class ProjectForm extends Form {
   state = {
     data: {
       name: "",
       description: "",
+      moderater_userId: "",
     },
+
     //members:[],
     errors: {},
   };
+
   schema = {
     //Joi validate schema
     _id: Joi.string(),
-    name: Joi.string().required().label("Name"),
-    description: Joi.string().required().label("Description"),
+    name: Joi.string().min(5).max(50).required().label("Name"),
+    description: Joi.string().min(0).max(255).required().label("Description"),
+    moderater_userId: Joi.array().required().label("ModeratorId"),
   };
 
-  componentDidMount() {
+  async componentDidMount() {
     //call GetMethods
 
     // const members = getUsers();
     // this.setState({ members });
+    try {
+      const currentUser = auth.getCurrentUser();
 
-    const projectId = this.props.match.params.id;
-    if (projectId === "new") return;
+      var datacopy = this.state.data;
+      var currentUserArr = [currentUser._id];
+      datacopy.moderater_userId = currentUserArr;
 
-    const project = getProject(projectId);
-    if (!project) return this.props.history.replace("/not-found");
+      const projectId = this.props.match.params.id;
+      if (projectId === "new") {
+        this.setState({ data: datacopy });
+        return;
+      }
 
-    this.setState({ data: this.mapToViewModel(project) });
+      const { data: project } = await getProject(projectId);
+
+      this.setState({ data: this.mapToViewModel(project) });
+    } catch (ex) {
+      if (ex.response && ex.response.status === 404)
+        this.props.history.replace("/not-found");
+    }
   }
 
   mapToViewModel(project) {
     return {
       _id: project._id,
       name: project.name,
-      //members: project.member._id,
       description: project.description,
+      moderater_userId: [project.moderators[0]._id], //need to read all the moderators IDs from all the array objects :/
     };
   }
 
-  doSubmit = () => {
-    saveProject(this.state.data);
+  doSubmit = async () => {
+    await saveProject(this.state.data);
     this.props.history.push("/myprojects");
   };
 
   render() {
     console.log(this.state.data);
+
     return (
       <div className="">
         <h1>Add New Project</h1>

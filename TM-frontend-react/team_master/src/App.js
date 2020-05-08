@@ -21,10 +21,12 @@ import TaskForm from "./components/taskForm";
 import "./App.css";
 
 class App extends Component {
-  state = {};
+  state = {
+    currentUser: {},
+  };
   componentDidMount() {
     const currentUser = auth.getCurrentUser();
-    this.setState({ currentUser });
+    this.setState({ currentUser: currentUser });
   }
   render() {
     return (
@@ -40,6 +42,7 @@ class App extends Component {
             <Route path="/home" component={Home} />
             <ProtectedRoute exact path="/newproject" component={NewProject} />
             <ProtectedRoute exact path="/myprojects" component={MyProjects} />
+
             <ProtectedRoute
               exact
               path="/myprojects/:id/:name"
@@ -56,7 +59,13 @@ class App extends Component {
               path="/myprojects/:id/:name/:basketid/:taskid"
               component={TaskForm}
             />
-            <ProtectedRoute path="/myprojects/:id" component={ProjectForm} />
+            <ProtectedRoute
+              path="/myprojects/:id"
+              render={(props) => (
+                <ProjectForm {...props} currentUser={this.state.currentUser} />
+              )}
+            />
+
             <Redirect exact from="/" to="/home" />
             <Redirect to="notFound" />
           </Switch>

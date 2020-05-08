@@ -11,7 +11,7 @@ export function getProject(projectId) {
   return http.get(projectApiEndPoint + projectId);
 }
 
-export function saveProjects(project) {
+export function saveProject(project) {
   if (project._id) {
     const body = { ...project };
     delete body._id;
