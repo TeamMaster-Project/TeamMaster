@@ -54,8 +54,9 @@ class ProjectForm extends Form {
     return {
       _id: project._id,
       name: project.name,
-      description: project.description,
-      moderater_userEmails: [project.moderators[0].email], //need to read all the moderators IDs from all the array objects :/
+      description: project.description, //moderators[0].email
+      //moderater_userEmails: [project.moderators[0].email],
+      moderater_userEmails: project.moderators.map((m) => m.email), //all moderator emails from emails array property in project
     };
   }
 
