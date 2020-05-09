@@ -42,7 +42,7 @@ function validateProject(project) {
     name: Joi.string().min(1).max(50).required(),
     description: Joi.string().min(0).max(255).required(),
     //basketId: Joi.array().required(),
-    moderater_userId: Joi.array(),
+    moderater_userEmails: Joi.array(),
     date: Joi.date(),
     member_userId: Joi.array(),
   };

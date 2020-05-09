@@ -22,7 +22,7 @@ router.post("/", async (req, res) => {
   //console.log("baskets array:", baskets);
 
   const moderators = await User.find({
-    _id: { $in: req.body.moderater_userId },
+    email: { $in: req.body.moderater_userEmails },
   });
   if (!moderators) return res.status(400).send("Invalid user.");
   console.log("moderators array:", moderators);
@@ -52,28 +52,21 @@ router.put("/:id", [auth], async (req, res) => {
   // const basket = await Basket.findById(req.body.basketId);
   // if (!basket) return res.status(400).send("Invalid genre.");
 
-  const user = await User.find({
-    _id: { $in: req.body.moderater_userId },
+  const moderators = await User.find({
+    email: { $in: req.body.moderater_userEmails },
   });
-  if (!user) return res.status(400).send("Invalid user.");
+  if (!moderators) return res.status(400).send("Invalid user.");
+  console.log("moderators array:", moderators);
+  // const user = await User.findById(req.body.moderater_userId);
+  // if (!user) return res.status(400).send("Invalid user.");
 
   const project = await Project.findByIdAndUpdate(
     req.params.id,
     {
       name: req.body.name,
       description: req.body.description,
-      moderators: {
-        _id: user._id,
-        name: user.name,
-        email: user.email,
-        password: user.password,
-      },
-      members: {
-        _id: user._id,
-        name: user.name,
-        email: user.email,
-        password: user.password,
-      },
+      moderators: moderators,
+      //members: user,
     },
     { new: true }
   );

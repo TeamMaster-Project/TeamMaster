@@ -8,7 +8,7 @@ class ProjectForm extends Form {
     data: {
       name: "",
       description: "",
-      moderater_userId: "",
+      moderater_userEmails: "",
     },
 
     //members:[],
@@ -20,7 +20,7 @@ class ProjectForm extends Form {
     _id: Joi.string(),
     name: Joi.string().min(5).max(50).required().label("Name"),
     description: Joi.string().min(0).max(255).required().label("Description"),
-    moderater_userId: Joi.array().required().label("ModeratorId"),
+    moderater_userEmails: Joi.array().required().label("ModeratorId"),
   };
 
   async componentDidMount() {
@@ -32,8 +32,8 @@ class ProjectForm extends Form {
       const currentUser = auth.getCurrentUser();
 
       var datacopy = this.state.data;
-      var currentUserArr = [currentUser._id];
-      datacopy.moderater_userId = currentUserArr;
+      var currentUserArr = [currentUser.email];
+      datacopy.moderater_userEmails = currentUserArr;
 
       const projectId = this.props.match.params.id;
       if (projectId === "new") {
@@ -55,7 +55,7 @@ class ProjectForm extends Form {
       _id: project._id,
       name: project.name,
       description: project.description,
-      moderater_userId: [project.moderators[0]._id], //need to read all the moderators IDs from all the array objects :/
+      moderater_userEmails: [project.moderators[0].email], //need to read all the moderators IDs from all the array objects :/
     };
   }
 
