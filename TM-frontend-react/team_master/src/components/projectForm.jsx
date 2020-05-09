@@ -55,6 +55,9 @@ class ProjectForm extends Form {
 
       const { data: project } = await getProject(projectId);
       this.setState({ data: this.mapToViewModel(project) });
+
+      const datacopy = this.state.data;
+      this.setState({ chips: datacopy.moderater_userEmail });
     } catch (ex) {
       if (ex.response && ex.response.status === 404)
         this.props.history.replace("/not-found");
@@ -65,7 +68,7 @@ class ProjectForm extends Form {
     return {
       _id: project._id,
       name: project.name,
-      description: project.description, //moderators[0].email
+      description: project.description,
       //moderater_userEmail: [project.moderators[0].email],
       moderater_userEmail: project.moderators.map((m) => m.email), //moderator emails from all the emails array properties in project
     };
@@ -79,7 +82,7 @@ class ProjectForm extends Form {
     const chipsCopy = this.state.chips;
     finalDataCopy.moderater_userEmail = chipsCopy;
     this.setState({ data: finalDataCopy });
-    //this.setState({ data: { moderater_userEmail: chipsCopy } });
+
     await saveProject(this.state.data);
     this.props.history.push("/myprojects");
   };
@@ -92,7 +95,7 @@ class ProjectForm extends Form {
     console.log(this.state.chipsPlaceholders);
     console.log(this.state.chips);
     console.log(this.state.data);
-    console.log(this.state.currentUser);
+    console.log("current user", this.state.currentUser);
 
     return (
       <div className="">
