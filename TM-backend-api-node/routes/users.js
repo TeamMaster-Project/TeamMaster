@@ -9,6 +9,11 @@ const mongoose = require("mongoose");
 const express = require("express");
 const router = express.Router();
 
+router.get("/", [auth], async (req, res) => {
+  const users = await User.find().sort("name");
+  res.send(users);
+});
+
 router.get("/me", auth, async (req, res) => {
   const user = await User.findById(req.user._id).select("-password");
   res.send(user);
@@ -33,13 +38,6 @@ router.post("/", async (req, res) => {
     .send(_.pick(user, ["_id", "name", "email", "isAdmin"]));
 });
 
-router.get("/:id", validateObjectId, async (req, res) => {
-  const user = await User.findById(req.params.id).select("-password");
-
-  if (!user)
-    return res.status(404).send("The genre with the given ID was not found.");
-
-  res.send(user);
-});
+//PUT
 
 module.exports = router;

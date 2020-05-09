@@ -22,7 +22,7 @@ router.post("/", async (req, res) => {
   //console.log("baskets array:", baskets);
 
   const moderators = await User.find({
-    email: { $in: req.body.moderater_userEmails },
+    email: { $in: req.body.moderater_userEmail },
   });
   if (!moderators) return res.status(400).send("Invalid user.");
   console.log("moderators array:", moderators);
@@ -51,12 +51,16 @@ router.put("/:id", [auth], async (req, res) => {
 
   // const basket = await Basket.findById(req.body.basketId);
   // if (!basket) return res.status(400).send("Invalid genre.");
-
-  const moderators = await User.find({
-    email: { $in: req.body.moderater_userEmails },
+  /*
+  const User = await User.find({
+    _id: { $in: req.body.moderater_userId },
   });
-  if (!moderators) return res.status(400).send("Invalid user.");
-  console.log("moderators array:", moderators);
+  if (!User) return res.status(400).send("Invalid user.");
+  console.log("User array:", User);
+  */
+  const user = await User.find({
+    email: { $in: req.body.moderater_userEmail },
+  });
   // const user = await User.findById(req.body.moderater_userId);
   // if (!user) return res.status(400).send("Invalid user.");
 
@@ -65,8 +69,8 @@ router.put("/:id", [auth], async (req, res) => {
     {
       name: req.body.name,
       description: req.body.description,
-      moderators: moderators,
-      //members: user,
+      moderators: user,
+      members: user,
     },
     { new: true }
   );

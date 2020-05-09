@@ -17,16 +17,12 @@ const projectSchema = new mongoose.Schema({
     maxlength: 255,
   },
 
-  // baskets: {
-  //   type: [basketSchema],
-  //   required: true,
-  // },
-
   moderators: {
     //members who can add tasks and delete tasks userSchema
     type: [userSchema], //userSchema type array
     required: true,
   },
+
   members: {
     //members who complete tasks
     type: [userSchema], //userSchema type array
@@ -42,7 +38,7 @@ function validateProject(project) {
     name: Joi.string().min(1).max(50).required(),
     description: Joi.string().min(0).max(255).required(),
     //basketId: Joi.array().required(),
-    moderater_userEmails: Joi.array(),
+    moderater_userEmail: Joi.array(),
     date: Joi.date(),
     member_userId: Joi.array(),
   };
