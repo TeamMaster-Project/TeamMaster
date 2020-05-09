@@ -44,17 +44,12 @@ class ProjectForm extends Form {
 
     try {
       const currentUser = auth.getCurrentUser();
-
-      var datacopy = this.state.data;
-      datacopy.moderater_userEmail = [currentUser.email];
-
       this.setState({ currentUser: currentUser.email }); //To append at the end to chips
       // var currentUserArr = [currentUser.email];
       // datacopy.moderater_userEmail = currentUserArr;
 
       const projectId = this.props.match.params.id;
       if (projectId === "new") {
-        this.setState({ data: datacopy });
         return;
       }
 
@@ -77,16 +72,19 @@ class ProjectForm extends Form {
   }
 
   doSubmit = async () => {
-    this.setState((prevState) => ({
+    await this.setState((prevState) => ({
       chips: [...prevState.chips, this.state.currentUser],
     }));
-    //const chipsCopy = this.state.chips;
+    const finalDataCopy = this.state.data;
+    const chipsCopy = this.state.chips;
+    finalDataCopy.moderater_userEmail = chipsCopy;
+    this.setState({ data: finalDataCopy });
     //this.setState({ data: { moderater_userEmail: chipsCopy } });
     await saveProject(this.state.data);
     this.props.history.push("/myprojects");
   };
 
-  onChange = (chips) => {
+  onChangeChips = (chips) => {
     this.setState({ chips: chips });
   };
 
@@ -109,7 +107,7 @@ class ProjectForm extends Form {
             <div>
               <Chips
                 value={this.state.chips}
-                onChange={this.onChange}
+                onChange={this.onChangeChips}
                 suggestions={this.state.chipsPlaceholders}
                 placeholder="Search EMAILS of your friends to add as moderators for your project.(All the members need to have a TeamMaster account)"
               />
