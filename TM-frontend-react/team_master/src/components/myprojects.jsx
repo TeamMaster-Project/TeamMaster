@@ -8,6 +8,9 @@ class MyProjects extends Component {
   state = {
     projects: [],
     currentUser: "",
+
+    myProjectsWithModeratorAccess: [],
+    myProjectsWithMemberAccess: [],
   };
 
   async componentDidMount() {
@@ -15,22 +18,29 @@ class MyProjects extends Component {
     const currentUser = auth.getCurrentUser();
 
     var filteredProjects = [];
+    var myProjectsWithModeratorAccess = [];
+    var myProjectsWithMemberAccess = [];
+
     await projects.map((project) => {
       project.moderators.map((moderator) => {
         if (moderator.email == currentUser.email) {
           filteredProjects.push(project);
+          myProjectsWithModeratorAccess.push(project);
         }
       });
       project.members.map((member) => {
         if (member.email == currentUser.email) {
           filteredProjects.push(project);
+          myProjectsWithMemberAccess.push(project);
         }
       });
     });
 
     this.setState({
-      projects: filteredProjects,
+      projects: filteredProjects, //Projects Replace with personalized projects
       currentUser: currentUser,
+      myProjectsWithModeratorAccess: myProjectsWithModeratorAccess,
+      myProjectsWithMemberAccess: myProjectsWithMemberAccess,
     });
   }
 
@@ -52,6 +62,14 @@ class MyProjects extends Component {
   render() {
     console.log(this.state.projects);
     console.log(this.state.currentUser);
+    console.log(
+      "myProjectsWithModeratorAccess",
+      this.state.myProjectsWithModeratorAccess
+    );
+    console.log(
+      "myProjectsWithMemberAccess",
+      this.state.myProjectsWithMemberAccess
+    );
 
     if (this.state.projects.length === 0)
       return <p>There are no Projects yet</p>;

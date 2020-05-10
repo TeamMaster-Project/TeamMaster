@@ -30,26 +30,26 @@ class ProjectForm extends Form {
     member_userEmail: Joi.array().required().label("MemberEmails"),
   };
 
-  async populateUsers() {
-    try {
-      const { data: users } = await getUsers();
-      const userEmails = await users.map((m) => m.email);
-      this.setState({ chipsPlaceholders: userEmails });
-    } catch (ex) {
-      if (ex.response && ex.response.status === 404)
-        this.props.history.replace("/not-found");
-    }
-  }
-
   async componentDidMount() {
     //call GetMethods
-    await this.populateUsers();
+    // await this.populateCurrentUser();
+    // await this.populateUsers();
 
     try {
-      const currentUser = auth.getCurrentUser();
-      this.setState({ currentUser: currentUser.email }); //To append at the end to chips
-      // var currentUserArr = [currentUser.email];
-      // datacopy.moderater_userEmail = currentUserArr;
+      const currentUser = await auth.getCurrentUser();
+      this.setState({ currentUser: currentUser.email }); //To the purpose of appending at the end to chips
+
+      const { data: users } = await getUsers();
+      var userEmails = await users.map((m) => m.email);
+      const currentUserCopy = this.state.currentUser;
+      for (var i = 0; i < userEmails.length; i++) {
+        if (userEmails[i] === currentUserCopy) {
+          userEmails.splice(i, 1);
+          i--;
+        }
+      }
+      //userEmails.pop(currentUserCopy); //removing current loged in user from chipsPlaceholder
+      this.setState({ chipsPlaceholders: userEmails });
 
       const projectId = this.props.match.params.id;
       if (projectId === "new") {
