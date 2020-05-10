@@ -21,6 +21,11 @@ class MyProjects extends Component {
           filteredProjects.push(project);
         }
       });
+      project.members.map((member) => {
+        if (member.email == currentUser.email) {
+          filteredProjects.push(project);
+        }
+      });
     });
 
     this.setState({
