@@ -12,6 +12,7 @@ class ProjectForm extends Form {
       description: "",
       moderater_userEmail: [],
       member_userEmail: [],
+      createrEmail: "",
     },
     chipsModerators: [],
     chipsMembers: [],
@@ -28,6 +29,7 @@ class ProjectForm extends Form {
     description: Joi.string().min(0).max(255).required().label("Description"),
     moderater_userEmail: Joi.array().required().label("ModeratorEmails"),
     member_userEmail: Joi.array().required().label("MemberEmails"),
+    createrEmail: Joi.string().label("creater"),
   };
 
   async componentDidMount() {
@@ -35,12 +37,12 @@ class ProjectForm extends Form {
 
     try {
       const currentUser = await auth.getCurrentUser();
+
       this.setState({ currentUser: currentUser.email }); //To the purpose of appending at the end to chips
 
       const { data: users } = await getUsers();
       var userEmails = await users.map((m) => m.email);
       const currentUserCopy = this.state.currentUser;
-
       for (var i = 0; i < userEmails.length; i++) {
         //removing current loged in user from chipsPlaceholder
         if (userEmails[i] === currentUserCopy) {
@@ -52,6 +54,8 @@ class ProjectForm extends Form {
 
       const projectId = this.props.match.params.id;
       if (projectId === "new") {
+        const dcopy = this.state.data;
+        dcopy.createrEmail = currentUser.email;
         return;
       }
 
@@ -74,7 +78,7 @@ class ProjectForm extends Form {
       _id: project._id,
       name: project.name,
       description: project.description,
-      //moderater_userEmail: [project.moderators[0].email],
+      createrEmail: project.creater,
       moderater_userEmail: project.moderators.map((m) => m.email), //moderator emails from all the emails array properties in project
       member_userEmail: project.members.map((m) => m.email),
     };

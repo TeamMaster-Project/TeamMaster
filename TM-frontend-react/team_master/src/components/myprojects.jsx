@@ -136,20 +136,25 @@ class MyProjects extends Component {
                   {this.state.myProjectsWithModeratorAccess.map(
                     (filteredModeratorProject) => {
                       if (filteredModeratorProject == project) {
-                        return (
-                          //Show Delete button only for moderators
-                          <td key={filteredModeratorProject._id}>
-                            <button
-                              onClick={() => this.handleDelete(project)}
-                              className="btn btn-danger btn-sm"
-                            >
-                              Delete
-                            </button>
-                            <p style={{ color: "red" }}>
-                              <i> You are the Admin of this project</i>
-                            </p>
-                          </td>
-                        );
+                        if (
+                          filteredModeratorProject.creater ===
+                          this.state.currentUser.email
+                        ) {
+                          return (
+                            //Show Delete button only for moderators
+                            <td key={filteredModeratorProject._id}>
+                              <button
+                                onClick={() => this.handleDelete(project)}
+                                className="btn btn-danger btn-sm"
+                              >
+                                Delete
+                              </button>
+                              <p style={{ color: "red" }}>
+                                <i> You are the Admin of this project</i>
+                              </p>
+                            </td>
+                          );
+                        }
                       }
                     }
                   )}

@@ -34,6 +34,7 @@ router.post("/", async (req, res) => {
     description: req.body.description,
     moderators: moderators,
     members: members,
+    creater: req.body.createrEmail,
   });
   await project.save();
 

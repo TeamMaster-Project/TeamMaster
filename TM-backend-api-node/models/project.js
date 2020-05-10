@@ -17,6 +17,10 @@ const projectSchema = new mongoose.Schema({
     maxlength: 255,
   },
 
+  creater: {
+    type: String,
+  },
+
   moderators: {
     //members who can add tasks and delete tasks userSchema
     type: [userSchema], //userSchema type array
@@ -41,6 +45,7 @@ function validateProject(project) {
     moderater_userEmail: Joi.array(),
     date: Joi.date(),
     member_userEmail: Joi.array(),
+    createrEmail: Joi.string(),
   };
 
   return Joi.validate(project, schema);
