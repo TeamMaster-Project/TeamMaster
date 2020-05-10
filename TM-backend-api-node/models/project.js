@@ -40,7 +40,7 @@ function validateProject(project) {
     //basketId: Joi.array().required(),
     moderater_userEmail: Joi.array(),
     date: Joi.date(),
-    member_userId: Joi.array(),
+    member_userEmail: Joi.array(),
   };
 
   return Joi.validate(project, schema);

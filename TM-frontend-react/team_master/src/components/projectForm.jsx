@@ -11,8 +11,10 @@ class ProjectForm extends Form {
       name: "",
       description: "",
       moderater_userEmail: [],
+      member_userEmail: [],
     },
     chips: [],
+    chips2: [],
     chipsPlaceholders: [],
 
     currentUser: "",
@@ -24,7 +26,8 @@ class ProjectForm extends Form {
     _id: Joi.string(),
     name: Joi.string().min(5).max(50).required().label("Name"),
     description: Joi.string().min(0).max(255).required().label("Description"),
-    moderater_userEmail: Joi.array().required().label("ModeratorId"),
+    moderater_userEmail: Joi.array().required().label("ModeratorEmails"),
+    member_userEmail: Joi.array().required().label("MemberEmails"),
   };
 
   async populateUsers() {
@@ -57,7 +60,10 @@ class ProjectForm extends Form {
       this.setState({ data: this.mapToViewModel(project) });
 
       const datacopy = this.state.data;
-      this.setState({ chips: datacopy.moderater_userEmail });
+      this.setState({
+        chips: datacopy.moderater_userEmail,
+        chips2: datacopy.member_userEmail,
+      });
     } catch (ex) {
       if (ex.response && ex.response.status === 404)
         this.props.history.replace("/not-found");
@@ -71,6 +77,7 @@ class ProjectForm extends Form {
       description: project.description,
       //moderater_userEmail: [project.moderators[0].email],
       moderater_userEmail: project.moderators.map((m) => m.email), //moderator emails from all the emails array properties in project
+      member_userEmail: project.members.map((m) => m.email),
     };
   }
 
@@ -78,9 +85,11 @@ class ProjectForm extends Form {
     await this.setState((prevState) => ({
       chips: [...prevState.chips, this.state.currentUser],
     }));
-    const finalDataCopy = this.state.data;
+    var finalDataCopy = this.state.data;
     const chipsCopy = this.state.chips;
+    const chipsCopy2 = this.state.chips2;
     finalDataCopy.moderater_userEmail = chipsCopy;
+    finalDataCopy.member_userEmail = chipsCopy2;
     this.setState({ data: finalDataCopy });
 
     await saveProject(this.state.data);
@@ -89,6 +98,9 @@ class ProjectForm extends Form {
 
   onChangeChips = (chips) => {
     this.setState({ chips: chips });
+  };
+  onChangeChips2 = (chips) => {
+    this.setState({ chips2: chips });
   };
 
   render() {
@@ -113,6 +125,14 @@ class ProjectForm extends Form {
                 onChange={this.onChangeChips}
                 suggestions={this.state.chipsPlaceholders}
                 placeholder="Search EMAILS of your friends to add as moderators for your project.(All the members need to have a TeamMaster account)"
+              />
+            </div>
+            <div>
+              <Chips
+                value={this.state.chips2}
+                onChange={this.onChangeChips2}
+                suggestions={this.state.chipsPlaceholders}
+                placeholder="Search EMAILS of your friends to add as members for your project.(All the members need to have a TeamMaster account)"
               />
             </div>
             {this.renderButton("Save")}

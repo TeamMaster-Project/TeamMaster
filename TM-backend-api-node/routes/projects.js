@@ -17,26 +17,21 @@ router.post("/", async (req, res) => {
   const { error } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
-  // const baskets = await Basket.find({ _id: { $in: req.body.basketId } });
-  // if (!baskets) return res.status(400).send("Invalid basket.");
-  //console.log("baskets array:", baskets);
-
   const moderators = await User.find({
     email: { $in: req.body.moderater_userEmail },
   });
-  if (!moderators) return res.status(400).send("Invalid user.");
+  if (!moderators) return res.status(400).send("Invalid moderator.");
   console.log("moderators array:", moderators);
 
   const members = await User.find({
-    _id: { $in: req.body.member_userId },
+    email: { $in: req.body.member_userEmail },
   });
-  if (!members) return res.status(400).send("Invalid user.");
-  // console.log("members array:", members);
+  if (!members) return res.status(400).send("Invalid member.");
+  console.log("members array:", members);
 
   const project = new Project({
     name: req.body.name,
     description: req.body.description,
-    //baskets: baskets,
     moderators: moderators,
     members: members,
   });
@@ -58,19 +53,25 @@ router.put("/:id", [auth], async (req, res) => {
   if (!User) return res.status(400).send("Invalid user.");
   console.log("User array:", User);
   */
-  const user = await User.find({
+  const moderators = await User.find({
     email: { $in: req.body.moderater_userEmail },
   });
-  // const user = await User.findById(req.body.moderater_userId);
-  // if (!user) return res.status(400).send("Invalid user.");
+  if (!moderators) return res.status(400).send("Invalid moderator.");
+  console.log("moderators array:", moderators);
+
+  const members = await User.find({
+    email: { $in: req.body.member_userEmail },
+  });
+  if (!members) return res.status(400).send("Invalid member.");
+  console.log("members array:", members);
 
   const project = await Project.findByIdAndUpdate(
     req.params.id,
     {
       name: req.body.name,
       description: req.body.description,
-      moderators: user,
-      members: user,
+      moderators: moderators,
+      members: members,
     },
     { new: true }
   );
