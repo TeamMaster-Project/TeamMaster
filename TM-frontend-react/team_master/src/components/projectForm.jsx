@@ -111,7 +111,7 @@ class ProjectForm extends Form {
 
     return (
       <div className="">
-        <h1>Add New Project</h1>
+        <h1>Save Project</h1>
 
         <div>
           <form onSubmit={this.handleSubmit}>
@@ -120,6 +120,7 @@ class ProjectForm extends Form {
             {/* {this.renderSelect("memberId", "Member", this.state.members)} */}
             {this.renderInputs("description", "Description", "text")}
             <div>
+              <label htmlFor="">Moderator Emails</label>
               <Chips
                 value={this.state.chipsModerators}
                 onChange={this.onChangeChipsModerators}
@@ -127,7 +128,9 @@ class ProjectForm extends Form {
                 placeholder="Search EMAILS of your friends to add as moderators for your project.(All the members need to have a TeamMaster account)"
               />
             </div>
+
             <div>
+              <label htmlFor="">Member Emails</label>
               <Chips
                 value={this.state.chipsMembers}
                 onChange={this.onChangeChipsMembers}
@@ -135,8 +138,13 @@ class ProjectForm extends Form {
                 placeholder="Search EMAILS of your friends to add as members for your project.(All the members need to have a TeamMaster account)"
               />
             </div>
+            <br />
             {this.renderButton("Save")}
           </form>
+
+          <div>
+            <p> About moderators and members</p>
+          </div>
         </div>
       </div>
     );
