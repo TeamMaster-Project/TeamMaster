@@ -143,7 +143,7 @@ class ProjectForm extends Form {
           </form>
 
           <div>
-            <p> About moderators and members</p>
+            <p> About moderators and members. Better add a card view</p>
           </div>
         </div>
       </div>

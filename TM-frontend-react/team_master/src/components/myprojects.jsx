@@ -1,16 +1,32 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-//import { getProjects } from "../services/fake1ProjectService";
+import auth from "../services/authService";
 import { getProjects, deleteProject } from "../services/projectService";
 import { toast } from "react-toastify";
 
 class MyProjects extends Component {
   state = {
     projects: [],
+    currentUser: "",
   };
+
   async componentDidMount() {
     const { data: projects } = await getProjects();
-    this.setState({ projects: projects });
+    const currentUser = auth.getCurrentUser();
+
+    var filteredProjects = [];
+    await projects.map((project) => {
+      project.moderators.map((moderator) => {
+        if (moderator.email == currentUser.email) {
+          filteredProjects.push(project);
+        }
+      });
+    });
+
+    this.setState({
+      projects: filteredProjects,
+      currentUser: currentUser,
+    });
   }
 
   handleDelete = async (project) => {
@@ -29,10 +45,12 @@ class MyProjects extends Component {
     }
   };
   render() {
+    console.log(this.state.projects);
+    console.log(this.state.currentUser);
+
     if (this.state.projects.length === 0)
       return <p>There are no Projects yet</p>;
 
-    console.log(this.state.projects);
     return (
       <div className="container">
         <h1>My Projects</h1>
