@@ -113,43 +113,65 @@ class MyProjects extends Component {
                   </td>
                   <td>{project.description}</td>
 
-                  <td>
-                    {this.state.myProjectsWithModeratorAccess.map(
-                      (filteredModeratorProject) => {
-                        if (filteredModeratorProject == project) {
-                          return (
-                            //Show edit button only for moderators
-                            <button
-                              key={filteredModeratorProject._id}
-                              className="btn btn-light btn-sm"
-                            >
+                  {this.state.myProjectsWithModeratorAccess.map(
+                    (filteredModeratorProject) => {
+                      if (filteredModeratorProject == project) {
+                        return (
+                          //Show edit button only for moderators
+                          <td key={filteredModeratorProject._id}>
+                            <button className="btn btn-light btn-sm">
                               <Link to={`/myprojects/${project._id}`}>
                                 Edit Project
                               </Link>
                             </button>
-                          );
-                        }
+                            <p style={{ color: "blue" }}>
+                              <i> You are a moderator in this project</i>
+                            </p>
+                          </td>
+                        );
                       }
-                    )}
-                  </td>
-                  <td>
-                    {this.state.myProjectsWithModeratorAccess.map(
-                      (filteredModeratorProject) => {
-                        if (filteredModeratorProject == project) {
-                          return (
-                            //Show Delete button only for moderators
+                    }
+                  )}
+
+                  {this.state.myProjectsWithModeratorAccess.map(
+                    (filteredModeratorProject) => {
+                      if (filteredModeratorProject == project) {
+                        return (
+                          //Show Delete button only for moderators
+                          <td key={filteredModeratorProject._id}>
                             <button
-                              key={filteredModeratorProject._id}
                               onClick={() => this.handleDelete(project)}
                               className="btn btn-danger btn-sm"
                             >
                               Delete
                             </button>
-                          );
-                        }
+                            <p style={{ color: "red" }}>
+                              <i> You are the Admin of this project</i>
+                            </p>
+                          </td>
+                        );
                       }
-                    )}
-                  </td>
+                    }
+                  )}
+
+                  {this.state.myProjectsWithMemberAccess.map(
+                    (filteredMemberProject) => {
+                      if (filteredMemberProject == project) {
+                        return (
+                          //Show Delete button only for moderators
+                          <td key={filteredMemberProject._id}>
+                            <p style={{ color: "green" }}>
+                              <i>
+                                {" "}
+                                You are a just a member of this project. No Edit
+                                Access
+                              </i>
+                            </p>
+                          </td>
+                        );
+                      }
+                    }
+                  )}
                 </tr>
               ))}
             </tbody>
