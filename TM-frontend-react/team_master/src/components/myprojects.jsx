@@ -112,20 +112,43 @@ class MyProjects extends Component {
                     </Link>
                   </td>
                   <td>{project.description}</td>
+
                   <td>
-                    <button className="btn btn-light btn-sm">
-                      <Link to={`/myprojects/${project._id}`}>
-                        Edit Project
-                      </Link>
-                    </button>
+                    {this.state.myProjectsWithModeratorAccess.map(
+                      (filteredModeratorProject) => {
+                        if (filteredModeratorProject == project) {
+                          return (
+                            //Show edit button only for moderators
+                            <button
+                              key={filteredModeratorProject._id}
+                              className="btn btn-light btn-sm"
+                            >
+                              <Link to={`/myprojects/${project._id}`}>
+                                Edit Project
+                              </Link>
+                            </button>
+                          );
+                        }
+                      }
+                    )}
                   </td>
                   <td>
-                    <button
-                      onClick={() => this.handleDelete(project)}
-                      className="btn btn-danger btn-sm"
-                    >
-                      Delete
-                    </button>
+                    {this.state.myProjectsWithModeratorAccess.map(
+                      (filteredModeratorProject) => {
+                        if (filteredModeratorProject == project) {
+                          return (
+                            //Show Delete button only for moderators
+                            <button
+                              key={filteredModeratorProject._id}
+                              onClick={() => this.handleDelete(project)}
+                              className="btn btn-danger btn-sm"
+                            >
+                              Delete
+                            </button>
+                          );
+                        }
+                      }
+                    )}
                   </td>
                 </tr>
               ))}

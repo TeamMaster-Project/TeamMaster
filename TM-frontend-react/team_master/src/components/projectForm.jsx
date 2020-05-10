@@ -32,8 +32,6 @@ class ProjectForm extends Form {
 
   async componentDidMount() {
     //call GetMethods
-    // await this.populateCurrentUser();
-    // await this.populateUsers();
 
     try {
       const currentUser = await auth.getCurrentUser();
@@ -42,13 +40,14 @@ class ProjectForm extends Form {
       const { data: users } = await getUsers();
       var userEmails = await users.map((m) => m.email);
       const currentUserCopy = this.state.currentUser;
+
       for (var i = 0; i < userEmails.length; i++) {
+        //removing current loged in user from chipsPlaceholder
         if (userEmails[i] === currentUserCopy) {
           userEmails.splice(i, 1);
           i--;
         }
       }
-      //userEmails.pop(currentUserCopy); //removing current loged in user from chipsPlaceholder
       this.setState({ chipsPlaceholders: userEmails });
 
       const projectId = this.props.match.params.id;
