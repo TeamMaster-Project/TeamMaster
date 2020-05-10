@@ -13,8 +13,8 @@ class ProjectForm extends Form {
       moderater_userEmail: [],
       member_userEmail: [],
     },
-    chips: [],
-    chips2: [],
+    chipsModerators: [],
+    chipsMembers: [],
     chipsPlaceholders: [],
 
     currentUser: "",
@@ -61,8 +61,8 @@ class ProjectForm extends Form {
 
       const datacopy = this.state.data;
       this.setState({
-        chips: datacopy.moderater_userEmail,
-        chips2: datacopy.member_userEmail,
+        chipsModerators: datacopy.moderater_userEmail,
+        chipsMembers: datacopy.member_userEmail,
       });
     } catch (ex) {
       if (ex.response && ex.response.status === 404)
@@ -81,31 +81,31 @@ class ProjectForm extends Form {
     };
   }
 
+  onChangeChipsModerators = (chips) => {
+    this.setState({ chipsModerators: chips });
+  };
+  onChangeChipsMembers = (chips) => {
+    this.setState({ chipsMembers: chips });
+  };
+
   doSubmit = async () => {
     await this.setState((prevState) => ({
-      chips: [...prevState.chips, this.state.currentUser],
+      chipsModerators: [...prevState.chipsModerators, this.state.currentUser],
     }));
     var finalDataCopy = this.state.data;
-    const chipsCopy = this.state.chips;
-    const chipsCopy2 = this.state.chips2;
-    finalDataCopy.moderater_userEmail = chipsCopy;
-    finalDataCopy.member_userEmail = chipsCopy2;
+    const chipsModeratorsCopy = this.state.chipsModerators;
+    const chipsMembersCopy = this.state.chipsMembers;
+    finalDataCopy.moderater_userEmail = chipsModeratorsCopy;
+    finalDataCopy.member_userEmail = chipsMembersCopy;
     this.setState({ data: finalDataCopy });
 
     await saveProject(this.state.data);
     this.props.history.push("/myprojects");
   };
 
-  onChangeChips = (chips) => {
-    this.setState({ chips: chips });
-  };
-  onChangeChips2 = (chips) => {
-    this.setState({ chips2: chips });
-  };
-
   render() {
     console.log(this.state.chipsPlaceholders);
-    console.log(this.state.chips);
+    //console.log(this.state.chipsModerators);
     console.log(this.state.data);
     console.log("current user", this.state.currentUser);
 
@@ -121,16 +121,16 @@ class ProjectForm extends Form {
             {this.renderInputs("description", "Description", "text")}
             <div>
               <Chips
-                value={this.state.chips}
-                onChange={this.onChangeChips}
+                value={this.state.chipsModerators}
+                onChange={this.onChangeChipsModerators}
                 suggestions={this.state.chipsPlaceholders}
                 placeholder="Search EMAILS of your friends to add as moderators for your project.(All the members need to have a TeamMaster account)"
               />
             </div>
             <div>
               <Chips
-                value={this.state.chips2}
-                onChange={this.onChangeChips2}
+                value={this.state.chipsMembers}
+                onChange={this.onChangeChipsMembers}
                 suggestions={this.state.chipsPlaceholders}
                 placeholder="Search EMAILS of your friends to add as members for your project.(All the members need to have a TeamMaster account)"
               />
