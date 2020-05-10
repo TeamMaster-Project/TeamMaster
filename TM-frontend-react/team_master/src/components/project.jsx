@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { getBaskets, deleteBasket } from "../services/basketService";
 import { getTasks, deleteTask } from "../services/taskService";
+import { getProject } from "../services/projectService";
 import { toast } from "react-toastify";
 import "../styles/buttons/liquidbutton.css";
 import EditBaskets from "./project_page/editBaskets";
@@ -11,12 +12,16 @@ import BasketsCardView from "./project_page/basketsCardView";
 
 class Project extends Component {
   state = {
+    project: "",
     projectName: "",
     baskets: [],
     filteredBasketIds: [],
     tasks: [],
   };
   async componentDidMount() {
+    const projectId = this.props.match.params.id;
+    const { data: project } = await getProject(projectId);
+
     const projectName = this.props.location.projectName;
 
     const { data: baskets } = await getBaskets();
@@ -36,6 +41,7 @@ class Project extends Component {
     );
 
     this.setState({
+      project: project,
       projectName: projectName,
       baskets: filteredBaskets,
       filteredBasketIds: filteredBasketIds,
@@ -74,7 +80,7 @@ class Project extends Component {
   };
 
   render() {
-    console.log(this.state.baskets);
+    console.log(this.state.project);
     console.log(this.state.filteredBasketIds);
     console.log(this.state.tasks);
     //if (this.state.baskets.length === 0) return <p>There are no baskets yet</p>;
@@ -90,6 +96,7 @@ class Project extends Component {
         />
         {infoBox}
         <MainButtons
+          project={this.state.project}
           id={this.props.match.params.id}
           name={this.props.match.params.name}
         />

@@ -13,6 +13,7 @@ const basketSchema = mongoose.Schema({
     minlength: 0,
     maxlength: 100,
   },
+  date: { type: Date, default: Date.now },
 });
 
 const Basket = mongoose.model("Basket", basketSchema);
@@ -21,6 +22,7 @@ function validateBasket(basket) {
   const schema = {
     name: Joi.string().min(1).max(100).required(),
     projectId: Joi.objectId().required(),
+    date: Joi.date(),
   };
 
   return Joi.validate(basket, schema);

@@ -8,7 +8,7 @@ const express = require("express");
 const router = express.Router();
 
 router.get("/", [auth], async (req, res) => {
-  const baskets = await Basket.find().sort("name");
+  const baskets = await Basket.find().sort("date");
   res.send(baskets);
 });
 

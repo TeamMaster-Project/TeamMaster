@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+
 class ProjectSummary extends Component {
   render() {
-    const { name, description } = this.props;
+    const { name, description, project } = this.props;
     return (
       <div className="card text-center my-3 mx-5 projectsummery">
         <div className="card-header">
