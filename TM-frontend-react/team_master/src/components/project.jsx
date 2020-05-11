@@ -13,6 +13,7 @@ import auth from "../services/authService";
 
 class Project extends Component {
   state = {
+    projectId: "",
     projectName: "",
     baskets: [],
     filteredBasketIds: [],
@@ -53,6 +54,7 @@ class Project extends Component {
     );
 
     this.setState({
+      projectId: projectId,
       projectName: projectName,
       baskets: filteredBaskets,
       filteredBasketIds: filteredBasketIds,
@@ -103,6 +105,8 @@ class Project extends Component {
     return (
       <div>
         <ProjectSummary
+          isaModerator={this.state.isaModerator}
+          projectId={this.state.projectId}
           name={this.props.match.params.name}
           description={this.props.location.description}
         />
@@ -112,23 +116,34 @@ class Project extends Component {
           id={this.props.match.params.id}
           name={this.props.match.params.name}
         />
-        <br /> <h6>Baskets With Tasks</h6>
-        <BasketsCardView
-          isaModerator={this.state.isaModerator}
-          baskets={this.state.baskets}
-          tasks={this.state.tasks}
-          projectId={this.props.match.params.id}
-          name={this.props.match.params.name}
-          onDelete={this.handleDeleteTask}
-        />
         <br />
-        <h6>Edit Baskets</h6>
-        <EditBaskets //display all baskets and edit, delete them
-          baskets={this.state.baskets}
-          projectId={this.props.match.params.id}
-          name={this.props.match.params.name}
-          onDelete={this.handleDeleteBasket}
-        />
+        <h6>
+          <i> Working Area</i>
+        </h6>
+        <div className="row" style={{ margin: "0 50px" }}>
+          <div className="col">
+            <BasketsCardView
+              isaModerator={this.state.isaModerator}
+              baskets={this.state.baskets}
+              tasks={this.state.tasks}
+              projectId={this.props.match.params.id}
+              name={this.props.match.params.name}
+              onDelete={this.handleDeleteTask}
+            />
+          </div>
+          {this.state.isaModerator && (
+            <div className="col-2">
+              <h6>Edit Baskets</h6>
+              <EditBaskets //display all baskets and edit, delete them
+                baskets={this.state.baskets}
+                projectId={this.props.match.params.id}
+                name={this.props.match.params.name}
+                onDelete={this.handleDeleteBasket}
+              />
+            </div>
+          )}
+        </div>
+        <br />
       </div>
     );
   }

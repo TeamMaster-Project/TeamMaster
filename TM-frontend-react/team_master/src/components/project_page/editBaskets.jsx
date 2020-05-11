@@ -18,7 +18,7 @@ class EditBaskets extends Component {
                 <td>{basket.name}</td>
                 <td style={{ width: "25px" }}>
                   <Link
-                    className="btn btn-sm btn-light"
+                    className="btn btn-sm btn-success"
                     to={{
                       pathname: `/myprojects/${projectId}/${name}/${basket._id}`,
                     }}
