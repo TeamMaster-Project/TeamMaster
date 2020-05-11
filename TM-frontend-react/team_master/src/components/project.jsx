@@ -9,18 +9,30 @@ import EditBaskets from "./project_page/editBaskets";
 import ProjectSummary from "./project_page/projectSummary";
 import MainButtons from "./project_page/mainButtons";
 import BasketsCardView from "./project_page/basketsCardView";
+import auth from "../services/authService";
 
 class Project extends Component {
   state = {
-    project: "",
     projectName: "",
     baskets: [],
     filteredBasketIds: [],
     tasks: [],
+
+    isaModerator: "",
   };
   async componentDidMount() {
+    const currentUser = await auth.getCurrentUser();
     const projectId = this.props.match.params.id;
     const { data: project } = await getProject(projectId);
+    const mods = project.moderators;
+    var modEmails = [];
+    mods.map((m) => modEmails.push(m.email));
+    var isaModerator = "";
+    if (modEmails.indexOf(currentUser.email) !== -1) {
+      isaModerator = true;
+    } else {
+      isaModerator = false;
+    }
 
     const projectName = this.props.location.projectName;
 
@@ -41,11 +53,11 @@ class Project extends Component {
     );
 
     this.setState({
-      project: project,
       projectName: projectName,
       baskets: filteredBaskets,
       filteredBasketIds: filteredBasketIds,
       tasks: filteredTasks,
+      isaModerator: isaModerator,
     });
   }
 
@@ -80,9 +92,9 @@ class Project extends Component {
   };
 
   render() {
-    console.log(this.state.project);
     console.log(this.state.filteredBasketIds);
     console.log(this.state.tasks);
+    console.log(this.state.isaModerator);
     //if (this.state.baskets.length === 0) return <p>There are no baskets yet</p>;
     let infoBox;
     if (this.state.baskets.length === 0)
@@ -96,12 +108,13 @@ class Project extends Component {
         />
         {infoBox}
         <MainButtons
-          project={this.state.project}
+          isaModerator={this.state.isaModerator}
           id={this.props.match.params.id}
           name={this.props.match.params.name}
         />
         <br /> <h6>Baskets With Tasks</h6>
         <BasketsCardView
+          isaModerator={this.state.isaModerator}
           baskets={this.state.baskets}
           tasks={this.state.tasks}
           projectId={this.props.match.params.id}

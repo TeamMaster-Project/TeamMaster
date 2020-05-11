@@ -2,7 +2,14 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 class BasketsCardView extends Component {
   render() {
-    const { baskets, tasks, projectId, name, onDelete } = this.props;
+    const {
+      baskets,
+      tasks,
+      projectId,
+      name,
+      onDelete,
+      isaModerator,
+    } = this.props;
     return (
       <div className="">
         <div className="row">
@@ -40,19 +47,20 @@ class BasketsCardView extends Component {
                               {/* edit mark */}
                             </Link>
                           </td>
-
-                          <td style={{ width: "25px" }}>
-                            <button
-                              onClick={() => onDelete(task)}
-                              className="btn btn-light btn-sm"
-                            >
-                              <i
-                                className="fa fa-trash-o"
-                                aria-hidden="true"
-                              ></i>
-                              {/* Delete icon */}
-                            </button>
-                          </td>
+                          {isaModerator && (
+                            <td style={{ width: "25px" }}>
+                              <button
+                                onClick={() => onDelete(task)}
+                                className="btn btn-light btn-sm"
+                              >
+                                <i
+                                  className="fa fa-trash-o"
+                                  aria-hidden="true"
+                                ></i>
+                                {/* Delete icon */}
+                              </button>
+                            </td>
+                          )}
                         </tr>
                       );
                     }
