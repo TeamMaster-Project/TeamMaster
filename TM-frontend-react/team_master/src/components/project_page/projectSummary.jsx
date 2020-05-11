@@ -19,7 +19,6 @@ class ProjectSummary extends Component {
                   <i className="fa fa-pencil-square-o" aria-hidden="true"></i>
                   {/* edit icon */}
                 </Link>
-                <Link to="#" className="btn btn-sm btn-light "></Link>
               </span>
             )}
           </h3>
