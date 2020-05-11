@@ -132,9 +132,9 @@ class MyProjects extends Component {
                                     Edit Project
                                   </Link>
                                 </button>
-                                {/* <p style={{ color: "blue" }}>
+                                <p style={{ color: "blue" }}>
                                   <i> You are a moderator in this project</i>
-                                </p> */}
+                                </p>
                               </td>
                             );
                           }
@@ -157,9 +157,9 @@ class MyProjects extends Component {
                                   >
                                     Delete
                                   </button>
-                                  {/* <p style={{ color: "red" }}>
-                                    <i> You are the Admin of this project</i>
-                                  </p> */}
+                                  <p style={{ color: "red" }}>
+                                    <i> You created this project</i>
+                                  </p>
                                 </td>
                               );
                             }
