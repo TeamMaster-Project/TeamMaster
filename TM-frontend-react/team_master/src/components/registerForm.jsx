@@ -3,6 +3,7 @@ import Form from "./common/form";
 import Joi from "joi-browser";
 import * as userService from "../services/userService";
 import auth from "../services/authService";
+import "../styles/registerform.css";
 
 class Register extends Form {
   state = {
@@ -38,15 +39,21 @@ class Register extends Form {
   };
   render() {
     return (
-      <div>
-        <h1>Register</h1>
-        <form onSubmit={this.handleSubmit}>
-          {this.renderInputs("username", "Email", "text")}
-          {this.renderInputs("password", "Password", "password")}
-          {/* name label datatype */}
-          {this.renderInputs("name", "Name", "text")}
-          {this.renderButton("Register")}
-        </form>
+      <div className="register-form-container">
+        <div className="register-form-card">
+          <div className="register-form">
+            <h1>Register</h1>
+            <form onSubmit={this.handleSubmit}>
+              {this.renderInputs("username", "Email", "text")}
+              {this.renderInputs("password", "Password", "password")}
+              {/* name label datatype */}
+              {this.renderInputs("name", "Name", "text")}
+              <div className="form-submit-button">
+                {this.renderButton("Register")}
+              </div>
+            </form>
+          </div>
+        </div>
       </div>
     );
   }

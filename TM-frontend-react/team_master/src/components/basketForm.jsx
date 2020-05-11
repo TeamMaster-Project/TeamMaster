@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Form from "./common/form";
 import Joi from "joi-browser";
 import { getBasket, saveBasket } from "../services/basketService";
+import "../styles/registerform.css";
 class BasketForm extends Form {
   state = {
     data: {
@@ -67,15 +68,19 @@ class BasketForm extends Form {
   render() {
     console.log(this.state.data);
     return (
-      <div className="container">
-        <h1>Save Basket</h1>
-        <div>
-          <form onSubmit={this.handleSubmit}>
-            {/* name, label, datatype */}
+      <div className="register-form-container">
+        <div className="register-form-card">
+          <div className="register-form">
+            <h1>Save Basket</h1>
+            <div>
+              <form onSubmit={this.handleSubmit}>
+                {/* name, label, datatype */}
 
-            {this.renderInputs("name", "Name", "text")}
-            {this.renderButton("Save")}
-          </form>
+                {this.renderInputs("name", "Name", "text")}
+                {this.renderButton("Save")}
+              </form>
+            </div>
+          </div>
         </div>
       </div>
     );

@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import auth from "../services/authService";
 import { getProjects, deleteProject } from "../services/projectService";
 import { toast } from "react-toastify";
+import "../styles/myprojects.css";
+import PermissionDetails from "./myprojects_page/permissionDetails";
 
 class MyProjects extends Component {
   state = {
@@ -75,7 +77,7 @@ class MyProjects extends Component {
       return <p>There are no Projects yet</p>;
 
     return (
-      <div className="container">
+      <div className="">
         <h1>My Projects</h1>
         <h1>
           <Link
@@ -86,101 +88,108 @@ class MyProjects extends Component {
             New Project
           </Link>
         </h1>
-        <div className="row">
-          <table className="table">
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Description</th>
-                {/* <th>Moderators</th>
+        <div className="myproject-container">
+          <div className="row">
+            <div className="col-md-3 col-sm">
+              <PermissionDetails />
+            </div>
+            <div className="col">
+              <table className="table">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    {/* <th>Moderators</th>
                 <th>Members</th> */}
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              {this.state.projects.map((project) => (
-                <tr key={project._id}>
-                  <td>
-                    <Link
-                      to={{
-                        pathname: `/myprojects/${project._id}/${project.name}`,
-                        projectName: `${project.name}`,
-                        description: `${project.description}`,
-                      }}
-                    >
-                      {project.name}
-                    </Link>
-                  </td>
-                  <td>{project.description}</td>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {this.state.projects.map((project) => (
+                    <tr key={project._id}>
+                      <td>
+                        <Link
+                          to={{
+                            pathname: `/myprojects/${project._id}/${project.name}`,
+                            projectName: `${project.name}`,
+                            description: `${project.description}`,
+                          }}
+                        >
+                          {project.name}
+                        </Link>
+                      </td>
+                      <td>{project.description}</td>
 
-                  {this.state.myProjectsWithModeratorAccess.map(
-                    (filteredModeratorProject) => {
-                      if (filteredModeratorProject == project) {
-                        return (
-                          //Show edit button only for moderators
-                          <td key={filteredModeratorProject._id}>
-                            <button className="btn btn-light btn-sm">
-                              <Link to={`/myprojects/${project._id}`}>
-                                Edit Project
-                              </Link>
-                            </button>
-                            <p style={{ color: "blue" }}>
-                              <i> You are a moderator in this project</i>
-                            </p>
-                          </td>
-                        );
-                      }
-                    }
-                  )}
-
-                  {this.state.myProjectsWithModeratorAccess.map(
-                    (filteredModeratorProject) => {
-                      if (filteredModeratorProject == project) {
-                        if (
-                          filteredModeratorProject.creater ===
-                          this.state.currentUser.email
-                        ) {
-                          return (
-                            //Show Delete button only for moderators
-                            <td key={filteredModeratorProject._id}>
-                              <button
-                                onClick={() => this.handleDelete(project)}
-                                className="btn btn-danger btn-sm"
-                              >
-                                Delete
-                              </button>
-                              <p style={{ color: "red" }}>
-                                <i> You are the Admin of this project</i>
-                              </p>
-                            </td>
-                          );
+                      {this.state.myProjectsWithModeratorAccess.map(
+                        (filteredModeratorProject) => {
+                          if (filteredModeratorProject == project) {
+                            return (
+                              //Show edit button only for moderators
+                              <td key={filteredModeratorProject._id}>
+                                <button className="btn btn-light btn-sm">
+                                  <Link to={`/myprojects/${project._id}`}>
+                                    Edit Project
+                                  </Link>
+                                </button>
+                                <p style={{ color: "blue" }}>
+                                  <i> You are a moderator in this project</i>
+                                </p>
+                              </td>
+                            );
+                          }
                         }
-                      }
-                    }
-                  )}
+                      )}
 
-                  {this.state.myProjectsWithMemberAccess.map(
-                    (filteredMemberProject) => {
-                      if (filteredMemberProject == project) {
-                        return (
-                          //Show Delete button only for moderators
-                          <td key={filteredMemberProject._id}>
-                            <p style={{ color: "green" }}>
-                              <i>
-                                {" "}
-                                You are a just a member of this project. No Edit
-                                Access
-                              </i>
-                            </p>
-                          </td>
-                        );
-                      }
-                    }
-                  )}
-                </tr>
-              ))}
-            </tbody>
-          </table>
+                      {this.state.myProjectsWithModeratorAccess.map(
+                        (filteredModeratorProject) => {
+                          if (filteredModeratorProject == project) {
+                            if (
+                              filteredModeratorProject.creater ===
+                              this.state.currentUser.email
+                            ) {
+                              return (
+                                //Show Delete button only for moderators
+                                <td key={filteredModeratorProject._id}>
+                                  <button
+                                    onClick={() => this.handleDelete(project)}
+                                    className="btn btn-danger btn-sm"
+                                  >
+                                    Delete
+                                  </button>
+                                  <p style={{ color: "red" }}>
+                                    <i> You are the Admin of this project</i>
+                                  </p>
+                                </td>
+                              );
+                            }
+                          }
+                        }
+                      )}
+
+                      {this.state.myProjectsWithMemberAccess.map(
+                        (filteredMemberProject) => {
+                          if (filteredMemberProject == project) {
+                            return (
+                              //Show Delete button only for moderators
+                              <td key={filteredMemberProject._id}>
+                                <p style={{ color: "green" }}>
+                                  <i>
+                                    {" "}
+                                    You are a just a member of this project. No
+                                    Edit Access
+                                  </i>
+                                </p>
+                              </td>
+                            );
+                          }
+                        }
+                      )}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
       </div>
     );

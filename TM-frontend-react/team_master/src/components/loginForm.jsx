@@ -3,6 +3,7 @@ import { Redirect } from "react-router-dom";
 import Joi from "joi-browser"; //Joi for form validation library
 import Form from "./common/form";
 import auth from "../services/authService";
+import "../styles/registerform.css";
 
 class LoginForm extends Form {
   state = {
@@ -38,14 +39,20 @@ class LoginForm extends Form {
     if (auth.getCurrentUser()) return <Redirect to="/" />; //Prevent go to 'login' again when a user already loged in.
 
     return (
-      <div>
-        <h1>Login</h1>
-        <form onSubmit={this.handleSubmit}>
-          {this.renderInputs("username", "Username")}
-          {this.renderInputs("password", "Password", "password")}
-          {/* name label datatype */}
-          {this.renderButton("Login")}
-        </form>
+      <div className="register-form-container">
+        <div className="register-form-card">
+          <div className="register-form">
+            <h1>Login</h1>
+            <form onSubmit={this.handleSubmit}>
+              {this.renderInputs("username", "Username")}
+              {this.renderInputs("password", "Password", "password")}
+              {/* name label datatype */}
+              <div className="form-submit-button">
+                {this.renderButton("Login")}
+              </div>
+            </form>
+          </div>
+        </div>
       </div>
     );
   }

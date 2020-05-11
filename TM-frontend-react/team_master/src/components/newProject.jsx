@@ -1,9 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import "../styles/newproject.css";
 const NewForm = () => {
   return (
-    <div className="newproject">
+    <div className="newproject newproject-container">
       <h3>Create Your New Project And Manage It Easily With TEAM MASTER</h3>
+      {/* <img src="/images/bg1.jpg" /> */}
       <h1>
         <Link
           to="/myprojects/new"

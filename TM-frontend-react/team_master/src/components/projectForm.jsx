@@ -5,6 +5,7 @@ import Joi from "joi-browser";
 import { getProject, saveProject } from "../services/projectService";
 import { getUsers } from "../services/userService";
 import Chips, { Chip } from "react-chips";
+import "../styles/registerform.css";
 class ProjectForm extends Form {
   state = {
     data: {
@@ -113,40 +114,44 @@ class ProjectForm extends Form {
     console.log("current user", this.state.currentUser);
 
     return (
-      <div className="">
-        <h1>Save Project</h1>
-
-        <div>
-          <form onSubmit={this.handleSubmit}>
-            {/* name, label, datatype */}
-            {this.renderInputs("name", "Name", "text")}
-            {/* {this.renderSelect("memberId", "Member", this.state.members)} */}
-            {this.renderInputs("description", "Description", "text")}
-            <div>
-              <label htmlFor="">Moderator Emails</label>
-              <Chips
-                value={this.state.chipsModerators}
-                onChange={this.onChangeChipsModerators}
-                suggestions={this.state.chipsPlaceholders}
-                placeholder="Search EMAILS of your friends to add as moderators for your project.(All the members need to have a TeamMaster account)"
-              />
-            </div>
+      <div className="register-form-container">
+        <div className="register-form-card">
+          <div className="register-form">
+            <h1>Save Project</h1>
 
             <div>
-              <label htmlFor="">Member Emails</label>
-              <Chips
-                value={this.state.chipsMembers}
-                onChange={this.onChangeChipsMembers}
-                suggestions={this.state.chipsPlaceholders}
-                placeholder="Search EMAILS of your friends to add as members for your project.(All the members need to have a TeamMaster account)"
-              />
-            </div>
-            <br />
-            {this.renderButton("Save")}
-          </form>
+              <form onSubmit={this.handleSubmit}>
+                {/* name, label, datatype */}
+                {this.renderInputs("name", "Name", "text")}
+                {/* {this.renderSelect("memberId", "Member", this.state.members)} */}
+                {this.renderInputs("description", "Description", "text")}
+                <div>
+                  <label htmlFor="">Moderator Emails</label>
+                  <Chips
+                    value={this.state.chipsModerators}
+                    onChange={this.onChangeChipsModerators}
+                    suggestions={this.state.chipsPlaceholders}
+                    placeholder="Search EMAILS of your friends to add as moderators for your project.(All the members need to have a TeamMaster account)"
+                  />
+                </div>
 
-          <div>
-            <p> About moderators and members. Better add a card view</p>
+                <div>
+                  <label htmlFor="">Member Emails</label>
+                  <Chips
+                    value={this.state.chipsMembers}
+                    onChange={this.onChangeChipsMembers}
+                    suggestions={this.state.chipsPlaceholders}
+                    placeholder="Search EMAILS of your friends to add as members for your project.(All the members need to have a TeamMaster account)"
+                  />
+                </div>
+                <br />
+                {this.renderButton("Save")}
+              </form>
+
+              <div>
+                <p> About moderators and members. Better add a card view</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>

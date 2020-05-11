@@ -14,20 +14,13 @@ h6 {
     rgb(0, 98, 255),
     rgb(7, 137, 160)
   ) !important;
+  top: 0;
+  width: 100%;
+  /* position: fixed !important; */
 }
 /* .nav-link {
   color: white !important;
 }  */
-
-.newproject {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(2px + 2vmin);
-  color: black;
-}
 
 .projectsummery {
   background: rgb(250, 250, 250) !important;

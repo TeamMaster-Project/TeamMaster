@@ -3,6 +3,7 @@ import Form from "./common/form";
 import Joi from "joi-browser";
 import { getTask, saveTask } from "../services/taskService";
 import { getBaskets } from "../services/basketService";
+import "../styles/registerform.css";
 
 class TaskForm extends Form {
   state = {
@@ -77,20 +78,24 @@ class TaskForm extends Form {
     console.log(this.state.data);
     //console.log(this.state.task);
     return (
-      <div className="container">
-        <h1>Save Task</h1>
-        <div>
-          <form onSubmit={this.handleSubmit}>
-            {/* name label datatype */}
-            {this.renderInputs("title", "Title", "text")}
-            {this.renderSelect(
-              "basketId",
-              "Relevent Basket",
-              this.state.baskets
-            )}
-            {/* {this.renderInputs("deadline", "Deadline", "date")} */}
-            {this.renderButton("Save")}
-          </form>
+      <div className="register-form-container">
+        <div className="register-form-card">
+          <div className="register-form">
+            <h1>Save Task</h1>
+            <div>
+              <form onSubmit={this.handleSubmit}>
+                {/* name label datatype */}
+                {this.renderInputs("title", "Title", "text")}
+                {this.renderSelect(
+                  "basketId",
+                  "Relevent Basket",
+                  this.state.baskets
+                )}
+                {/* {this.renderInputs("deadline", "Deadline", "date")} */}
+                {this.renderButton("Save")}
+              </form>
+            </div>
+          </div>
         </div>
       </div>
     );
