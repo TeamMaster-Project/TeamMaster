@@ -10,6 +10,7 @@ import ProjectSummary from "./project_page/projectSummary";
 import MainButtons from "./project_page/mainButtons";
 import BasketsCardView from "./project_page/basketsCardView";
 import auth from "../services/authService";
+import "../styles/project.css";
 
 class Project extends Component {
   state = {
@@ -131,8 +132,9 @@ class Project extends Component {
               onDelete={this.handleDeleteTask}
             />
           </div>
+          {this.state.isaModerator && <div class="vl"></div>}
           {this.state.isaModerator && (
-            <div className="col-2">
+            <div className="col-2 edit-baskets">
               <h6>Edit Baskets</h6>
               <EditBaskets //display all baskets and edit, delete them
                 baskets={this.state.baskets}

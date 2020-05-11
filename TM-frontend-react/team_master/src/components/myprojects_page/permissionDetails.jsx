@@ -10,8 +10,7 @@ class PermissionDetails extends Component {
           <div className="card-header">Admins</div>
           <div className="card-body">
             <p className="card-text">
-              The permission to delete created projet is only for the creater of
-              the project.
+              Only the Creater/Admin has permission to DELETE project
             </p>
           </div>
         </div>
@@ -22,8 +21,8 @@ class PermissionDetails extends Component {
           <div className="card-header">Moderators</div>
           <div className="card-body">
             <p className="card-text">
-              Creator can add moderators who have access to edit the project
-              details, and set baskets, delete baskets and manage the project
+              Only the moderators has permission to EDIT project details and
+              MANAGE BASKETS.
             </p>
           </div>
         </div>
@@ -34,8 +33,8 @@ class PermissionDetails extends Component {
           <div className="card-header">Members</div>
           <div className="card-body">
             <p className="card-text">
-              Members who are not tagged as moderators can edit task status and
-              move it to another the basket after completing.
+              Members who are not tagged as moderators can EDIT TASK status only
+              and move it to another basket after completing.
             </p>
           </div>
         </div>

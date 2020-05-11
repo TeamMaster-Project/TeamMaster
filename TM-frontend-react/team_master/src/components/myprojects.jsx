@@ -78,7 +78,7 @@ class MyProjects extends Component {
 
     return (
       <div className="">
-        <h1>My Projects</h1>
+        <h2>My Projects</h2>
         <h1>
           <Link
             to="/myprojects/new"
@@ -97,17 +97,18 @@ class MyProjects extends Component {
               <table className="table">
                 <thead>
                   <tr>
-                    <th>Name</th>
-                    <th>Description</th>
-                    {/* <th>Moderators</th>
-                <th>Members</th> */}
+                    {/* <th>Name</th> */}
+                    {/* <th>Description</th> */}
+                    <th>Projects that you are assigned</th>
+                    <th></th>
                     <th></th>
                   </tr>
                 </thead>
                 <tbody>
                   {this.state.projects.map((project) => (
+                    // <tr key={project._id} className="project-card card">
                     <tr key={project._id}>
-                      <td>
+                      <td className="project-name card">
                         <Link
                           to={{
                             pathname: `/myprojects/${project._id}/${project.name}`,
@@ -131,9 +132,9 @@ class MyProjects extends Component {
                                     Edit Project
                                   </Link>
                                 </button>
-                                <p style={{ color: "blue" }}>
+                                {/* <p style={{ color: "blue" }}>
                                   <i> You are a moderator in this project</i>
-                                </p>
+                                </p> */}
                               </td>
                             );
                           }
@@ -156,9 +157,9 @@ class MyProjects extends Component {
                                   >
                                     Delete
                                   </button>
-                                  <p style={{ color: "red" }}>
+                                  {/* <p style={{ color: "red" }}>
                                     <i> You are the Admin of this project</i>
-                                  </p>
+                                  </p> */}
                                 </td>
                               );
                             }
@@ -173,11 +174,7 @@ class MyProjects extends Component {
                               //Show Delete button only for moderators
                               <td key={filteredMemberProject._id}>
                                 <p style={{ color: "green" }}>
-                                  <i>
-                                    {" "}
-                                    You are a just a member of this project. No
-                                    Edit Access
-                                  </i>
+                                  <i> (Member Only. No Edit Access)</i>
                                 </p>
                               </td>
                             );
