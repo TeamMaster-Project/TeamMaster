@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import Form from "./common/form";
+import Form from "../common/form";
 import Joi from "joi-browser";
-import { getBasket, saveBasket } from "../services/basketService";
-import "../styles/registerform.css";
+import { getBasket, saveBasket } from "../../services/basketService";
+import "../../styles/registerform.css";
 class BasketForm extends Form {
   state = {
     data: {

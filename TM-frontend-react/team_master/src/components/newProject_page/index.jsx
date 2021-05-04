@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "../styles/newproject.css";
+import "../../styles/newproject.css";
 const NewForm = () => {
   return (
     <div className="newproject newproject-container">

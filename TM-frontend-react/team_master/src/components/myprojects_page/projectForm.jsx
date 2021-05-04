@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import auth from "../services/authService";
-import Form from "./common/form";
+import auth from "../../services/authService";
+import Form from "../common/form";
 import Joi from "joi-browser";
-import { getProject, saveProject } from "../services/projectService";
-import { getUsers } from "../services/userService";
+import { getProject, saveProject } from "../../services/projectService";
+import { getUsers } from "../../services/userService";
 import Chips, { Chip } from "react-chips";
-import "../styles/registerform.css";
+import "../../styles/registerform.css";
 class ProjectForm extends Form {
   state = {
     data: {

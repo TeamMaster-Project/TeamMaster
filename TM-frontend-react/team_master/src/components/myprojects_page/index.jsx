@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import auth from "../services/authService";
-import { getProjects, deleteProject } from "../services/projectService";
+import auth from "../../services/authService";
+import { getProjects, deleteProject } from "../../services/projectService";
 import { toast } from "react-toastify";
-import "../styles/myprojects.css";
-import PermissionDetails from "./myprojects_page/permissionDetails";
+import "../../styles/myprojects.css";
+import PermissionDetails from "./permissionDetails";
 
 class MyProjects extends Component {
   state = {
