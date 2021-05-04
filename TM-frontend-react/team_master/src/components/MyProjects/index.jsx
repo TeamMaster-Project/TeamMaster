@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import auth from "../../services/authService";
 import { getProjects, deleteProject } from "../../services/projectService";
 import { toast } from "react-toastify";
-import "../../styles/myprojects.css";
+import "./index.css";
 import PermissionDetails from "./permissionDetails";
 
 class MyProjects extends Component {

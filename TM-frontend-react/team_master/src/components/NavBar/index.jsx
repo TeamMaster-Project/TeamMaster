@@ -1,7 +1,7 @@
 import React from "react";
 import * as ReactBootstrap from "react-bootstrap";
 import { Link, NavLink } from "react-router-dom";
-import "../App.css";
+import "./index.css";
 
 const NavBar = (props) => {
   //console.log(props.currentUser);

@@ -2,22 +2,22 @@ import React, { Component } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
-import jwtDecode from "jwt-decode";
-import NavBar from "./components/navBar";
-import Home from "./components/home";
-import MyProjects from "./components/myprojects_page";
-import Project from "./components/project_page";
-import NotFound from "./components/notFound";
-import ProjectForm from "./components/myprojects_page/projectForm";
-import NewProject from "./components/newProject_page";
-import Register from "./components/auth/registerForm";
-import LoginForm from "./components/auth/loginForm";
-import ProtectedRoute from "./components/common/protectedRoute";
-import auth from "./services/authService";
+
+import NavBar from "./components/NavBar";
+import Home from "./components/Home";
+import MyProjects from "./components/MyProjects";
+import Project from "./components/MyProjects/project_page";
+import NotFound from "./components/PageNotFound";
+import ProjectForm from "./components/NewProject/projectForm";
+import NewProject from "./components/NewProject";
+import Register from "./components/auth/Register";
+import LoginForm from "./components/auth/Login";
+import ProtectedRoute from "./components/Common/protectedRoute";
 import Logout from "./components/auth/logout";
-import BasketForm from "./components/project_page/basketForm";
-import TaskForm from "./components/project_page/taskForm";
-//import logo from "./logo.svg";
+import BasketForm from "./components/MyProjects/project_page/basketForm";
+import TaskForm from "./components/MyProjects/project_page/taskForm";
+import auth from "./services/authService";
+// import logo from "./logo.svg";
 import "./App.css";
 
 class App extends Component {

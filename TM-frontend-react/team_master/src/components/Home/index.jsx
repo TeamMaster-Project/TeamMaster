@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "../styles/home.css";
+import "./index.css";
 class Home extends Component {
   render() {
     return (

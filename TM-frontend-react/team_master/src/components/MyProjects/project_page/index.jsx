@@ -1,16 +1,16 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { getBaskets, deleteBasket } from "../../services/basketService";
-import { getTasks, deleteTask } from "../../services/taskService";
-import { getProject } from "../../services/projectService";
+import { getBaskets, deleteBasket } from "../../../services/basketService";
+import { getTasks, deleteTask } from "../../../services/taskService";
+import { getProject } from "../../../services/projectService";
 import { toast } from "react-toastify";
-import "../../styles/buttons/liquidbutton.css";
+import "../../../styles/buttons/liquidbutton.css";
 import EditBaskets from "./editBaskets";
 import ProjectSummary from "./projectSummary";
 import MainButtons from "./mainButtons";
 import BasketsCardView from "./basketsCardView";
-import auth from "../../services/authService";
-import "../../styles/project.css";
+import auth from "../../../services/authService";
+import "./index.css";
 
 class Project extends Component {
   state = {

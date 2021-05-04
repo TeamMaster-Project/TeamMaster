@@ -1,0 +1,17 @@
+.navbar {
+  padding: 5px 80px;
+  background-color: rgb(101, 91, 196) !important;
+  background-image: linear-gradient(
+    to right,
+    rgb(0, 98, 255),
+    rgb(7, 137, 160)
+  ) !important;
+  z-index: 10;
+  top: 0;
+  width: 100%;
+  /* position: fixed !important; */
+}
+
+.nav-link {
+  /* color: white !important; */
+} 

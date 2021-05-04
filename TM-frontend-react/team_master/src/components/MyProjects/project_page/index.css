@@ -1,0 +1,38 @@
+.edit-baskets {
+}
+.vl {
+  border-left: 6px solid green;
+  height: 59vh;
+}
+
+.register-form-container {
+  background-color: #1029b8;
+
+  min-height: 94.3vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.05rem;
+}
+
+.register-form-card {
+  background-color: #fff;
+  border-radius: 15px;
+  width: 50vw;
+  opacity: 0.9;
+}
+.register-form-card:hover {
+  opacity: 1;
+}
+
+.register-form {
+  padding: 25px;
+}
+.register-form:hover {
+  padding: 30px;
+}
+
+.form-submit-button {
+  text-align: center;
+}

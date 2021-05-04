@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import Form from "./../common/form";
+import Form from "../../Common/form";
 import Joi from "joi-browser";
-import { getTask, saveTask } from "../../services/taskService";
-import { getBaskets } from "../../services/basketService";
-import "../../styles/registerform.css";
+import { getTask, saveTask } from "../../../services/taskService";
+import { getBaskets } from "../../../services/basketService";
+import "./index.css";
 
 class TaskForm extends Form {
   state = {
