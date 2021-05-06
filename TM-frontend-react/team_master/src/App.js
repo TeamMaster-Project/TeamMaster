@@ -17,6 +17,8 @@ import Logout from "./components/auth/logout";
 import BasketForm from "./components/MyProjects/project_page/basketForm";
 import TaskForm from "./components/MyProjects/project_page/taskForm";
 import auth from "./services/authService";
+import Chatbox from './components/Chatbox/index';
+
 // import logo from "./logo.svg";
 import "./App.css";
 
@@ -42,6 +44,7 @@ class App extends Component {
             <Route path="/home" component={Home} />
             <ProtectedRoute exact path="/newproject" component={NewProject} />
             <ProtectedRoute exact path="/myprojects" component={MyProjects} />
+            <ProtectedRoute exact path="/chatbox" component={Chatbox} />
 
             <ProtectedRoute
               exact
