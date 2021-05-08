@@ -119,9 +119,9 @@ class ProjectForm extends Form {
            await addChatRoom(currentProject.name, member)
         });
         currentProject.members.map( async (member) =>{ 
-           console.log(member.email);
-           console.log(member._id);
-           await addChatRoom(currentProject.name, member)
+          //  console.log(member.email);
+          //  console.log(member._id);
+          //  await addChatRoom(currentProject.name, member)
         });
       }catch(error){
         console.log(error)
