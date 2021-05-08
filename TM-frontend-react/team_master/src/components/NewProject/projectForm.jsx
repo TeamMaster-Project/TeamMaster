@@ -3,10 +3,12 @@ import auth from "../../services/authService";
 import Form from "../Common/form";
 import Joi from "joi-browser";
 import { getProject, saveProject } from "../../services/projectService";
-import { addChatRoom } from "../../services/chatboxService";
+import { addChatRoom, getChatRooms, addChatMembers } from "../../services/chatboxService";
 import { getUsers } from "../../services/userService";
 import Chips, { Chip } from "react-chips";
 import "./index.css";
+import { toast } from "react-toastify";
+
 class ProjectForm extends Form {
   state = {
     data: {
@@ -22,6 +24,7 @@ class ProjectForm extends Form {
 
     currentUser: "",
     errors: {},
+    chatRoomId: "",
   };
 
   schema = {
@@ -93,40 +96,64 @@ class ProjectForm extends Form {
   };
 
   doSubmit = async () => {
-    await this.setState((prevState) => ({
-      chipsModerators: [...prevState.chipsModerators, this.state.currentUser],
-    }));
-    var finalDataCopy = this.state.data;
-    const chipsModeratorsCopy = this.state.chipsModerators;
-    const chipsMembersCopy = this.state.chipsMembers;
-    finalDataCopy.moderater_userEmail = chipsModeratorsCopy;
-    finalDataCopy.member_userEmail = chipsMembersCopy;
-    this.setState({ data: finalDataCopy });
-
-    await saveProject(this.state.data);
-    await this.saveChatbox();
-    this.props.history.push("/myprojects");
+    try{
+      await this.setState((prevState) => ({
+        chipsModerators: [...prevState.chipsModerators, this.state.currentUser],
+      }));
+      var finalDataCopy = this.state.data;
+      const chipsModeratorsCopy = this.state.chipsModerators;
+      const chipsMembersCopy = this.state.chipsMembers;
+      finalDataCopy.moderater_userEmail = chipsModeratorsCopy;
+      finalDataCopy.member_userEmail = chipsMembersCopy;
+      this.setState({ data: finalDataCopy });
+  
+      await saveProject(this.state.data);
+      toast("Project Successfully Updated");
+      await this.addChatbox();
+      toast("ChatRoom Successfully Updated")
+      this.props.history.push("/myprojects");
+    }catch(error){
+      console.log(error);
+      toast("Project Updating Failed")
+    }
   };
 
-  saveChatbox = async () => {
-    const projectId = this.props.match.params.id;
-    if(projectId != "New"){
-      const { data:currentProject } = await getProject(projectId);
-      try{
+  addChatbox = async () => {
+      const projectId = this.props.match.params.id;
+      const currentUser = await auth.getCurrentUser();
+
+      if(projectId != "New"){
+        const { data:currentProject } = await getProject(projectId);
+        let ChatRooms = await getChatRooms(currentUser);
+          ChatRooms.map( async (chatroom) =>{ 
+              if(chatroom.title == currentProject.name){
+                  this.setState({chatRoomId: chatroom.id})
+              }
+              else{
+                await addChatRoom(currentProject.name, currentUser)
+                let ChatRooms = await getChatRooms(currentUser);
+                ChatRooms.map( async (chatroom) =>{
+                    if(chatroom.title == currentProject.name){
+                      this.setState({chatRoomId: chatroom.id})
+                  }
+                })
+              }
+        });
+        await this.addChatboxMembers(currentProject, currentUser);
+    }
+  }
+
+  addChatboxMembers = async (currentProject, currentUser) => {
+    try{
         currentProject.moderators.map( async (member) =>{ 
-           console.log(member.email);
-           console.log(member._id);
-           await addChatRoom(currentProject.name, member)
+          await addChatMembers(this.state.chatRoomId, currentUser, member)
         });
         currentProject.members.map( async (member) =>{ 
-          //  console.log(member.email);
-          //  console.log(member._id);
-          //  await addChatRoom(currentProject.name, member)
+          await addChatMembers(this.state.chatRoomId, currentUser, member)
         });
       }catch(error){
         console.log(error)
       }
-    }
   }
 
   render() {

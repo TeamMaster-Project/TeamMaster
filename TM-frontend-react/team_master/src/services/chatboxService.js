@@ -15,8 +15,8 @@ export function addUsers (user) {
             }
         }   
         let data = {
-        "username": user.email,
-        "secret": user._id
+            "username": user.email,
+            "secret": user._id
         }
 
         http.removeJwt();
@@ -25,53 +25,42 @@ export function addUsers (user) {
         console.log("res", res)
 }
 
-export const getChatRooms = async (member) => {
+export async function getChatRooms (user) {
         let configs = {
             headers: {
                 "Project-ID": projectID,
-                "User-Name": member.email,
-                "User-Secret": member._id
+                "User-Name": user.email,
+                "User-Secret": user._id
             }
-        }   
-        return http.get(chatEngineApiEndPoint + "/chats/", configs)
-            .then((res) => res.data)
-            .catch(function(error) {
-                console.log(error.response.data);
-      })
+        }  
+        http.removeJwt(); 
+        let res = await http.get(chatEngineApiEndPoint + "/chats/", configs)
+        http.setJwt(getJwt());
+        return res.data
 }
 
-export function addChatRoom(chatboxTitle, member){
+export async function addChatRoom(chatboxTitle, user){
             let configs = {
             headers: {
                 "Project-ID": projectID,
-                "User-Name": member.email,
-                "User-Secret": member._id
+                "User-Name": user.email,
+                "User-Secret": user._id
             }
         }   
         let data = {
             "title" : chatboxTitle
         }
         http.removeJwt();
-        let ChatRooms = getChatRooms(member);
-        console.log(ChatRooms)
-        // ChatRooms.map( async (chatroom) =>{ 
-        //    if(chatroom.title == chatboxTitle){
-        //     //    updateChatRoom(chatboxTitle, member)
-        //        toast("chatroom already exist")
-        //    }
-        //    else{
-        //        http.post(chatEngineApiEndPoint + "/chats/", data, configs);
-        //    }
-        // });
+        http.post(chatEngineApiEndPoint + "/chats/", data, configs);
         http.setJwt(getJwt());
 }
 
-export function updateChatRoom(chatboxTitle, member){
-            let configs = {
+export function updateChatRoom(chatboxTitle, user){
+        let configs = {
             headers: {
                 "Project-ID": projectID,
-                "User-Name": member.email,
-                "User-Secret": member._id
+                "User-Name": user.email,
+                "User-Secret": user._id
             }
         }   
         let data = {
@@ -80,6 +69,22 @@ export function updateChatRoom(chatboxTitle, member){
         http.removeJwt();
         // http.put(chatEngineApiEndPoint + "/chats/" + chatRoomId, data, configs);
         http.setJwt(getJwt());
+}
+
+export async function addChatMembers(chatRoomId, currentUser, member){
+    let configs = {
+        headers: {
+            "Project-ID": projectID,
+            "User-Name": currentUser.email,
+            "User-Secret": currentUser._id
+        }
+    }   
+    let data = {
+        "username": member.email
+    }
+    http.removeJwt();
+    http.post(chatEngineApiEndPoint + "/chats/" + chatRoomId + "/people/", data, configs);
+    http.setJwt(getJwt());
 }
 
 
