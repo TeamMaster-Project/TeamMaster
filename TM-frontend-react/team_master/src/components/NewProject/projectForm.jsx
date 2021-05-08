@@ -107,9 +107,9 @@ class ProjectForm extends Form {
       finalDataCopy.member_userEmail = chipsMembersCopy;
       this.setState({ data: finalDataCopy });
   
-      await saveProject(this.state.data);
+      let res = await saveProject(this.state.data);
       toast("Project Successfully Updated");
-      await this.addChatbox();
+      await this.addChatbox(res.data);
       toast("ChatRoom Successfully Updated")
       this.props.history.push("/myprojects");
     }catch(error){
@@ -118,29 +118,25 @@ class ProjectForm extends Form {
     }
   };
 
-  addChatbox = async () => {
+  addChatbox = async (project) => {
       const projectId = this.props.match.params.id;
       const currentUser = await auth.getCurrentUser();
 
-      if(projectId != "New"){
+      if(projectId != "new"){
         const { data:currentProject } = await getProject(projectId);
         let ChatRooms = await getChatRooms(currentUser);
           ChatRooms.map( async (chatroom) =>{ 
               if(chatroom.title == currentProject.name){
                   this.setState({chatRoomId: chatroom.id})
-              }
-              else{
-                await addChatRoom(currentProject.name, currentUser)
-                let ChatRooms = await getChatRooms(currentUser);
-                ChatRooms.map( async (chatroom) =>{
-                    if(chatroom.title == currentProject.name){
-                      this.setState({chatRoomId: chatroom.id})
-                  }
-                })
-              }
-        });
-        await this.addChatboxMembers(currentProject, currentUser);
-    }
+                  await this.addChatboxMembers(currentProject, currentUser);
+                }
+              });
+            }
+      else{
+          let NewChatRoom = await addChatRoom(project.name, currentUser);
+          await this.setState({chatRoomId: NewChatRoom.id})
+          await this.addChatboxMembers(project, currentUser);
+        }
   }
 
   addChatboxMembers = async (currentProject, currentUser) => {

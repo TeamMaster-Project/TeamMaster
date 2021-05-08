@@ -51,8 +51,9 @@ export async function addChatRoom(chatboxTitle, user){
             "title" : chatboxTitle
         }
         http.removeJwt();
-        http.post(chatEngineApiEndPoint + "/chats/", data, configs);
+        let res = await http.post(chatEngineApiEndPoint + "/chats/", data, configs);
         http.setJwt(getJwt());
+        return res.data
 }
 
 export function updateChatRoom(chatboxTitle, user){
@@ -84,6 +85,22 @@ export async function addChatMembers(chatRoomId, currentUser, member){
     }
     http.removeJwt();
     http.post(chatEngineApiEndPoint + "/chats/" + chatRoomId + "/people/", data, configs);
+    http.setJwt(getJwt());
+}
+
+export async function deleteChatMembers(chatRoomId, currentUser, member){
+    let configs = {
+        headers: {
+            "Project-ID": projectID,
+            "User-Name": currentUser.email,
+            "User-Secret": currentUser._id
+        }
+    }   
+    let data = {
+        "username": member.email
+    }
+    http.removeJwt();
+    http.put(chatEngineApiEndPoint + "/chats/" + chatRoomId + "/people/", data, configs);
     http.setJwt(getJwt());
 }
 
