@@ -15,7 +15,7 @@ class BasketsCardView extends Component {
         <div className="row">
           {baskets.map((basket) => (
             <div className="col-lg-3 col-md-4 col-sm-6 col-sm" key={basket._id}>
-              <table className="table">
+              <table className="table card shadow-lg">
                 <thead>
                   <tr>
                     <th>{basket.name}</th>

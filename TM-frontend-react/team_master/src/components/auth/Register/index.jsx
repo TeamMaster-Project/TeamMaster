@@ -4,6 +4,8 @@ import Joi from "joi-browser";
 import * as userService from "../../../services/userService";
 import auth from "../../../services/authService";
 import "./index.css";
+import { addUsers } from "../../../services/chatboxService";
+import { toast } from "react-toastify";
 
 class Register extends Form {
   state = {
@@ -18,19 +20,30 @@ class Register extends Form {
     name: Joi.string().required().min(5).label("Name"),
   };
 
-  doSubmit = async () => {
-    //Call the server
-    try {
-      const response = await userService.register(this.state.data);
-      console.log("Registered Successfully", response);
-      //Log in user soon after registration
+  createUserInChatEngine = async (currentUser) => {
+    try{
+      await addUsers(currentUser);
+    }catch(error){
+      console.log(error);
+      toast("User Registration Failed in ChatEngine")
+    }
+      
+  };
 
+  doSubmit = async () => {
+    try {
+      const response = await userService.register(this.state.data);//Register user
+      await this.createUserInChatEngine(response.data);//Register user in ChatEngine
+
+      //Log in user soon after registration
       auth.loginWithJwt("token", response.headers["x-auth-token"]); //Store the token in localStorage when after creating a new user
-      this.props.history.push("/newproject"); //Redirecting to main home page to get current user loged in
+      //Redirecting to main home page to get current user logged in
       //window.location = "/"; //full Reload and redirecting to homepage
+      this.props.history.push("/newproject"); 
+      toast("User Registered Successfully");
     } catch (ex) {
       if (ex.response && ex.response.status === 400) {
-        //handle user already registered error
+        //Handle user already registered error
         const errors = { ...this.state.errors };
         errors.username = ex.response.data;
         this.setState({ errors });

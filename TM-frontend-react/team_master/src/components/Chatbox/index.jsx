@@ -10,7 +10,7 @@ const IndexApp = () => {
 		<ChatEngine
 			height='100vh'
 			projectID='5d514e59-2de9-4fa3-a915-764ea74ad722'
-			userName='Darshana'
+			userName='Mihindu'
 			userSecret='12345'
 			renderChatFeed={(chatAppProps) => <ChatFeed {...chatAppProps} />}
 		/>

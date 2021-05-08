@@ -3,6 +3,7 @@ import auth from "../../services/authService";
 import Form from "../Common/form";
 import Joi from "joi-browser";
 import { getProject, saveProject } from "../../services/projectService";
+import { addChatRoom } from "../../services/chatboxService";
 import { getUsers } from "../../services/userService";
 import Chips, { Chip } from "react-chips";
 import "./index.css";
@@ -35,7 +36,6 @@ class ProjectForm extends Form {
 
   async componentDidMount() {
     //call GetMethods
-
     try {
       const currentUser = await auth.getCurrentUser();
 
@@ -104,14 +104,36 @@ class ProjectForm extends Form {
     this.setState({ data: finalDataCopy });
 
     await saveProject(this.state.data);
+    await this.saveChatbox();
     this.props.history.push("/myprojects");
   };
 
+  saveChatbox = async () => {
+    const projectId = this.props.match.params.id;
+    if(projectId != "New"){
+      const { data:currentProject } = await getProject(projectId);
+      try{
+        currentProject.moderators.map( async (member) =>{ 
+           console.log(member.email);
+           console.log(member._id);
+           await addChatRoom(currentProject.name, member)
+        });
+        currentProject.members.map( async (member) =>{ 
+           console.log(member.email);
+           console.log(member._id);
+           await addChatRoom(currentProject.name, member)
+        });
+      }catch(error){
+        console.log(error)
+      }
+    }
+  }
+
   render() {
-    console.log(this.state.chipsPlaceholders);
-    //console.log(this.state.chipsModerators);
-    console.log(this.state.data);
-    console.log("current user", this.state.currentUser);
+    // console.log(this.state.chipsPlaceholders);
+    // console.log(this.state.chipsModerators);
+    // console.log(this.state.data);
+    // console.log("current user", this.state.currentUser);
 
     return (
       <div className="register-form-container">

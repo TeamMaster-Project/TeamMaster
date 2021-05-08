@@ -1,3 +1,4 @@
 {
-  "apiEndPointUrl": "https://teammaster-api-backend.herokuapp.com/api"
+  "apiEndPointUrl": "https://teammaster-api-backend.herokuapp.com/api",
+  "chatEngineApiEndPointUrl": "https://api.chatengine.io"
 }
