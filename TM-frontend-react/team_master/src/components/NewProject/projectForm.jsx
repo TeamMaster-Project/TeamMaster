@@ -3,7 +3,7 @@ import auth from "../../services/authService";
 import Form from "../Common/form";
 import Joi from "joi-browser";
 import { getProject, saveProject } from "../../services/projectService";
-import { addChatRoom, getChatRooms, addChatMembers } from "../../services/chatboxService";
+import { addChatRoom, getChatRooms, addChatMembers, deleteChatMembers } from "../../services/chatboxService";
 import { getUsers } from "../../services/userService";
 import Chips, { Chip } from "react-chips";
 import "./index.css";
@@ -21,6 +21,9 @@ class ProjectForm extends Form {
     chipsModerators: [],
     chipsMembers: [],
     chipsPlaceholders: [],
+
+    ExistingChatRoomMembers:[],
+    NewChatRoomMembers:[],
 
     currentUser: "",
     errors: {},
@@ -48,7 +51,7 @@ class ProjectForm extends Form {
       var userEmails = await users.map((m) => m.email);
       const currentUserCopy = this.state.currentUser;
       for (var i = 0; i < userEmails.length; i++) {
-        //removing current loged in user from chipsPlaceholder
+        //removing current logged in user from chipsPlaceholder
         if (userEmails[i] === currentUserCopy) {
           userEmails.splice(i, 1);
           i--;
@@ -70,6 +73,7 @@ class ProjectForm extends Form {
       this.setState({
         chipsModerators: datacopy.moderater_userEmail,
         chipsMembers: datacopy.member_userEmail,
+        ExistingChatRoomMembers: datacopy.moderater_userEmail.concat(datacopy.member_userEmail)
       });
     } catch (ex) {
       if (ex.response && ex.response.status === 404)
@@ -96,21 +100,27 @@ class ProjectForm extends Form {
   };
 
   doSubmit = async () => {
+    toast("Please Wait")
     try{
       await this.setState((prevState) => ({
         chipsModerators: [...prevState.chipsModerators, this.state.currentUser],
+        NewChatRoomMembers: [...prevState.NewChatRoomMembers, this.state.currentUser],
       }));
-      var finalDataCopy = this.state.data;
+      
+      let updatedProject = this.state.data;
       const chipsModeratorsCopy = this.state.chipsModerators;
       const chipsMembersCopy = this.state.chipsMembers;
-      finalDataCopy.moderater_userEmail = chipsModeratorsCopy;
-      finalDataCopy.member_userEmail = chipsMembersCopy;
-      this.setState({ data: finalDataCopy });
+      updatedProject.moderater_userEmail = chipsModeratorsCopy;
+      updatedProject.member_userEmail = chipsMembersCopy;
+      this.setState({ data: updatedProject });
+      this.setState({ NewChatRoomMembers: updatedProject.moderater_userEmail.concat(updatedProject.member_userEmail) });
   
       let res = await saveProject(this.state.data);
       toast("Project Successfully Updated");
+
       await this.addChatbox(res.data);
-      toast("ChatRoom Successfully Updated")
+      toast("ChatRoom Successfully Updated");
+
       this.props.history.push("/myprojects");
     }catch(error){
       console.log(error);
@@ -122,20 +132,21 @@ class ProjectForm extends Form {
       const projectId = this.props.match.params.id;
       const currentUser = await auth.getCurrentUser();
 
-      if(projectId != "new"){
-        const { data:currentProject } = await getProject(projectId);
-        let ChatRooms = await getChatRooms(currentUser);
+      if(projectId == "new"){
+          let NewChatRoom = await addChatRoom(project.name, currentUser);
+          await this.setState({chatRoomId: NewChatRoom.id})
+          await this.addChatboxMembers(project, currentUser);
+      }
+      else{
+          const { data:currentProject } = await getProject(projectId);
+          let ChatRooms = await getChatRooms(currentUser);
           ChatRooms.map( async (chatroom) =>{ 
               if(chatroom.title == currentProject.name){
                   this.setState({chatRoomId: chatroom.id})
                   await this.addChatboxMembers(currentProject, currentUser);
+                  await this.deleteChatboxMembers(currentUser);
                 }
-              });
-            }
-      else{
-          let NewChatRoom = await addChatRoom(project.name, currentUser);
-          await this.setState({chatRoomId: NewChatRoom.id})
-          await this.addChatboxMembers(project, currentUser);
+          });
         }
   }
 
@@ -152,12 +163,25 @@ class ProjectForm extends Form {
       }
   }
 
-  render() {
-    // console.log(this.state.chipsPlaceholders);
-    // console.log(this.state.chipsModerators);
-    // console.log(this.state.data);
-    // console.log("current user", this.state.currentUser);
+  deleteChatboxMembers = async (currentUser) => {
+    let DroppedMembers = [...this.state.ExistingChatRoomMembers];
+    //Filtering Dropped Members
 
+    for(let i=0; i < this.state.ExistingChatRoomMembers.length; i++){
+      for(let j=0; j <this.state.NewChatRoomMembers.length; j++){
+        if(this.state.ExistingChatRoomMembers[i] == this.state.NewChatRoomMembers[j]) {
+            DroppedMembers = DroppedMembers.filter(e => e != this.state.NewChatRoomMembers[j]);
+        }
+      }
+    }
+
+    DroppedMembers.map( async (member) =>{ 
+          await deleteChatMembers(this.state.chatRoomId, currentUser, member)
+    });
+
+  }
+
+  render() {
     return (
       <div className="register-form-container">
         <div className="register-form-card">

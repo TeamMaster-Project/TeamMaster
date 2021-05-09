@@ -1,7 +1,6 @@
 import http from "./httpService";
 import config from "./config.json";
 import { getJwt } from "./authService";
-import { toast } from "react-toastify";
 
 const chatEngineApiEndPoint = config.chatEngineApiEndPointUrl;
 
