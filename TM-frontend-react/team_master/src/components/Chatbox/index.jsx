@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import './Chat.css';
 import auth from '../../services/authService';
 import NewChatForm from './NewChatForm';
+import ChatSettingsTop from './ChatSettingsTop';
 
 const IndexApp = () => {
 	// if (!localStorage.getItem('username')) return <LoginForm />;
@@ -16,6 +17,9 @@ const IndexApp = () => {
 			userSecret= {currentUser._id}
 			renderChatFeed={(chatAppProps) => <ChatFeed {...chatAppProps} />}
 			renderNewChatForm={(creds) => <NewChatForm {...creds}/>}
+			renderChatSettingsTop={(creds, chat) => <ChatSettingsTop creds={creds} chat={chat}/>}
+			renderPhotosSettings={(chat) => {}}
+			renderOptionsSettings={(creds, chat) => {}}
 		/>
 	);
 };
