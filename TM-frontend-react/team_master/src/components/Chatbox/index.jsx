@@ -3,6 +3,7 @@ import ChatFeed from './ChatFeed';
 import React, { Component } from 'react';
 import './Chat.css';
 import auth from '../../services/authService';
+import NewChatForm from './NewChatForm';
 
 const IndexApp = () => {
 	// if (!localStorage.getItem('username')) return <LoginForm />;
@@ -14,6 +15,7 @@ const IndexApp = () => {
 			userName= {currentUser.email}
 			userSecret= {currentUser._id}
 			renderChatFeed={(chatAppProps) => <ChatFeed {...chatAppProps} />}
+			renderNewChatForm={(creds) => <NewChatForm {...creds}/>}
 		/>
 	);
 };
