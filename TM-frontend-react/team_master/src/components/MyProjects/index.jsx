@@ -15,11 +15,14 @@ class MyProjects extends Component {
 
     myProjectsWithModeratorAccess: [],
     myProjectsWithMemberAccess: [],
+
+    isLoading: true
   };
 
   async componentDidMount() {
     const { data: projects } = await getProjects();
     const currentUser = auth.getCurrentUser();
+    this.setState({ isLoading: false});
 
     var filteredProjects = [];
     var myProjectsWithModeratorAccess = [];
