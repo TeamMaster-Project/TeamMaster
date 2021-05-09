@@ -6,11 +6,13 @@ import auth from "../../../services/authService";
 import "./index.css";
 import { addUsers } from "../../../services/chatboxService";
 import { toast } from "react-toastify";
+import PreLoader from "../../PreLoader";
 
 class Register extends Form {
   state = {
     data: { username: "", password: "", name: "" },
     errors: {},
+    isLoading: false
   };
 
   schema = {
@@ -32,13 +34,15 @@ class Register extends Form {
 
   doSubmit = async () => {
     try {
+      this.setState({isLoading: true})
       const response = await userService.register(this.state.data);//Register user
       await this.createUserInChatEngine(response.data);//Register user in ChatEngine
 
       //Log in user soon after registration
-      auth.loginWithJwt("token", response.headers["x-auth-token"]); //Store the token in localStorage when after creating a new user
       //Redirecting to main home page to get current user logged in
+      auth.loginWithJwt("token", response.headers["x-auth-token"]); //Store the token in localStorage when after creating a new user
       //window.location = "/"; //full Reload and redirecting to homepage
+      this.setState({isLoading: false})
       this.props.history.push("/newproject"); 
       toast("User Registered Successfully");
     } catch (ex) {
@@ -51,6 +55,10 @@ class Register extends Form {
     }
   };
   render() {
+    
+    if(this.state.isLoading)
+      return <PreLoader/>
+
     return (
       <div className="register-form-container">
         <div className="register-form-card">

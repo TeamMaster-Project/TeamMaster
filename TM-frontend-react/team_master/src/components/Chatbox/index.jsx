@@ -3,10 +3,17 @@ import ChatFeed from './ChatFeed';
 import React, { Component } from 'react';
 import './Chat.css';
 import auth from '../../services/authService';
+import PreLoader from '../PreLoader';
 
 const IndexApp = () => {
 	// if (!localStorage.getItem('username')) return <LoginForm />;
+	let isLoading = true;
 	const currentUser = auth.getCurrentUser();
+	isLoading = false;
+
+	if(isLoading)
+		return <PreLoader/>
+
 	return (
 		<ChatEngine
 			height='94vh'

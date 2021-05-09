@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 import auth from "../../services/authService";
 import { getProjects, deleteProject } from "../../services/projectService";
 import { toast } from "react-toastify";
-import "./index.css";
 import PermissionDetails from "./permissionDetails";
+import PreLoader from "../PreLoader"
 import { deleteChatRoom, getChatRooms } from "../../services/chatboxService";
-
+import "./index.css";
 class MyProjects extends Component {
   state = {
     projects: [],
@@ -93,6 +93,12 @@ class MyProjects extends Component {
       "myProjectsWithMemberAccess",
       this.state.myProjectsWithMemberAccess
     );
+
+    if(this.state.isLoading){
+      return(
+        <PreLoader/>
+      )
+    }
 
     if (this.state.projects.length === 0)
       return (
