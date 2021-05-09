@@ -5,10 +5,17 @@ import './Chat.css';
 import auth from '../../services/authService';
 import NewChatForm from './NewChatForm';
 import ChatSettingsTop from './ChatSettingsTop';
+import PreLoader from '../PreLoader';
 
 const IndexApp = () => {
 	// if (!localStorage.getItem('username')) return <LoginForm />;
+	let isLoading = true;
 	const currentUser = auth.getCurrentUser();
+	isLoading = false;
+
+	if(isLoading)
+		return <PreLoader/>
+
 	return (
 		<ChatEngine
 			height='94vh'
