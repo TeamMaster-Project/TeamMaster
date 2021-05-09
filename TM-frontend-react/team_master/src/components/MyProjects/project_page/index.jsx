@@ -71,6 +71,7 @@ class Project extends Component {
 
     try {
       await deleteBasket(basket._id);
+       toast("Basket Successfully Deleted");
     } catch (ex) {
       if (ex.response && ex.response.status === 404)
         toast.error("This basket is already deleted"); //Expected error handle
@@ -86,6 +87,7 @@ class Project extends Component {
 
     try {
       await deleteTask(task._id);
+      toast("Task Successfully Deleted");
     } catch (ex) {
       if (ex.response && ex.response.status === 404)
         toast.error("This task is already deleted"); //Expected error handle

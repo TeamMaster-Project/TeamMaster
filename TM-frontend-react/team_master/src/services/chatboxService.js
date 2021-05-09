@@ -71,6 +71,29 @@ export function updateChatRoom(chatboxTitle, user){
         http.setJwt(getJwt());
 }
 
+export async function deleteChatRoom(chatRoomId, user){
+    console.log(chatRoomId, user)
+        let configs = {
+            headers: {
+                "Project-ID": projectID,
+                "User-Name": user.email,
+                "User-Secret": user._id
+            }
+        }   
+        let params = {
+            params: {
+                "Project-ID": projectID,
+                "User-Name": user.email,
+                "User-Secret": user._id
+            }
+        }
+            
+        http.removeJwt();
+        let res = await http.delete(chatEngineApiEndPoint + "/chats/" + chatRoomId, configs, params);
+        http.setJwt(getJwt());
+        return res.data
+}
+
 export async function addChatMembers(chatRoomId, currentUser, member){
     let configs = {
         headers: {

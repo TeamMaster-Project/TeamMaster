@@ -3,6 +3,7 @@ import Form from "../../Common/form";
 import Joi from "joi-browser";
 import { getBasket, saveBasket } from "../../../services/basketService";
 import "./index.css";
+import { toast } from "react-toastify";
 class BasketForm extends Form {
   state = {
     data: {
@@ -59,6 +60,7 @@ class BasketForm extends Form {
 
   doSubmit = async () => {
     await saveBasket(this.state.data);
+    toast("Basket Successfully Updated");
 
     this.props.history.push(
       `/myprojects/${this.props.match.params.id}/${this.props.match.params.name}`
