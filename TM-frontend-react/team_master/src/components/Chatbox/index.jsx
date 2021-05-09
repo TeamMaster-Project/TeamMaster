@@ -3,6 +3,8 @@ import ChatFeed from './ChatFeed';
 import React, { Component } from 'react';
 import './Chat.css';
 import auth from '../../services/authService';
+import NewChatForm from './NewChatForm';
+import ChatSettingsTop from './ChatSettingsTop';
 import PreLoader from '../PreLoader';
 
 const IndexApp = () => {
@@ -21,6 +23,10 @@ const IndexApp = () => {
 			userName= {currentUser.email}
 			userSecret= {currentUser._id}
 			renderChatFeed={(chatAppProps) => <ChatFeed {...chatAppProps} />}
+			renderNewChatForm={(creds) => <NewChatForm {...creds}/>}
+			renderChatSettingsTop={(creds, chat) => <ChatSettingsTop creds={creds} chat={chat}/>}
+			renderPhotosSettings={(chat) => {}}
+			renderOptionsSettings={(creds, chat) => {}}
 		/>
 	);
 };
