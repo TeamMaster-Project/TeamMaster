@@ -8,6 +8,7 @@ import { getUsers } from "../../services/userService";
 import Chips, { Chip } from "react-chips";
 import "./index.css";
 import { toast } from "react-toastify";
+import PreLoader from "../PreLoader";
 
 class ProjectForm extends Form {
   state = {
@@ -28,6 +29,8 @@ class ProjectForm extends Form {
     currentUser: "",
     errors: {},
     chatRoomId: "",
+
+    isLoading: false,
   };
 
   schema = {
@@ -101,6 +104,7 @@ class ProjectForm extends Form {
 
   doSubmit = async () => {
     toast("Please Wait")
+    this.setState({isLoading: true})
     try{
       await this.setState((prevState) => ({
         chipsModerators: [...prevState.chipsModerators, this.state.currentUser],
@@ -120,7 +124,7 @@ class ProjectForm extends Form {
 
       await this.addChatbox(res.data);
       toast("ChatRoom Successfully Updated");
-
+      this.setState({isLoading: true})
       this.props.history.push("/myprojects");
     }catch(error){
       console.log(error);
@@ -182,6 +186,9 @@ class ProjectForm extends Form {
   }
 
   render() {
+    if(this.state.isLoading)
+      return <PreLoader/>
+
     return (
       <div className="register-form-container">
         <div className="register-form-card">
