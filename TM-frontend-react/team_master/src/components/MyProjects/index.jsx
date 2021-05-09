@@ -92,7 +92,21 @@ class MyProjects extends Component {
     );
 
     if (this.state.projects.length === 0)
-      return <p>There are no Projects yet</p>;
+      return (
+         <div className="newproject newproject-container">
+          <h2>You have no any projects.</h2>
+          <h3>Create Your first Project And Manage It Easily With TEAM MASTER</h3>
+          <h1>
+            <Link
+              to="/myprojects/new"
+              className="btn btn-primary"
+              style={{ marginBottom: 20 }}
+            >
+              New Project
+            </Link>
+          </h1>
+        </div>
+      );
 
     return (
       <div className="">
