@@ -20,10 +20,15 @@ function setJwt(jwt) {
   //Whenever you are going to send a request to the backend, send this header
 }
 
+function removeJwt(){
+  delete axios.defaults.headers.common["x-auth-token"];
+}
+
 export default {
   get: axios.get,
   post: axios.post,
   put: axios.put,
   delete: axios.delete,
   setJwt,
+  removeJwt
 };

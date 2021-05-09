@@ -5,10 +5,12 @@ import { getProjects, deleteProject } from "../../services/projectService";
 import { toast } from "react-toastify";
 import "./index.css";
 import PermissionDetails from "./permissionDetails";
+import { deleteChatRoom, getChatRooms } from "../../services/chatboxService";
 
 class MyProjects extends Component {
   state = {
     projects: [],
+    chatRoomId: "",
     currentUser: "",
 
     myProjectsWithModeratorAccess: [],
@@ -47,13 +49,17 @@ class MyProjects extends Component {
   }
 
   handleDelete = async (project) => {
-    //console.log(project);//Delete Projects
     const originalProjects = this.state.projects;
     const projects = originalProjects.filter((m) => m._id !== project._id);
     this.setState({ projects: projects }); //projects object array override by projects
 
     try {
       await deleteProject(project._id);
+      toast("Project Successfully Deleted");
+      
+      await this.deleteChatRoom(project);
+      toast("ChatRoom Successfully Deleted");
+
     } catch (ex) {
       if (ex.response && ex.response.status === 404)
         toast.error("This Project Is Already Deleted");
@@ -61,6 +67,18 @@ class MyProjects extends Component {
       this.setState({ projects: originalProjects });
     }
   };
+
+  deleteChatRoom = async (project) => {
+    let ChatRooms = await getChatRooms(this.state.currentUser);
+
+    ChatRooms.map( async (chatroom) =>{ 
+        if(chatroom.title == project.name){
+            this.setState({chatRoomId: chatroom.id})
+            await deleteChatRoom(chatroom.id, this.state.currentUser);
+          }
+    });
+  }
+
   render() {
     console.log(this.state.projects);
     console.log(this.state.currentUser);
@@ -74,7 +92,21 @@ class MyProjects extends Component {
     );
 
     if (this.state.projects.length === 0)
-      return <p>There are no Projects yet</p>;
+      return (
+         <div className="newproject newproject-container">
+          <h2>You have no any projects.</h2>
+          <h3>Create Your first Project And Manage It Easily With TEAM MASTER</h3>
+          <h1>
+            <Link
+              to="/myprojects/new"
+              className="btn btn-primary"
+              style={{ marginBottom: 20 }}
+            >
+              New Project
+            </Link>
+          </h1>
+        </div>
+      );
 
     return (
       <div className="">

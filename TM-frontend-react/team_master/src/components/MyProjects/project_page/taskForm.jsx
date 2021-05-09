@@ -4,6 +4,7 @@ import Joi from "joi-browser";
 import { getTask, saveTask } from "../../../services/taskService";
 import { getBaskets } from "../../../services/basketService";
 import "./index.css";
+import { toast } from "react-toastify";
 
 class TaskForm extends Form {
   state = {
@@ -69,6 +70,7 @@ class TaskForm extends Form {
 
   doSubmit = async () => {
     await saveTask(this.state.data);
+    toast("Task Successfully Updated");
     this.props.history.push(
       `/myprojects/${this.props.match.params.id}/${this.props.match.params.name}`
     );

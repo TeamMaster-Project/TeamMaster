@@ -4,7 +4,7 @@ import { getBaskets, deleteBasket } from "../../../services/basketService";
 import { getTasks, deleteTask } from "../../../services/taskService";
 import { getProject } from "../../../services/projectService";
 import { toast } from "react-toastify";
-import "../../../styles/buttons/liquidbutton.css";
+// import "../../../styles/buttons/liquidbutton.css";
 import EditBaskets from "./editBaskets";
 import ProjectSummary from "./projectSummary";
 import MainButtons from "./mainButtons";
@@ -71,6 +71,7 @@ class Project extends Component {
 
     try {
       await deleteBasket(basket._id);
+       toast("Basket Successfully Deleted");
     } catch (ex) {
       if (ex.response && ex.response.status === 404)
         toast.error("This basket is already deleted"); //Expected error handle
@@ -86,6 +87,7 @@ class Project extends Component {
 
     try {
       await deleteTask(task._id);
+      toast("Task Successfully Deleted");
     } catch (ex) {
       if (ex.response && ex.response.status === 404)
         toast.error("This task is already deleted"); //Expected error handle
@@ -134,7 +136,7 @@ class Project extends Component {
           </div>
           {this.state.isaModerator && <div class="vl"></div>}
           {this.state.isaModerator && (
-            <div className="col-2 edit-baskets">
+            <div className="col-3 edit-baskets card shadow-lg py-5">
               <h6>Edit Baskets</h6>
               <EditBaskets //display all baskets and edit, delete them
                 baskets={this.state.baskets}

@@ -4,6 +4,7 @@ import Joi from "joi-browser"; //Joi for form validation library
 import Form from "../../Common/form";
 import auth from "../../../services/authService";
 import "./index.css";
+import { toast } from "react-toastify";
 
 class LoginForm extends Form {
   state = {
@@ -22,10 +23,10 @@ class LoginForm extends Form {
       //Handling login errors
       const { data } = this.state;
       await auth.login(data.username, data.password);
-
       //window.location = "/"; //full Reload and redirecting to get current user loged in
       const { state } = this.props.location;
       window.location = state ? state.from.pathname : "/newproject"; //if the state is defined log in to where user want, if state not defined redirect to home page
+      toast("Successfully Logged in")
     } catch (ex) {
       if (ex.response && ex.response.status === 400) {
         const errors = { ...this.state.errors };
