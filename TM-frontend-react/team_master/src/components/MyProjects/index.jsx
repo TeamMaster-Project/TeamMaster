@@ -118,7 +118,7 @@ class MyProjects extends Component {
       );
 
     return (
-      <div className="">
+      <div className="mt-5">
         <h2>My Projects</h2>
         <h1>
           <Link
@@ -149,18 +149,24 @@ class MyProjects extends Component {
                   {this.state.projects.map((project) => (
                     // <tr key={project._id} className="project-card card">
                     <tr key={project._id}>
-                      <td className="project-name card">
-                        <Link
-                          to={{
-                            pathname: `/myprojects/${project._id}/${project.name}`,
-                            projectName: `${project.name}`,
-                            description: `${project.description}`,
-                          }}
-                        >
+                      <td className="project-name card btn btn-warning">
                           {project.name}
-                        </Link>
                       </td>
                       <td>{project.description}</td>
+
+                      <td>                    
+                          <Link
+                            to={{
+                              pathname: `/myprojects/${project._id}/${project.name}`,
+                              projectName: `${project.name}`,
+                              description: `${project.description}`,
+                            }}
+                          >
+                            <button className="btn btn-primary btn-sm">
+                              Story Board
+                            </button>
+                          </Link>
+                      </td>
 
                       {this.state.myProjectsWithModeratorAccess.map(
                         (filteredModeratorProject) => {

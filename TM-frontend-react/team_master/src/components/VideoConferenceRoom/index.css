@@ -1,0 +1,21 @@
+.card {
+  border-radius: 25px;
+  text-align: center;
+}
+
+.myproject-container {
+  margin: 0px 20px;
+}
+
+.project-card {
+  background-color: rgb(224, 225, 231);
+  margin: 15px;
+  color: rgb(0, 0, 0);
+}
+
+.project-name {
+  margin: 10px;
+}
+
+
+

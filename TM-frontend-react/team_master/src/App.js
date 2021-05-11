@@ -21,6 +21,8 @@ import Chatbox from './components/Chatbox/index';
 
 // import logo from "./logo.svg";
 import "./App.css";
+import JitsiComponent from "./components/VideoConferenceRoom/VideoConference";
+import VideoConferenceArea from "./components/VideoConferenceRoom";
 
 class App extends Component {
   state = {
@@ -44,7 +46,9 @@ class App extends Component {
             <Route path="/home" component={Home} />
             <ProtectedRoute exact path="/newproject" component={NewProject} />
             <ProtectedRoute exact path="/myprojects" component={MyProjects} />
-            <ProtectedRoute exact path="/chatbox" component={Chatbox} />
+            <ProtectedRoute exact path="/chatroom" component={Chatbox} />
+            <ProtectedRoute exact path="/videoroom" component={VideoConferenceArea} />
+            <ProtectedRoute exact path="/videoroom/:projectId/:projectName" component={JitsiComponent} />
 
             <ProtectedRoute
               exact
