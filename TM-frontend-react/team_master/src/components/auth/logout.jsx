@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import auth from "../../services/authService";
-import PreLoader from "../PreLoader";
+import PreLoader from "../PreLoader/PreLoader";
 class Logout extends Component {
   componentDidMount() {
     auth.logout();

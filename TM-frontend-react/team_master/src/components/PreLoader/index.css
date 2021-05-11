@@ -10,3 +10,10 @@
   font-size: calc(2px + 2vmin);
   color: rgb(255, 255, 255);
 }
+
+.loader-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
