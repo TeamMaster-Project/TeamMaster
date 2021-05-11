@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import auth from "../../services/authService";
-import PreLoader from '../PreLoader';
+import PreLoader from '../PreLoader/PreLoader';
 
 class JitsiComponent extends Component {
 
@@ -8,7 +8,8 @@ class JitsiComponent extends Component {
     api = {};
 
     state = {
-        room: '',
+        projectId: '',
+        projectName: '',
         user: {
             name: ''
         },
@@ -17,21 +18,9 @@ class JitsiComponent extends Component {
         isLoading: false
     }
 
-    // constructor(props) {
-    //     super(props);
-    //     this.state = {
-    //         room: 'Instant Meeting',
-    //         user: {
-    //             name: 'Mihindu Ranasinghe'
-    //         },
-    //         isAudioMuted: false,
-    //         isVideoMuted: false,
-    //     }
-    // }
-
     startMeet = async () => {
         const options = {
-            roomName: this.state.room,
+            roomName: this.state.projectName,
             width: '100%',
             height: 910,
             configOverwrite: { prejoinPageEnabled: false },
@@ -78,7 +67,7 @@ class JitsiComponent extends Component {
 
     handleVideoConferenceLeft = () => {
         console.log("handleVideoConferenceLeft");
-        return this.props.history.push('/thank-you');
+        return this.props.history.push(`/thank-you`);
     }
 
     handleMuteStatus = (audio) => {
@@ -121,7 +110,7 @@ class JitsiComponent extends Component {
             projectName = "Instant Meeting"
 
         await this.setState({
-            room: projectName,
+            projectName: projectName,
             user: {
                 name: currentUser.name
             },

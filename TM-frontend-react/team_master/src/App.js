@@ -23,6 +23,7 @@ import Chatbox from './components/Chatbox/index';
 import "./App.css";
 import JitsiComponent from "./components/VideoConferenceRoom/VideoConference";
 import VideoConferenceArea from "./components/VideoConferenceRoom";
+import CallEndsThankYou from "./components/VideoConferenceRoom/CallEndsRedirect";
 
 class App extends Component {
   state = {
@@ -49,6 +50,7 @@ class App extends Component {
             <ProtectedRoute exact path="/chatroom" component={Chatbox} />
             <ProtectedRoute exact path="/videoroom" component={VideoConferenceArea} />
             <ProtectedRoute exact path="/videoroom/:projectId/:projectName" component={JitsiComponent} />
+            <ProtectedRoute exact path="/thank-you" component={CallEndsThankYou} />
 
             <ProtectedRoute
               exact
@@ -74,7 +76,7 @@ class App extends Component {
             />
 
             <Redirect exact from="/" to="/home" />
-            <Redirect to="notFound" />
+            {/* <Redirect to="notFound" /> */}
           </Switch>
         </main>
       </React.Fragment>

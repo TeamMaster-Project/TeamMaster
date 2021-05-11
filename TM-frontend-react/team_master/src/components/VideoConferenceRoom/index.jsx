@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import auth from '../../services/authService';
 import { Link } from "react-router-dom";
 import { getProjects } from '../../services/projectService';
-import PreLoader from '../PreLoader';
+import PreLoader from '../PreLoader/PreLoader';
 import './index.css'
 
 class VideoConferenceArea extends Component {
@@ -83,47 +83,45 @@ class VideoConferenceArea extends Component {
                         style={{ marginBottom: 20 }}
                     >
                         Create a new instant meeting
+                        <i class="fa fa-video-camera m-2" aria-hidden="true"></i>
                     </Link>
                     </h1>
-                    <div className="container">
+                    <h6>Stay connected with your teams 24/7 with Team Master</h6>
+                    <div className="container mt-5">
                             <table className="table">
-                            <thead>
-                            <tr>
-                                {/* <th>Name</th> */}
-                                {/* <th>Description</th> */}
-                                <th></th>
-                                <th>Projects that you are assigned</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {this.state.projects.map((project) => (
-                                // <tr key={project._id} className="project-card card">
-                                <tr key={project._id}>
-                                    <td  className="project-name card btn btn-warning">
-                                        <Link
-                                        to={{
-                                            pathname: `/myprojects/${project._id}/${project.name}`,
-                                            projectName: `${project.name}`,
-                                            description: `${project.description}`,
-                                        }}
-                                        >
-                                            {project.name}
-                                        </Link>
-                                    </td>
-                                    <td>{project.description}</td>
-                                    <td>
-                                        <Link
-                                        to={{
-                                            pathname: `/videoroom/${project._id}/${project.name}`,
-                                            projectName: `${project.name}`,
-                                            description: `${project.description}`,
-                                        }}
-                                        >
-                                        <p className="btn btn-danger">Join Call Now</p>
-                                        </Link>
-                                    </td>
-                                    </tr>
-                            ))}
+                                <tbody className="mt-3">
+                                {this.state.projects.map((project) => (
+                                    // <tr key={project._id} className="project-card card">
+                                    <tr key={project._id}>
+                                        <td  className="project-name card btn btn-warning">
+                                            <Link
+                                            to={{
+                                                pathname: `/myprojects/${project._id}/${project.name}`,
+                                                projectName: `${project.name}`,
+                                                description: `${project.description}`,
+                                            }}
+                                            >
+                                                {project.name}
+                                            </Link>
+                                        </td>
+                                        <td>{project.description}</td>
+                                        <td>
+                                            <Link
+                                            to={{
+                                                pathname: `/videoroom/${project._id}/${project.name}`,
+                                                projectName: `${project.name}`,
+                                                description: `${project.description}`,
+                                            }}
+                                            target="_blank"
+                                            >
+                                            <p className="btn btn-danger">
+                                            <i class="fa fa-phone-square m-1" aria-hidden="true"></i> 
+                                            Join Team Call
+                                            </p>
+                                            </Link>
+                                        </td>
+                                        </tr>
+                                ))}
                             </tbody>
                         </table>
                         </div>

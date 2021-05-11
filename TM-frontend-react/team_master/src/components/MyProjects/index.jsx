@@ -4,7 +4,7 @@ import auth from "../../services/authService";
 import { getProjects, deleteProject } from "../../services/projectService";
 import { toast } from "react-toastify";
 import PermissionDetails from "./permissionDetails";
-import PreLoader from "../PreLoader"
+import PreLoader from "../PreLoader/PreLoader"
 import { deleteChatRoom, getChatRooms } from "../../services/chatboxService";
 import "./index.css";
 class MyProjects extends Component {
@@ -142,7 +142,6 @@ class MyProjects extends Component {
                     {/* <th>Description</th> */}
                     <th>Projects that you are assigned</th>
                     <th></th>
-                    <th></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -153,7 +152,6 @@ class MyProjects extends Component {
                           {project.name}
                       </td>
                       <td>{project.description}</td>
-
                       <td>                    
                           <Link
                             to={{

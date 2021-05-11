@@ -6,7 +6,7 @@ import auth from "../../../services/authService";
 import "./index.css";
 import { addUsers } from "../../../services/chatboxService";
 import { toast } from "react-toastify";
-import PreLoader from "../../PreLoader";
+import PreLoader from "../../PreLoader/PreLoader";
 
 class Register extends Form {
   state = {

@@ -11,9 +11,13 @@ import MainButtons from "./mainButtons";
 import BasketsCardView from "./basketsCardView";
 import auth from "../../../services/authService";
 import "./index.css";
+import Loader from "../../PreLoader/Loader";
+
 
 class Project extends Component {
   state = {
+    isLoading: false,
+
     projectId: "",
     projectName: "",
     baskets: [],
@@ -23,6 +27,7 @@ class Project extends Component {
     isaModerator: "",
   };
   async componentDidMount() {
+    await this.setState({isLoading: true})
     const currentUser = await auth.getCurrentUser();
     const projectId = this.props.match.params.id;
     const { data: project } = await getProject(projectId);
@@ -54,13 +59,14 @@ class Project extends Component {
       filteredBasketIds.includes(task.basket._id)
     );
 
-    this.setState({
+    await this.setState({
       projectId: projectId,
       projectName: projectName,
       baskets: filteredBaskets,
       filteredBasketIds: filteredBasketIds,
       tasks: filteredTasks,
       isaModerator: isaModerator,
+      isLoading: false
     });
   }
 
@@ -121,34 +127,38 @@ class Project extends Component {
         />
         <br />
         <h6>
-          <i> Working Area</i>
+          {/* <i> Working Area</i> */}
         </h6>
-        <div className="row" style={{ margin: "0 50px" }}>
-          <div className="col">
-            <BasketsCardView
-              isaModerator={this.state.isaModerator}
-              baskets={this.state.baskets}
-              tasks={this.state.tasks}
-              projectId={this.props.match.params.id}
-              name={this.props.match.params.name}
-              onDelete={this.handleDeleteTask}
-            />
-          </div>
-          {this.state.isaModerator && <div class="vl"></div>}
-          {this.state.isaModerator && (
-            <div className="col-3 edit-baskets card shadow-lg py-5">
-              <h6>Edit Baskets</h6>
-              <EditBaskets //display all baskets and edit, delete them
+
+        {this.state.isLoading && 
+          <Loader/>
+        }
+          <div className="row" style={{ margin: "0 50px" }}>
+            <div className="col">
+              <BasketsCardView
+                isaModerator={this.state.isaModerator}
                 baskets={this.state.baskets}
+                tasks={this.state.tasks}
                 projectId={this.props.match.params.id}
                 name={this.props.match.params.name}
-                onDelete={this.handleDeleteBasket}
+                onDelete={this.handleDeleteTask}
               />
             </div>
-          )}
+            {this.state.isaModerator && <div class="vl"></div>}
+            {this.state.isaModerator && (
+              <div className="col-3 edit-baskets card shadow-lg py-5">
+                <h6>Edit Baskets</h6>
+                <EditBaskets //display all baskets and edit, delete them
+                  baskets={this.state.baskets}
+                  projectId={this.props.match.params.id}
+                  name={this.props.match.params.name}
+                  onDelete={this.handleDeleteBasket}
+                />
+              </div>
+            )}
+          </div>
+          <br />
         </div>
-        <br />
-      </div>
     );
   }
 }

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Loader from "../../assets/PreLoader/loader1.gif"
+import LoaderGif from "../../assets/PreLoader/loader1.gif"
 import "./index.css";
 
 class PreLoader extends Component {
@@ -7,7 +7,7 @@ class PreLoader extends Component {
     return (
       <React.Fragment>
         <div className="preloader-container">
-          <img src={Loader} width="100px" height="100px" />
+          <img src={LoaderGif} width="100px" height="100px" />
         </div>
       </React.Fragment>
     );
