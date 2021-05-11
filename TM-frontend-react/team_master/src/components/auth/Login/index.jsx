@@ -4,7 +4,7 @@ import Joi from "joi-browser"; //Joi for form validation library
 import Form from "../../Common/form";
 import auth from "../../../services/authService";
 import { toast } from "react-toastify";
-import PreLoader from "../../PreLoader";
+import PreLoader from "../../PreLoader/PreLoader";
 import "./index.css";
 
 class LoginForm extends Form {

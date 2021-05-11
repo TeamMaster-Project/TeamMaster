@@ -5,7 +5,7 @@ import './Chat.css';
 import auth from '../../services/authService';
 import NewChatForm from './NewChatForm';
 import ChatSettingsTop from './ChatSettingsTop';
-import PreLoader from '../PreLoader';
+import PreLoader from '../PreLoader/PreLoader';
 
 const IndexApp = () => {
 	// if (!localStorage.getItem('username')) return <LoginForm />;

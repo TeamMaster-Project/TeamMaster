@@ -8,7 +8,7 @@ import { getUsers } from "../../services/userService";
 import Chips, { Chip } from "react-chips";
 import "./index.css";
 import { toast } from "react-toastify";
-import PreLoader from "../PreLoader";
+import PreLoader from "../PreLoader/PreLoader";
 
 class ProjectForm extends Form {
   state = {

@@ -4,7 +4,7 @@ import auth from "../../services/authService";
 import { getProjects, deleteProject } from "../../services/projectService";
 import { toast } from "react-toastify";
 import PermissionDetails from "./permissionDetails";
-import PreLoader from "../PreLoader"
+import PreLoader from "../PreLoader/PreLoader"
 import { deleteChatRoom, getChatRooms } from "../../services/chatboxService";
 import "./index.css";
 class MyProjects extends Component {
@@ -118,7 +118,7 @@ class MyProjects extends Component {
       );
 
     return (
-      <div className="">
+      <div className="mt-5">
         <h2>My Projects</h2>
         <h1>
           <Link
@@ -142,25 +142,29 @@ class MyProjects extends Component {
                     {/* <th>Description</th> */}
                     <th>Projects that you are assigned</th>
                     <th></th>
-                    <th></th>
                   </tr>
                 </thead>
                 <tbody>
                   {this.state.projects.map((project) => (
                     // <tr key={project._id} className="project-card card">
                     <tr key={project._id}>
-                      <td className="project-name card">
-                        <Link
-                          to={{
-                            pathname: `/myprojects/${project._id}/${project.name}`,
-                            projectName: `${project.name}`,
-                            description: `${project.description}`,
-                          }}
-                        >
+                      <td className="project-name card btn btn-warning">
                           {project.name}
-                        </Link>
                       </td>
                       <td>{project.description}</td>
+                      <td>                    
+                          <Link
+                            to={{
+                              pathname: `/myprojects/${project._id}/${project.name}`,
+                              projectName: `${project.name}`,
+                              description: `${project.description}`,
+                            }}
+                          >
+                            <button className="btn btn-primary btn-sm">
+                              Story Board
+                            </button>
+                          </Link>
+                      </td>
 
                       {this.state.myProjectsWithModeratorAccess.map(
                         (filteredModeratorProject) => {

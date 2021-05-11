@@ -28,11 +28,11 @@ const NavBar = (props) => {
           <NavLink className="nav-link" to="/myprojects">
             My Projects
           </NavLink>
-          <NavLink className="nav-link" to="/chatbox">
-            Chat Box
+          <NavLink className="nav-link" to="/chatroom">
+            My Chat Rooms
           </NavLink>
-          <NavLink className="nav-link" to="/chatbox">
-            Conference Room
+          <NavLink className="nav-link" to="/videoroom">
+            My Conference Rooms
           </NavLink>
           <NavLink className="nav-link" to="/contact">
             Contact Us
