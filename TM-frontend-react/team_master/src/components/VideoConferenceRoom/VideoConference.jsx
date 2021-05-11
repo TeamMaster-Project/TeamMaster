@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { toast } from 'react-toastify';
 import auth from "../../services/authService";
 import PreLoader from '../PreLoader/PreLoader';
 
@@ -44,6 +45,7 @@ class JitsiComponent extends Component {
             audioMuteStatusChanged: this.handleMuteStatus,
             videoMuteStatusChanged: this.handleVideoStatus
         });
+        toast("You are joined")
     }
 
     handleClose = () => {
