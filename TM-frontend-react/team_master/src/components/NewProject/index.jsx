@@ -31,7 +31,7 @@ class NewForm extends Component {
           </p>
           <Link
             to="/myprojects/new"
-            className="btn btn-lg btn-block btn-outline-primary mt-5"
+            className="btn btn-lg btn-block btn-outline-primary my-5 shadow"
             style={{ marginBottom: 20 }}
           >
           Create New Project
@@ -39,17 +39,16 @@ class NewForm extends Component {
           </Link>
         </div>
 
-        <div>
-          <div className="card-deck mb-3 text-center">
-            <div className="card mb-4 box-shadow">
+        
+          <div className="card-deck my-3 text-center">
+            <div className="card mb-4 box-shadow shadow">
               <div className="card-header">
-                <h4 className="my-0 font-weight-normal">Story Boards</h4>
+                <h6 className="my-0 font-weight-normal">Story Boards</h6>
               </div>
               <div className="card-body">
                 <h5 className="card-title pricing-card-title pt-4 px-2">You only need to create a project for your team</h5>
                 <i>
-                <p className="pt-4">Add your team members to the project under different access control tiers</p>
-                <p>Story Board / Chat Room / Video Room features automatically enabled</p>
+                <p className="py-3">Manage your strory boards with Team Master</p>
                 </i>
                   <Link
                     to="/myprojects/"
@@ -60,13 +59,14 @@ class NewForm extends Component {
                   </Link>
               </div>
             </div>
-            <div className="card mb-4 box-shadow">
+            
+            <div className="card mb-4 box-shadow shadow">
               <div className="card-header">
-                <h4 className="my-0 font-weight-normal">Chat Rooms</h4>
+                <h6 className="my-0 font-weight-normal">Chat Rooms</h6>
               </div>
               <div className="card-body">
                 <h5 className="card-title pricing-card-title pt-4 px-2">All your team members will be added to a team chat rooms automatically</h5>
-                <p className="py-5"><i>Chat your team members at any time</i></p>              
+                <p className="py-3"><i>Chat your team members at any time</i></p>              
                 <Link
                     to="/chatroom/"
                     className="btn btn-lg btn-block btn-primary"
@@ -75,13 +75,14 @@ class NewForm extends Component {
                   </Link>
               </div>
             </div>
-            <div className="card mb-4 box-shadow">
+            
+            <div className="card mb-4 box-shadow shadow">
               <div className="card-header">
-                <h4 className="my-0 font-weight-normal">Video Rooms</h4>
+                <h6 className="my-0 font-weight-normal">Video Rooms</h6>
               </div>
               <div className="card-body">
                 <h5 className="card-title pricing-card-title pt-4 px-2">All your team members will be added to a video rooms automatically</h5>
-                <p className="py-5"><i>Join the team call at any time</i></p>  
+                <p className="py-3"><i>Join the team call at any time</i></p>  
                 <Link
                     to="/videoroom/"
                     className="btn btn-lg btn-block btn-primary"
@@ -90,7 +91,7 @@ class NewForm extends Component {
               </div>
             </div>
           </div>
-      </div>
+        
     </div>
     );
   }

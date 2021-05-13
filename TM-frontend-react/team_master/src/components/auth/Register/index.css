@@ -29,3 +29,15 @@
 .form-submit-button {
   text-align: center;
 }
+
+
+.login,
+.image {
+  min-height: 94vh;
+}
+
+.bg-image-register {
+  background-image: url('../../../assets/images/hands-typing.jpg');
+  background-size: cover;
+  background-position: center center;
+}
