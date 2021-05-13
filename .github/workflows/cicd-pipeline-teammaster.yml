@@ -26,6 +26,14 @@ jobs:
       with:
         node-version: ${{ env.NODE_VERSION }}
 
+    - name: npm install, build, and test
+      working-directory: ${{ env.WORKING_DIRECTORY }}
+      env: 
+        CI: false
+      run: |
+        npm i --verbose
+        npm run build --if-present --verbose
+
     # - name: npm install, build, and test
     #   run: |
     #     # Build and test the project, then
