@@ -26,6 +26,7 @@ jobs:
         node-version: '14.x'
 
     - name: npm install, build, and test
+      working-directory: ${{env.working-directory}}
       run: |
         npm install
         npm run build --if-present
@@ -36,4 +37,4 @@ jobs:
         app-name: Dev-Environment-TeamMaster
         slot-name: Production
         publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_AF19B382F13343A4BB96002917791A61 }}
-        package: .
+        package: ${{env.working-directory}}
