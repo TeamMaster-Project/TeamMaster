@@ -24,7 +24,7 @@ const Images = {
     carousel_2: require('./homePage/carousel/carousel-2.jpg'),
     carousel_3: require('./homePage/carousel/carousel-3.jpg'),
     carousel_4: require('./homePage/carousel/carousel-4.jpg'),
-    carousel_5: require('./homePage/carousel/carousel-5.jpg'),
+    carousel_5: require('./homePage/carousel/carousel-5.jpeg'),
     carousel_6: require('./homePage/carousel/carousel-6.jpg'),
 
     qr: require('./homePage/qr.png'),
