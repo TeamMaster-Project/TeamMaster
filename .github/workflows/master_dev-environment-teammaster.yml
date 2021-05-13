@@ -3,40 +3,42 @@
 
 name: Azure App Service - Dev-Environment-TeamMaster(Production), Build and deploy NodeJS app
 
-on:
-  push:
-    branches:
-      - master
+# on:
+#   push:
+#     branches:
+#       - master
+
+on: push
+
+env:
+  AZURE_WEBAPP_NAME: Dev-Environment-TeamMaster # set this to your application's name
+  AZURE_WEBAPP_PACKAGE_PATH: ./TM-frontend-react/team_master/build  # set this to the path to your web app project, defaults to the repository root
+  NODE_VERSION: '10.x'                # set this to the node version to use
+  working-directory: ./TM-frontend-react/team_master
 
 jobs:
   build-and-deploy:
+    name: Build and Deploy
     runs-on: ubuntu-latest
-    env: 
-      working-directory: ./TM-frontend-react/team_master
-      build-directory: ./TM-frontend-react/team_master/build
-
     steps:
-    # checkout the repo
-    - name: 'Checkout Github Action'
-      uses: actions/checkout@master
-
-
-    - name: Set up Node.js version
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ env.NODE_VERSION }}
       uses: actions/setup-node@v1
       with:
-        node-version: '14.x'
-
+        node-version: ${{ env.NODE_VERSION }}
     # - name: npm install, build, and test
-    #   working-directory: ${{env.working-directory}}
     #   run: |
-    #       npm install
-    #       npm run build --if-present
-    #       npm run test --if-present
-
-    - name: Run Azure webapp deploy action using publish profile credentials
+    #     # Build and test the project, then
+    #     # deploy to Azure Web App.
+    #     npm install
+    #     npm run build --if-present
+    #     npm run test --if-present
+    - name: add process.json
+      run: |
+        echo '{ script: "serve", env: { PM2_SERVE_SPA: "true", PM2_SERVE_HOMEPAGE: "/index.html" } }' >> build/process.json
+    - name: 'Deploy to Azure WebApp'
       uses: azure/webapps-deploy@v2
       with:
-        app-name: Dev-Environment-TeamMaster
-        slot-name: Production
-        publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_AF19B382F13343A4BB96002917791A61 }}
-        package: ${{env.build-directory}}
+        app-name: ${{ env.AZURE_WEBAPP_NAME }}
+        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+        package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
