@@ -1,0 +1,63 @@
+# Docs for the Azure Web Apps Deploy action: https://go.microsoft.com/fwlink/?linkid=2134798
+# More GitHub Actions for Azure: https://go.microsoft.com/fwlink/?linkid=2135048
+
+name: Azure App Service - CICD-automation-workflow-TeamMaster
+
+on:
+  push:
+    branches: [main, test-deploy, production-deploy]
+
+env:
+  AZURE_WEBAPP_NAME_DEV: Dev-Environment-TeamMaster 
+  AZURE_WEBAPP_NAME_TEST: Test-Environment-TeamMaster 
+  AZURE_WEBAPP_NAME_PROD: Prod-Environment-TeamMaster 
+  AZURE_WEBAPP_PACKAGE_PATH: ./TM-frontend-react/team_master/build  
+  working-directory: ./TM-frontend-react/team_master
+  # NODE_VERSION: '10.x'
+
+jobs:
+  build-and-deploy:
+    name: Build and Deploy
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ env.NODE_VERSION }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+
+    # - name: npm install, build, and test
+    #   run: |
+    #     # Build and test the project, then
+    #     # deploy to Azure Web App.
+    #     npm install
+    #     npm run build --if-present
+    #     npm run test --if-present
+
+    - name: add process.json
+      run: |
+        echo '{ script: "serve", env: { PM2_SERVE_SPA: "true", PM2_SERVE_HOMEPAGE: "/index.html" } }' >> ./TM-frontend-react/team_master/build/process.json
+    
+    - name: 'Deploy to Azure Dev Environment of TeamMaster'
+      if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+      uses: azure/webapps-deploy@v2
+      with:
+        app-name: ${{ env.AZURE_WEBAPP_NAME_DEV }}
+        publish-profile: ${{ secrets.AZURE_WEBAPP_DEV_ENV_PUBLISH_PROFILE }}
+        package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
+
+    - name: 'Deploy to Azure Test Environment of TeamMaster'
+      if: github.event_name == 'push' && github.ref == 'refs/heads/test-deploy'
+      uses: azure/webapps-deploy@v2
+      with:
+        app-name: ${{ env.AZURE_WEBAPP_NAME_TEST }}
+        publish-profile: ${{ secrets.AZURE_WEBAPP_TEST_ENV_PUBLISH_PROFILE }}
+        package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
+
+    - name: 'Deploy to Azure Production Environment of TeamMaster'
+      if: github.event_name == 'push' && github.ref == 'refs/heads/production-deploy'
+      uses: azure/webapps-deploy@v2
+      with:
+        app-name: ${{ env.AZURE_WEBAPP_NAME_PROD }}
+        publish-profile: ${{ secrets.AZURE_WEBAPP_PROD_ENV_PUBLISH_PROFILE }}
+        package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}

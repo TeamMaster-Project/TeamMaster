@@ -1,1 +1,0 @@
-TM App : stands for the name of our design project "TeamMaster App" or "TaskMasket App"  :) JUST A NAME
