@@ -6,7 +6,7 @@ class Loader extends Component {
   render() {
     return (
       <React.Fragment>
-        <div className="container">
+        <div className="container an_home_section_1">
             <h2>
               <img src={LoaderGif} width="100px" height="100px" />
             </h2>

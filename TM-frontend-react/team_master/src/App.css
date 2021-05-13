@@ -7,3 +7,21 @@ h6 {
   text-align: center;
 }
 
+.shadow-box {
+  height: 96%;
+  position: absolute;
+  z-index: -1;
+  width: 200%;
+  top: 0;
+  left: auto;
+  right: -0%;
+  border-radius: 0 0 90% 50%;
+  -webkit-box-shadow: 18px 25px 46px 0 #2165832e;
+  box-shadow: 18px 25px 46px 0 #2165832e;
+}
+@media (min-width: 0px) and (max-width: 767.98px) {
+  .shadow-box {
+      height: 168%;
+  }
+}
+

@@ -46,6 +46,8 @@ class Register extends Form {
       this.props.history.push("/newproject"); 
       toast("User Registered Successfully");
     } catch (ex) {
+      this.setState({isLoading: false})
+      this.props.history.push("/newproject");
       if (ex.response && ex.response.status === 400) {
         //Handle user already registered error
         const errors = { ...this.state.errors };

@@ -27,13 +27,14 @@ class LoginForm extends Form {
 
       this.setState({isLoading: true})
       await auth.login(data.username, data.password);
-      this.setState({isLoading: false})
-
+      
       //window.location = "/"; //full Reload and redirecting to get current user loged in
       const { state } = this.props.location;
+      this.setState({isLoading: false})
       window.location = state ? state.from.pathname : "/newproject"; //if the state is defined log in to where user want, if state not defined redirect to home page
       toast("Successfully Logged in")
     } catch (ex) {
+      this.setState({isLoading: false})
       if (ex.response && ex.response.status === 400) {
         const errors = { ...this.state.errors };
         errors.username = ex.response.data;

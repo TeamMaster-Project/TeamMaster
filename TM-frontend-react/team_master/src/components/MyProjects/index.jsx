@@ -119,6 +119,7 @@ class MyProjects extends Component {
 
     return (
       <div className="mt-5">
+        <div className="shadow-box" ></div>
         <h2>My Projects</h2>
         <h1>
           <Link
