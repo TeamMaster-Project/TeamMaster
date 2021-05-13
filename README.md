@@ -23,4 +23,4 @@ Dev Environment Link : https://test-environment-teammaster.azurewebsites.net/
 
 This branch acts as the Production Environment Deployment with Azure.
 
-Dev Environment Link : https://prod-environment-teammaster.azurewebsites.net/
+Dev Environment Link : https://dev-environment-teammaster.azurewebsites.net/
