@@ -76,7 +76,7 @@ class App extends Component {
             />
 
             <Redirect exact from="/" to="/home" />
-            {/* <Redirect to="notFound" /> */}
+            <Redirect to="notFound" />
           </Switch>
         </main>
       </React.Fragment>
