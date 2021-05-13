@@ -13,6 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     env: 
       working-directory: ./TM-frontend-react/team_master
+      build-directory: ./TM-frontend-react/team_master/build
 
     steps:
     # checkout the repo
@@ -25,12 +26,12 @@ jobs:
       with:
         node-version: '14.x'
 
-    - name: npm install, build, and test
-      working-directory: ${{env.working-directory}}
-      run: |
-        npm install
-      # npm run build --if-present
-      # npm run test --if-present
+    # - name: npm install, build, and test
+    #   working-directory: ${{env.working-directory}}
+    #   run: |
+    #       npm install
+    #       npm run build --if-present
+    #       npm run test --if-present
 
     - name: Run Azure webapp deploy action using publish profile credentials
       uses: azure/webapps-deploy@v2
@@ -38,4 +39,4 @@ jobs:
         app-name: Dev-Environment-TeamMaster
         slot-name: Production
         publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_AF19B382F13343A4BB96002917791A61 }}
-        package: ${{env.working-directory}}
+        package: ${{env.build-directory}}
