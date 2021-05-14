@@ -1,46 +1,115 @@
 import React, { Component } from "react";
 import "./index.css";
-import contact_3 from "../../assets/images/contact_3.gif";
+import TeamMasterImg from "../../assets/images/Logo/Success.jpg";
+import Mihindu from "../../assets/images/Team/mihindu.jpg";
+import PreLoader from "../PreLoader/PreLoader";
 
 class ContactUs extends Component {
+  state = {
+              isLoading: false
+      };
+
+    async componentDidMount() {
+        this.setState({isLoading: true});
+        setTimeout(()=>{
+            this.setState({isLoading: false});
+        },1000)
+    };
+
+
   render() {
+    if(this.state.isLoading)
+      return <PreLoader/>
+
     return (
-      <div
-        class="container"
-        style={{
-          backgroundImage: `url(${contact_3})`,
-        }}
-      >
-        <h4 class="h4-header">GET IN TOUCH</h4>
-        <div class="full-content">
-          <div class="icon">
-            <p class="contact-way">
-              <i class="fa fa-map-marker"></i> 123/2 Galle Road, Colombo 03.
-            </p>
-            <p class="contact-way">
-              <i class="fa fa-phone"></i> Telephone : +(94) 76 687 3396
-            </p>
-            <p class="contact-way">
-              <i class="fa fa-fax"></i> FAX : +(94) 41 568 7754
-            </p>
-            <p class="contact-way">
-              <i class="fa fa-envelope-o"></i> Email :
-              <a href="mailto:pvkchathuranga060@mail.com">
-                info@teammaster.com
-              </a>
-            </p>
-          </div>
-          <div class="map-w3layouts">
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d18451.05437903347!2d79.92609419051306!3d6.974392066324805!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x12c707892cabde33!2z4Laa4LeQ4LeF4Lar4LeS4La6IOC3gOC3kuC3geC3iuC3gOC3gOC3kuC2r-C3iuKAjeC2uuC3j-C2veC2ug!5e0!3m2!1ssi!2slk!4v1620929143857!5m2!1ssi!2slk"
-              width="600"
-              height="500"
-              allowfullscreen=""
-              loading="lazy"
-            ></iframe>
-          </div>
-        </div>
+      <div class="about-section ">
+      <div className="shadow-box" ></div>
+                <div class="container py-5">
+                    <div class="row">
+                        <div class="col-md-7 col-sm-6">
+                          <div class="about-title clearfix">
+                              <h1>About <span>TeamMaster</span></h1>
+                              <h3 className="font-weight-light">All in one project / team management platform </h3>
+                              <p class="about-paddingB">
+                                TeamMaster provides all kind of team engagement activities inside one single platform. 
+                                We provide you to form projects and teams with your team mates and you will be able to manage a project management workspace / storyboard (kanban)
+                                and you will be able to use chat room service to chat with the same particular team and also we provide video conferencing facility 
+                                for your particular team to have your online meetings in a secure manner.
+                              </p>
+                              <p>
+                                We are a group of Software Engineers from University of Kelaniya Sri Lanka, behind the success of this amazing platform
+                              </p>
+
+                                <h2 class="font-weight-light text-black mt-4">Meet the Team</h2>
+                                <div className="container p-2">
+                                       <div class="row">
+                                            <div class="col-xl-3 col-md-6 mb-4">
+                                                  <div class="card border-0 shadow">
+                                                    <img src={Mihindu} class="card-img-top" alt="..." />
+                                                    <div class="card-body text-center">
+                                                      <h6 class="card-title mb-0">Mihindu</h6>
+                                                      <div class="card-text text-black-50">Software Engineer</div>
+                                                    </div>
+                                                  </div>
+                                            </div>
+
+                                            <div class="col-xl-3 col-md-6 mb-4">
+                                              <div class="card border-0 shadow">
+                                                <img src="https://source.unsplash.com/9UVmlIb0wJU/500x350" class="card-img-top" alt="..." />
+                                                <div class="card-body text-center">
+                                                  <h6 class="card-title mb-0">Sanjula</h6>
+                                                  <div class="card-text text-black-50">Software Engineer</div>
+                                                </div>
+                                              </div>
+                                            </div>
+                                         
+                                            <div class="col-xl-3 col-md-6 mb-4">
+                                              <div class="card border-0 shadow">
+                                                <img src="https://source.unsplash.com/sNut2MqSmds/500x350" class="card-img-top" alt="..." />
+                                                <div class="card-body text-center">
+                                                  <h6 class="card-title mb-0">Darshana</h6>
+                                                  <div class="card-text text-black-50">Software Engineer</div>
+                                                </div>
+                                              </div>
+                                            </div>
+
+                                            <div class="col-xl-3 col-md-6 mb-4">
+                                              <div class="card border-0 shadow">
+                                                <img src="https://source.unsplash.com/ZI6p3i9SbVU/500x350" class="card-img-top" alt="..." />
+                                                  <div class="card-body text-center">
+                                                    <h6 class="card-title mb-0">Kasun</h6>
+                                                  <div class="card-text text-black-50">Software Engineer</div>
+                                                </div>
+                                              </div>
+                                            </div>
+                                       </div>
+                                </div>
+                              
+                              <h1>
+                              <div class="about-icons"> 
+                                <ul >
+                                    <li><a href="https://www.facebook.com/"><i id="social-fb" class="fa fa-facebook-square fa-3x social"></i></a> </li>
+                                    <li><a href="https://twitter.com/"><i id="social-tw" class="fa fa-twitter-square fa-3x social"></i></a> </li>
+                                    <li> <a href="https://plus.google.com/"><i id="social-gp" class="fa fa-google-plus-square fa-3x social"></i></a> </li>
+                                    <li> <a href="mailto:teammasterlk@gmail.com"><i id="social-em" class="fa fa-envelope-square fa-3x social"></i></a> </li>
+                                </ul>   
+                              </div>
+                              </h1>
+                                <p className="text-center">Copyright @ 2021</p>                	        
+
+                          </div>
+                        </div>
+
+                        <div class="col-md-5 col-sm-6">
+                          <div class="pt-4 mt-3">
+                              <img className="px-5 py-4 about-img" src={TeamMasterImg} alt=""></img>
+                            <h5 className="font-weight-light">Join our success</h5>
+                          </div>
+                        </div>
+                    </div>
+                  </div>
       </div>
+      
     );
   }
 }
