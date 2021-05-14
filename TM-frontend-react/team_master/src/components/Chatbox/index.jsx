@@ -6,6 +6,7 @@ import auth from '../../services/authService';
 import NewChatForm from './NewChatForm';
 import ChatSettingsTop from './ChatSettingsTop';
 import PreLoader from '../PreLoader/PreLoader';
+import PeopleSettings from './PeopleSettings';
 
 const IndexApp = () => {
 	// if (!localStorage.getItem('username')) return <LoginForm />;
@@ -27,6 +28,7 @@ const IndexApp = () => {
 			renderChatSettingsTop={(creds, chat) => <ChatSettingsTop creds={creds} chat={chat}/>}
 			renderPhotosSettings={(chat) => {}}
 			renderOptionsSettings={(creds, chat) => {}}
+			renderPeopleSettings={(creds, chat) => <PeopleSettings creds={creds} chat={chat}/>}
 		/>
 	);
 };
