@@ -9,11 +9,23 @@ import {
 import "./index.css";
 import Images from "../../assets/images"
 import { Link } from "react-router-dom"
+import PreLoader from "../PreLoader/PreLoader";
 
 // Price List
 const priceList = ["Included bookings", "Included SMS", "Included emails", "Customer info", "Covid customer form", ""]
 
 class Home extends Component {
+
+state = {
+        isLoading: false
+  };
+
+    async componentDidMount() {
+        this.setState({isLoading: true});
+        setTimeout(()=>{
+            this.setState({isLoading: false});
+        },7000)
+    };
 
   createBusinessCard(image = null, title = "", decription = "") {
       return (
@@ -88,20 +100,27 @@ class Home extends Component {
   }
 
   render() {
+    if (this.state.isLoading)
+        return <PreLoader/>
+
     return (
       <main className="an_home" >
         <Container className="pt-4 pt-sm-5 pb-5 an_home_section_1" >
+
             <div className="shadow-box" ></div>
             {window.innerWidth > 992 &&
                 <img className="an_home_section_1_flot_img" width="50" height="50" src={Images.admin_view} />
             }
+                
             <Row >
                 <Col md={12} lg={6} className="pt-0 pt-lg-5">
-                    <h1 className="display-5 font-weight-normal mb-1" >One task management </h1>
-                    <h1 className="display-5 font-weight-normal" >platform for<span className="an-text-info" > all your project planning needs</span></h1>
+                    <h1 className="" >One task management platform</h1>
+                    <h1 className="display-5 font-weight-normal" >for<span className="an-text-info" > all your project planning needs</span></h1>
                     <p className="lead font-weight-normal text-muted mb-4" >Simply define your services and providers, display their availability, and you will have clients both old and new making bookings 24/7.</p>
-                    <Button color="primary" className="rounded-pill px-5 py-3" size="lg" ><a href={`https://sss/signup`} style={{ textDecoration: "none", color: "#fff" }}>Get an Account</a></Button>
-                    <Button color="primary" className="rounded-pill px-5 py-3" size="lg" ><Link style={{ textDecoration: "none", color: "#fff" }}  to="/login" >Log in</Link></Button>
+                    <h1>
+                    <Button color="primary" className="rounded-pill px-5 py-3 m-3" size="lg" ><a href={`https://sss/signup`} style={{ textDecoration: "none", color: "#fff" }}>Get an Account</a></Button>
+                    <Button color="primary" className="rounded-pill px-5 py-3 m-3" size="lg" ><Link style={{ textDecoration: "none", color: "#fff" }}  to="/login" >Log in</Link></Button>
+                    </h1>
                 </Col>
                 <Col md={12} lg={6} className="pt-5 pt-lg-0 text-center pr-3 pr-md-0 an_home_section_1_mask" >
                 {window.innerWidth < 992 &&
