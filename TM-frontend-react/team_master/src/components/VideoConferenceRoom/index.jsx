@@ -59,6 +59,7 @@ class VideoConferenceArea extends Component {
             if (this.state.projects.length === 0)
             return (
                 <div className="newproject newproject-container">
+                <div className="shadow-box" ></div>
                 <h2>You have no any projects.</h2>
                 <h3>Create Your first Project And Manage It Easily With TEAM MASTER</h3>
                 <h1>
@@ -75,6 +76,7 @@ class VideoConferenceArea extends Component {
 
             return (
                 <div className="mt-5">
+                    <div className="shadow-box" ></div>
                     <h2>Video Conferencing</h2>
                     <h1>
                     <Link

@@ -29,3 +29,15 @@
 .form-submit-button {
   text-align: center;
 }
+
+
+.login,
+.image {
+  min-height: 94vh;
+}
+
+.bg-image {
+  background-image: url('../../../assets/images/homePage/carousel/carousel-5.jpeg');
+  background-size: cover;
+  background-position: center center;
+}

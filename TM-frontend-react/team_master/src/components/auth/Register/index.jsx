@@ -7,6 +7,7 @@ import "./index.css";
 import { addUsers } from "../../../services/chatboxService";
 import { toast } from "react-toastify";
 import PreLoader from "../../PreLoader/PreLoader";
+import { Link } from "react-router-dom";
 
 class Register extends Form {
   state = {
@@ -46,6 +47,8 @@ class Register extends Form {
       this.props.history.push("/newproject"); 
       toast("User Registered Successfully");
     } catch (ex) {
+      this.setState({isLoading: false})
+      this.props.history.push("/newproject");
       if (ex.response && ex.response.status === 400) {
         //Handle user already registered error
         const errors = { ...this.state.errors };
@@ -60,22 +63,63 @@ class Register extends Form {
       return <PreLoader/>
 
     return (
-      <div className="register-form-container">
-        <div className="register-form-card">
-          <div className="register-form">
-            <h1>Register</h1>
-            <form onSubmit={this.handleSubmit}>
-              {this.renderInputs("username", "Email", "text")}
-              {this.renderInputs("password", "Password", "password")}
-              {/* name label datatype */}
-              {this.renderInputs("name", "Name", "text")}
-              <div className="form-submit-button">
-                {this.renderButton("Register")}
+      // <div className="register-form-container">
+      //   <div className="register-form-card">
+      //     <div className="register-form">
+      //       <h1>Register</h1>
+            // <form onSubmit={this.handleSubmit}>
+            //   {this.renderInputs("username", "Email", "text")}
+            //   {this.renderInputs("password", "Password", "password")}
+            //   {/* name label datatype */}
+            //   {this.renderInputs("name", "Name", "text")}
+            //   <div className="form-submit-button">
+            //     {this.renderButton("Register")}
+            //   </div>
+            // </form>
+      //     </div>
+      //   </div>
+      // </div>
+
+      <div class="container-fluid">
+          <div class="row no-gutter">
+            {/* left Half */}
+            <div class="col-md-6 d-none d-md-flex bg-image-register"></div>
+
+            {/* Right Half */}
+            <div class="col-md-6 bg-light">
+              <div class="login d-flex align-items-center py-5">
+                  <div class="container">
+                    <div class="row">
+                        <div class="col-lg-10 col-xl-7 mx-auto">
+                            <h3 class="display-4">Get an account</h3>
+                            <h6 class="text-muted mb-4">Enter your email and password</h6>
+
+                             <div className="register-form">
+                               <form onSubmit={this.handleSubmit}>
+                                  {this.renderInputs("username", "Email / Username", "text")}
+                                  {this.renderInputs("password", "Password", "password")}
+                                  {/* name label datatype */}
+                                  {this.renderInputs("name", "Name", "text")}
+                                  <div className="form-submit-button">
+                                    {this.renderButton("Register")}
+                                  </div>
+                                </form>
+                              </div>
+                               <h6 class="text-muted mb-4"> Already have an account ? &nbsp;
+                                  <Link
+                                  to="/login"
+                                  className="mb-4"
+                                >
+                                 <i>Log in</i>
+                                </Link>
+                               </h6>
+                        </div>
+                    </div>
+                  </div>
               </div>
-            </form>
+            </div>
           </div>
         </div>
-      </div>
     );
   }
 }

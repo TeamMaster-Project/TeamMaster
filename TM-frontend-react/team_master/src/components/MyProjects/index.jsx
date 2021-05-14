@@ -119,6 +119,7 @@ class MyProjects extends Component {
 
     return (
       <div className="mt-5">
+        <div className="shadow-box" ></div>
         <h2>My Projects</h2>
         <h1>
           <Link
@@ -160,7 +161,7 @@ class MyProjects extends Component {
                               description: `${project.description}`,
                             }}
                           >
-                            <button className="btn btn-primary btn-sm">
+                            <button className="btn btn-info btn-md">
                               Story Board
                             </button>
                           </Link>
@@ -178,7 +179,7 @@ class MyProjects extends Component {
                                   </Link>
                                 </button>
                                 <p style={{ color: "blue" }}>
-                                  <i> You are a moderator in this project</i>
+                                  <i> Moderator Access </i>
                                 </p>
                               </td>
                             );
@@ -203,7 +204,7 @@ class MyProjects extends Component {
                                     Delete
                                   </button>
                                   <p style={{ color: "red" }}>
-                                    <i> You created this project</i>
+                                    <i> Admin access </i>
                                   </p>
                                 </td>
                               );
@@ -219,7 +220,7 @@ class MyProjects extends Component {
                               //Show Delete button only for moderators
                               <td key={filteredMemberProject._id}>
                                 <p style={{ color: "green" }}>
-                                  <i> (Member Only. No Edit Access)</i>
+                                  <i> Member access only</i>
                                 </p>
                               </td>
                             );
