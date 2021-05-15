@@ -1,6 +1,6 @@
 import React from "react";
 import * as ReactBootstrap from "react-bootstrap";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, BrowserRouter as Router } from "react-router-dom";
 import "./index.css";
 
 const NavBar = (props) => {
@@ -22,47 +22,66 @@ const NavBar = (props) => {
           {/* <NavLink className="nav-link" to="/home">
             Home
           </NavLink> */}
-          <NavLink className="nav-link" to="/newproject">
-            New Project
-          </NavLink>
-          <NavLink className="nav-link" to="/myprojects">
-            My Projects
-          </NavLink>
-          <NavLink className="nav-link" to="/chatroom">
-            My Chat Rooms
-          </NavLink>
-          <NavLink className="nav-link" to="/videoroom">
-            My Conference Rooms
-          </NavLink>
-          <NavLink className="nav-link" to="/contact">
-            Contact Us
-          </NavLink>
+           <Router>
+              <NavLink className="nav-link" to="/newproject">
+                New Project
+              </NavLink>
+           </Router>
+           <Router>
+              <NavLink className="nav-link" to="/myprojects">
+                My Projects
+              </NavLink>
+            </Router>
+            <Router>
+              <NavLink className="nav-link" to="/chatroom">
+                My Chat Rooms
+              </NavLink>
+            </Router>
+            <Router>
+              <NavLink className="nav-link" to="/videoroom">
+                My Conference Rooms
+              </NavLink>
+            </Router>
+            <Router>
+              <NavLink className="nav-link" to="/contact">
+                Contact Us
+              </NavLink>
+            </Router>
         </ReactBootstrap.Nav>
+
         <ReactBootstrap.Nav>
           {props.currentUser && (
             <React.Fragment>
               <li className="nav-item">
+              <Router>
                 <NavLink className="nav-link" to="#">
                   Hi {props.currentUser.name} !
                 </NavLink>
+              </Router>
               </li>
               <li className="nav-item">
+              <Router>
                 <NavLink className="nav-link" to="/logout">
                   Log out
                 </NavLink>
+              </Router>
               </li>
             </React.Fragment>
           )}
           {!props.currentUser && (
             <React.Fragment>
-              <NavLink className="nav-link" to="/login">
-                Log In
-              </NavLink>
-              <NavLink className="nav-link" to="/register">
-                Register
-              </NavLink>
+              <Router>
+                <NavLink className="nav-link" to="/login">
+                  Log In
+                </NavLink>
+              </Router>
+              <Router>
+                <NavLink className="nav-link" to="/register">
+                  Register
+                </NavLink>
+              </Router>
             </React.Fragment>
-          )}
+          )}        
         </ReactBootstrap.Nav>
       </ReactBootstrap.Navbar.Collapse>
     </ReactBootstrap.Navbar>
