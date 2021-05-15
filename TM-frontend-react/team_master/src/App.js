@@ -25,11 +25,11 @@ import "./App.css";
 import JitsiComponent from "./components/VideoConferenceRoom/VideoConference";
 import VideoConferenceArea from "./components/VideoConferenceRoom";
 import CallEndsThankYou from "./components/VideoConferenceRoom/CallEndsRedirect";
-
 class App extends Component {
   state = {
     currentUser: {},
   };
+  
   componentDidMount() {
     const currentUser = auth.getCurrentUser();
     this.setState({ currentUser: currentUser });
