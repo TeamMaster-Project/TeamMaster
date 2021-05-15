@@ -5,6 +5,7 @@ import { getTask, saveTask } from "../../../services/taskService";
 import { getBaskets } from "../../../services/basketService";
 import "./index.css";
 import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
 
 class TaskForm extends Form {
   state = {
@@ -80,7 +81,8 @@ class TaskForm extends Form {
     console.log(this.state.data);
     //console.log(this.state.task);
     return (
-      <div className="register-form-container">
+      <div className="center-container">
+        <div className="shadow-box" ></div>
         <div className="register-form-card">
           <div className="register-form">
             <h1>Save Task</h1>
@@ -94,7 +96,16 @@ class TaskForm extends Form {
                   this.state.baskets
                 )}
                 {/* {this.renderInputs("deadline", "Deadline", "date")} */}
-                {this.renderButton("Save")}
+                {this.renderButton("Save")} 
+                <Link
+                  to={{
+                    pathname: `/myprojects/${this.props.match.params.id}/${this.props.match.params.name}`,
+                  }}
+                  className="btn btn-md btn-outline-primary m-2 shadow"
+                  style={{ marginBottom: 20 }}
+                >
+                Cancel
+                </Link>
               </form>
             </div>
           </div>

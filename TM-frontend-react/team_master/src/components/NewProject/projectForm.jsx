@@ -190,9 +190,10 @@ class ProjectForm extends Form {
       return <PreLoader/>
 
     return (
-      <div className="register-form-container">
+      <div className="newproject-container">
+        <div className="shadow-box" ></div>
         <div className="register-form-card">
-          <div className="register-form">
+          <div className="register-form shadow">
             <h1>Save Project</h1>
 
             <div>
@@ -225,7 +226,6 @@ class ProjectForm extends Form {
               </form>
 
               <div>
-                <p> About moderators and members. Better add a card view</p>
               </div>
             </div>
           </div>
