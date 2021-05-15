@@ -17,8 +17,6 @@ const NavBarProps = {
      }
 };
 
-
-
 test('Matches Snapshot',()=>{
     const tree = renderer.create(<NavBar/>).toJSON();
     expect(tree).toMatchSnapshot();

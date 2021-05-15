@@ -21,7 +21,8 @@ class MyProjects extends Component {
 
   async componentDidMount() {
     const { data: projects } = await getProjects();
-    const currentUser = auth.getCurrentUser();
+    const currentUser = this.props.currentUser ? this.props.currentUser : auth.getCurrentUser();
+    console.log(currentUser)
     this.setState({ isLoading: false});
 
     var filteredProjects = [];
