@@ -1,0 +1,39 @@
+# Docs for the Azure Web Apps Deploy action: https://go.microsoft.com/fwlink/?linkid=2134798
+# More GitHub Actions for Azure: https://go.microsoft.com/fwlink/?linkid=2135048
+
+name: Continuos integration and continuous testing before Pull Request
+
+on:
+  pull_request: 
+    branches: [master]
+
+    
+
+env:
+  WORKING_DIRECTORY: ./TM-frontend-react/team_master
+  NODE_VERSION: '10.x'
+
+jobs:
+  build-and-deploy:
+    name: Build and Test before merge
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ env.NODE_VERSION }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+
+    - name: npm install, build, and test
+      working-directory: ${{ env.WORKING_DIRECTORY }}
+      env: 
+        CI: false
+      run: |
+        npm i --verbose
+        npm run test --if-present
+
+    - name: add process.json
+      run: |
+        echo '{ script: "serve", env: { PM2_SERVE_SPA: "true", PM2_SERVE_HOMEPAGE: "/index.html" } }' >> ./TM-frontend-react/team_master/build/process.json
+    
+    
