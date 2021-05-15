@@ -28,7 +28,7 @@ const IndexApp = () => {
 			renderChatSettingsTop={(creds, chat) => <ChatSettingsTop creds={creds} chat={chat}/>}
 			renderPhotosSettings={(chat) => {}}
 			renderOptionsSettings={(creds, chat) => {}}
-			renderPeopleSettings={(creds, chat) => <PeopleSettings creds={creds} chat={chat}/>}
+			// renderPeopleSettings={(creds, chat) => <PeopleSettings creds={creds} chat={chat}/>}
 		/>
 	);
 };
