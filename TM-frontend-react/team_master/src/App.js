@@ -25,11 +25,12 @@ import "./App.css";
 import JitsiComponent from "./components/VideoConferenceRoom/VideoConference";
 import VideoConferenceArea from "./components/VideoConferenceRoom";
 import CallEndsThankYou from "./components/VideoConferenceRoom/CallEndsRedirect";
-
+import Todo from './components/Todo/todo'
 class App extends Component {
   state = {
     currentUser: {},
   };
+  
   componentDidMount() {
     const currentUser = auth.getCurrentUser();
     this.setState({ currentUser: currentUser });
@@ -94,6 +95,10 @@ class App extends Component {
           </Switch>
         </main>
       </React.Fragment>
+
+      // <div className="App">
+      //   <Todo/>
+      // </div>
     );
   }
 }
