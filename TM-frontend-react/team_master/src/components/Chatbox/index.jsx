@@ -31,8 +31,8 @@ class IndexApp extends Component {
 			<ChatEngine
 				height='94vh'
 				projectID='5d514e59-2de9-4fa3-a915-764ea74ad722'
-				userName= {currentUser.email}
-				userSecret= {currentUser._id}
+				userName= {this.state.currentUser.email}
+				userSecret= {this.state.currentUser._id}
 				renderChatFeed={(chatAppProps) => <ChatFeed {...chatAppProps} />}
 				renderNewChatForm={(creds) => <NewChatForm {...creds}/>}
 				renderChatSettingsTop={(creds, chat) => <ChatSettingsTop creds={creds} chat={chat}/>}
