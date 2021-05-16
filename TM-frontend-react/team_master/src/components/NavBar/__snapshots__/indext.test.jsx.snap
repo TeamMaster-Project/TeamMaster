@@ -1,0 +1,97 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Matches Snapshot 1`] = `
+<nav
+  className="navbar navbar navbar-expand-lg navbar-dark bg-dark"
+>
+  <a
+    className="navbar-brand"
+    href="/"
+  >
+    TeamMaster
+  </a>
+  <button
+    aria-controls="responsive-navbar-nav"
+    aria-label="Toggle navigation"
+    className="navbar-toggler collapsed"
+    onClick={[Function]}
+    type="button"
+  >
+    <span
+      className="navbar-toggler-icon"
+    />
+  </button>
+  <div
+    aria-expanded={null}
+    className="navbar-collapse collapse"
+    id="responsive-navbar-nav"
+  >
+    <div
+      className="mr-auto navbar-nav"
+      onKeyDown={[Function]}
+    >
+      <a
+        aria-current={null}
+        className="nav-link"
+        href="/newproject"
+        onClick={[Function]}
+      >
+        New Project
+      </a>
+      <a
+        aria-current={null}
+        className="nav-link"
+        href="/myprojects"
+        onClick={[Function]}
+      >
+        My Projects
+      </a>
+      <a
+        aria-current={null}
+        className="nav-link"
+        href="/chatroom"
+        onClick={[Function]}
+      >
+        My Chat Rooms
+      </a>
+      <a
+        aria-current={null}
+        className="nav-link"
+        href="/videoroom"
+        onClick={[Function]}
+      >
+        My Conference Rooms
+      </a>
+      <a
+        aria-current={null}
+        className="nav-link"
+        href="/contact"
+        onClick={[Function]}
+      >
+        Contact Us
+      </a>
+    </div>
+    <div
+      className="navbar-nav"
+      onKeyDown={[Function]}
+    >
+      <a
+        aria-current={null}
+        className="nav-link"
+        href="/login"
+        onClick={[Function]}
+      >
+        Log In
+      </a>
+      <a
+        aria-current={null}
+        className="nav-link"
+        href="/register"
+        onClick={[Function]}
+      >
+        Register
+      </a>
+    </div>
+  </div>
+</nav>
+`;
