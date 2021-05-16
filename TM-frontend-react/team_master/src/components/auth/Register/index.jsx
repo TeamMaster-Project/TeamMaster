@@ -38,6 +38,11 @@ class Register extends Form {
   async componentDidMount() {
       if(this.props.data)
         this.setState({data: this.props.data})
+      
+      this.setState({isLoading: true});
+        setTimeout(()=>{
+            this.setState({isLoading: false});
+        },2000)
   }
 
   doSubmit = async () => {

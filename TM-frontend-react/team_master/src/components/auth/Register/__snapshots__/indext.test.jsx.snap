@@ -35,6 +35,20 @@ exports[`Matches Snapshot 1`] = `
               >
                 Enter your email and password
               </h6>
+              <h6>
+                Please wait...
+                <div
+                  className="container"
+                >
+                  <h2>
+                    <img
+                      height="100px"
+                      src="loader1.gif"
+                      width="100px"
+                    />
+                  </h2>
+                </div>
+              </h6>
               <div
                 className="register-form"
               >
