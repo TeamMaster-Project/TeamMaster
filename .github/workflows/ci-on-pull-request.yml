@@ -7,8 +7,6 @@ on:
   pull_request: 
     branches: [master]
 
-    
-
 env:
   WORKING_DIRECTORY: ./TM-frontend-react/team_master
   NODE_VERSION: '10.x'
