@@ -124,7 +124,6 @@ class ProjectForm extends Form {
 
       await this.addChatbox(res.data);
       toast("ChatRoom Successfully Updated");
-      this.setState({isLoading: true})
       this.props.history.push("/myprojects");
     }catch(error){
       console.log(error);
