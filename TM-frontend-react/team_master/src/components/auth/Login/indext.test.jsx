@@ -24,6 +24,8 @@ const LoginFormPropsWithInvalidUsername = {
 const LoginFormPropsWithInvalidPassword = {
     data: { username: "user@gmail.com", password: "InvalidPassword" },
     doSubmit: jest.fn(),
+    // fidp: 'google-choreo',
+    // setRowsPerPage: jest.fn(),
 };
 
 test('Matches Snapshot',()=>{
