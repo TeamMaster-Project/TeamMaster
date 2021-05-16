@@ -95,14 +95,12 @@ class LoginForm extends Form {
                                </form>
                               </div>
                                <h6 class="text-muted mb-4"> Don't you have a TeamMaster account ? &nbsp;
-                               <Router>
                                   <Link
                                   to="/register"
                                   className="mb-4"
                                 >
                                  <i>Create New Project</i>
                                 </Link>
-                              </Router>
                                </h6>
                         </div>
                     </div>

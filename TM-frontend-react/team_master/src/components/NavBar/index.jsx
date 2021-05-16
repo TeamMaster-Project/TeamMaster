@@ -6,7 +6,6 @@ import "./index.css";
 const NavBar = (props) => {
   //console.log(props.currentUser);
   return (
-    <Router>
     <ReactBootstrap.Navbar
       collapseOnSelect
       expand="lg"
@@ -23,11 +22,10 @@ const NavBar = (props) => {
           {/* <NavLink className="nav-link" to="/home">
             Home
           </NavLink> */}
-   
               <NavLink className="nav-link" to="/newproject">
                 New Project
               </NavLink>
-
+              
               <NavLink className="nav-link" to="/myprojects">
                 My Projects
               </NavLink>
@@ -82,7 +80,6 @@ const NavBar = (props) => {
         </ReactBootstrap.Nav>
       </ReactBootstrap.Navbar.Collapse>
     </ReactBootstrap.Navbar>
-    </Router>
   );
 };
 

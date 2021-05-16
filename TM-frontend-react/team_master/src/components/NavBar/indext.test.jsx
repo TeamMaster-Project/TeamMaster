@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link, MemoryRouter as Router } from 'react-router-dom';
 import {render, cleanup } from '@testing-library/react';
 import renderer from 'react-test-renderer';
 import NavBar from '.';
@@ -18,13 +19,13 @@ const NavBarProps = {
 };
 
 test('Matches Snapshot',()=>{
-    const tree = renderer.create(<NavBar/>).toJSON();
+    const tree = renderer.create(<Router><NavBar/></Router>).toJSON();
     expect(tree).toMatchSnapshot();
 })
 
 describe('Testing Navigation items based on the autherization', () => {
     it('NavBar items testing for a logged in user', async () => {
-        const { getByTestId, getByText } = render(<NavBar {...NavBarProps} />);
+        const { getByText } = render(<Router><NavBar {...NavBarProps} /></Router>);
 
         const NewProject = getByText("New Project");
         expect(NewProject).toBeInTheDocument();
@@ -49,7 +50,7 @@ describe('Testing Navigation items based on the autherization', () => {
     });  
 
     it('NavBar items testing for a logged out user', async () => {
-        const { getByTestId, getByText } = render(<NavBar/>);
+        const { getByTestId, getByText } = render(<Router><NavBar/></Router>);
 
         const NewProject = getByText("New Project");
         expect(NewProject).toBeInTheDocument();

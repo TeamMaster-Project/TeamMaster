@@ -101,14 +101,12 @@ class Register extends Form {
                                 </form>
                               </div>
                                <h6 class="text-muted mb-4"> Already have an account ? &nbsp;
-                               <Router>
                                   <Link
                                   to="/login"
                                   className="mb-4"
                                 >
                                  <i>Log in</i>
                                 </Link>
-                              </Router>
                                </h6>
                         </div>
                     </div>
