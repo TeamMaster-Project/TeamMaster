@@ -1,15 +1,10 @@
-# Docs for the Azure Web Apps Deploy action: https://go.microsoft.com/fwlink/?linkid=2134798
-# More GitHub Actions for Azure: https://go.microsoft.com/fwlink/?linkid=2135048
+name: Test CI
 
-name: test
-
-on: push
-   
+on: [push]
 
 jobs:
-  build-and-deploy:
-    name: Build and Deploy
+  run-github-actions:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-
+      - name: Chechkout / clone the files in the repo to VM
+        uses: actions/checkout@v2.3.4
