@@ -6,6 +6,7 @@ import auth from '../../services/authService';
 import NewChatForm from './NewChatForm';
 import ChatSettingsTop from './ChatSettingsTop';
 import PreLoader from '../PreLoader/PreLoader';
+import PeopleSettings from './PeopleSettings';
 
 class IndexApp extends Component {
 	state = {
@@ -27,21 +28,20 @@ class IndexApp extends Component {
 			return <PreLoader/>
 
 		return (
-			<div>
-				<ChatEngine
-					height='94vh'
-					projectID='5d514e59-2de9-4fa3-a915-764ea74ad722'
-					userName= {this.state.currentUser.email}
-					userSecret= {this.state.currentUser._id}
-					renderChatFeed={(chatAppProps) => <ChatFeed {...chatAppProps} />}
-					renderNewChatForm={(creds) => <NewChatForm {...creds}/>}
-					renderChatSettingsTop={(creds, chat) => <ChatSettingsTop creds={creds} chat={chat}/>}
-					renderPhotosSettings={(chat) => {}}
-					renderOptionsSettings={(creds, chat) => {}}
-				/>
-			</div>
+			<ChatEngine
+				height='94vh'
+				projectID='5d514e59-2de9-4fa3-a915-764ea74ad722'
+				userName= {this.state.currentUser.email}
+				userSecret= {this.state.currentUser._id}
+				renderChatFeed={(chatAppProps) => <ChatFeed {...chatAppProps} />}
+				renderNewChatForm={(creds) => <NewChatForm {...creds}/>}
+				renderChatSettingsTop={(creds, chat) => <ChatSettingsTop creds={creds} chat={chat}/>}
+				renderPhotosSettings={(chat) => {}}
+				renderOptionsSettings={(creds, chat) => {}}
+				// renderPeopleSettings={(creds, chat) => <PeopleSettings creds={creds} chat={chat}/>}
+			/>
 		);
-	}
-};
+	};
+}
 
 export default IndexApp;

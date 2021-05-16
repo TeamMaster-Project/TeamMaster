@@ -1,9 +1,13 @@
 import React from 'react'
+import { WechatOutlined } from '@ant-design/icons';
 
 function NewChatForm() {
     return (
-        <div className="text-center pt-1 pb-1">
-            <h3>Chat Rooms</h3>
+        <div>
+            <div className="new-chat-form">
+                <h3 className="chat-form-heading">Chat Rooms</h3>
+                <WechatOutlined className='chat-icon' />
+            </div>
         </div>
     )
 }

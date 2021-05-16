@@ -108,9 +108,9 @@ state = {
         <Container className="pt-4 pt-sm-5 pb-5 an_home_section_1" >
 
             <div className="shadow-box" ></div>
-            {window.innerWidth > 992 &&
+            {/* {window.innerWidth > 992 &&
                 <img className="an_home_section_1_flot_img" width="50" height="50" src={Images.admin_view} />
-            }
+            } */}
                 
             <Row >
                 <Col md={12} lg={6} className="pt-0 pt-lg-5">
@@ -123,9 +123,9 @@ state = {
                     </h1>
                 </Col>
                 <Col md={12} lg={6} className="pt-5 pt-lg-0 text-center pr-3 pr-md-0 an_home_section_1_mask" >
-                {window.innerWidth < 992 &&
+                {/* {window.innerWidth < 992 &&
                 <img className="an_home_section_1_flot_img" width="50" height="50" src={Images.admin_view} />
-            }
+                } */}
                     <UncontrolledCarousel controls={false} indicators={false} autoPlay={true} items={[
                         {
                             src: Images.carousel_1,
@@ -185,7 +185,7 @@ state = {
         </Container>
 
         {/* We stand together image */}
-        <Container className="pt-5 pb-5 an_home_covid_section"  >
+        {/* <Container className="pt-5 pb-5 an_home_covid_section"  >
             <Row className="justify-content-start" >
                 <Col md={12} ><h3 className="text-uppercase text-left an_home_covid_top_head" >We stand together against <span className="an-text-info" >COVID 19</span></h3></Col>
             </Row>
@@ -213,7 +213,7 @@ state = {
                     </p>
                 </Col>
             </Row>
-        </Container>
+        </Container> */}
 
         {/* Feature cards */}
         <Container className="">
