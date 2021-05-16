@@ -44,3 +44,19 @@
   text-align: center;
 }
 
+.story-board-con{
+  background-color: rgb(217, 161, 243);
+}
+
+.chat-room-con{
+  background-color: rgb(163, 250, 214);
+}
+
+.video-room-con{
+  background-color: rgb(244, 248, 183);
+}
+ 
+.projects-headings{
+  color: black;
+  font-weight: bold;
+}
