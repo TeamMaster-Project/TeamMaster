@@ -1,5 +1,4 @@
 import React from "react";
-import { BrowserRouter as Router } from "react-router-dom";
 import { Link, Redirect } from "react-router-dom";
 import Joi from "joi-browser"; //Joi for form validation library
 import Form from "../../Common/form";

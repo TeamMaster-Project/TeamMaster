@@ -6,8 +6,7 @@ import auth from "../../../services/authService";
 import "./index.css";
 import { addUsers } from "../../../services/chatboxService";
 import { toast } from "react-toastify";
-import PreLoader from "../../PreLoader/PreLoader";
-import { Link , BrowserRouter as Router } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Loader from "../../PreLoader/Loader";
 
 class Register extends Form {
