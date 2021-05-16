@@ -16,12 +16,14 @@ class MyProjects extends Component {
     myProjectsWithModeratorAccess: [],
     myProjectsWithMemberAccess: [],
 
-    isLoading: true
+    isLoading: false
   };
 
   async componentDidMount() {
+    this.setState({isLoading: true});
     const { data: projects } = await getProjects();
-    const currentUser = auth.getCurrentUser();
+    const currentUser = this.props.currentUser ? this.props.currentUser : auth.getCurrentUser();
+    console.log(currentUser)
     this.setState({ isLoading: false});
 
     var filteredProjects = [];

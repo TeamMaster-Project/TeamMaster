@@ -6,14 +6,16 @@ import auth from "../../../services/authService";
 import "./index.css";
 import { addUsers } from "../../../services/chatboxService";
 import { toast } from "react-toastify";
-import PreLoader from "../../PreLoader/PreLoader";
 import { Link } from "react-router-dom";
+import Loader from "../../PreLoader/Loader";
 
 class Register extends Form {
   state = {
     data: { username: "", password: "", name: "" },
     errors: {},
-    isLoading: false
+    isLoading: false,
+    isSuccess: false,
+    isFail: false,
   };
 
   schema = {
@@ -33,6 +35,11 @@ class Register extends Form {
       
   };
 
+  async componentDidMount() {
+      if(this.props.data)
+        this.setState({data: this.props.data})
+  }
+
   doSubmit = async () => {
     try {
       this.setState({isLoading: true})
@@ -43,43 +50,23 @@ class Register extends Form {
       //Redirecting to main home page to get current user logged in
       auth.loginWithJwt("token", response.headers["x-auth-token"]); //Store the token in localStorage when after creating a new user
       //window.location = "/"; //full Reload and redirecting to homepage
-      this.setState({isLoading: false})
+      this.setState({isLoading: false, isSuccess: true})
       this.props.history.push("/newproject"); 
       toast("User Registered Successfully");
     } catch (ex) {
-      this.setState({isLoading: false})
-      this.props.history.push("/newproject");
+      this.setState({isLoading: false, isFail: true})
       if (ex.response && ex.response.status === 400) {
         //Handle user already registered error
         const errors = { ...this.state.errors };
         errors.username = ex.response.data;
         this.setState({ errors });
+        toast.error("Registration fail");
       }
     }
   };
   render() {
-    
-    if(this.state.isLoading)
-      return <PreLoader/>
 
     return (
-      // <div className="register-form-container">
-      //   <div className="register-form-card">
-      //     <div className="register-form">
-      //       <h1>Register</h1>
-            // <form onSubmit={this.handleSubmit}>
-            //   {this.renderInputs("username", "Email", "text")}
-            //   {this.renderInputs("password", "Password", "password")}
-            //   {/* name label datatype */}
-            //   {this.renderInputs("name", "Name", "text")}
-            //   <div className="form-submit-button">
-            //     {this.renderButton("Register")}
-            //   </div>
-            // </form>
-      //     </div>
-      //   </div>
-      // </div>
-
       <div class="container-fluid">
           <div class="row no-gutter">
             {/* left Half */}
@@ -93,7 +80,14 @@ class Register extends Form {
                         <div class="col-lg-10 col-xl-7 mx-auto">
                             <h3 class="display-4">Get an account</h3>
                             <h6 class="text-muted mb-4">Enter your email and password</h6>
-
+                            {this.state.isLoading ? ( 
+                              <h6>Please wait...
+                                  <Loader/>
+                              </h6>
+                              ) : null 
+                            }
+                            { !this.state.isLoading && this.state.isSuccess ? <h6 style={{color: 'green'}}>Registration success</h6>: null }
+                            { !this.state.isLoading && this.state.isFail ? <h6 style={{color: 'red'}}>Registration fail</h6>: null }
                              <div className="register-form">
                                <form onSubmit={this.handleSubmit}>
                                   {this.renderInputs("username", "Email / Username", "text")}

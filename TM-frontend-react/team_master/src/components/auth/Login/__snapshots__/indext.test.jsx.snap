@@ -1,0 +1,138 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Matches Snapshot 1`] = `
+<div
+  class="container-fluid"
+>
+  <div
+    class="row no-gutter"
+  >
+    <div
+      class="col-md-6 d-none d-md-flex bg-image"
+    />
+    <div
+      class="col-md-6 bg-light"
+    >
+      <div
+        class="login d-flex align-items-center py-5"
+      >
+        <div
+          class="container"
+        >
+          <div
+            class="row"
+          >
+            <div
+              class="col-lg-10 col-xl-7 mx-auto"
+            >
+              <h3
+                class="display-4"
+              >
+                TeamMaster
+              </h3>
+              <h3
+                class="display-4 mb-5"
+              >
+                Log In
+              </h3>
+              <h6
+                class="text-muted mb-4"
+              >
+                Enter your email and password
+              </h6>
+              <h6>
+                Please wait...
+                <div
+                  className="container"
+                >
+                  <h2>
+                    <img
+                      height="100px"
+                      src="loader1.gif"
+                      width="100px"
+                    />
+                  </h2>
+                </div>
+              </h6>
+              <div
+                className="register-form"
+              >
+                <form
+                  onSubmit={[Function]}
+                >
+                  <div
+                    className="form-group"
+                  >
+                    <label
+                      htmlFor="username"
+                    >
+                      Email / Username
+                    </label>
+                    <input
+                      className="form-control"
+                      data-testid="username"
+                      id="username"
+                      name="username"
+                      onChange={[Function]}
+                      type="text"
+                      value=""
+                    />
+                  </div>
+                  <div
+                    className="form-group"
+                  >
+                    <label
+                      htmlFor="password"
+                    >
+                      Password
+                    </label>
+                    <input
+                      className="form-control"
+                      data-testid="password"
+                      id="password"
+                      name="password"
+                      onChange={[Function]}
+                      type="password"
+                      value=""
+                    />
+                  </div>
+                  <div
+                    className="form-submit-button"
+                  >
+                    <button
+                      className="btn btn-primary"
+                      data-testid="Login"
+                      disabled={
+                        Object {
+                          "password": "\\"Password\\" is not allowed to be empty",
+                          "username": "\\"Username\\" is not allowed to be empty",
+                        }
+                      }
+                    >
+                      Login
+                    </button>
+                  </div>
+                </form>
+              </div>
+              <h6
+                class="text-muted mb-4"
+              >
+                 Don't you have a TeamMaster account ?  
+                <a
+                  className="mb-4"
+                  href="/register"
+                  onClick={[Function]}
+                >
+                  <i>
+                    Create New Project
+                  </i>
+                </a>
+              </h6>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

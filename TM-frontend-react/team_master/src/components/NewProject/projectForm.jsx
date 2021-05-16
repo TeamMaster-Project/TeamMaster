@@ -192,7 +192,7 @@ class ProjectForm extends Form {
     return (
       <div className="newproject-container">
         <div className="shadow-box" ></div>
-        <div className="register-form-card">
+        <div className="register-form-card shadow">
           <div className="register-form shadow">
             <h1>Save Project</h1>
 
