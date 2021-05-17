@@ -382,6 +382,7 @@
 }
 .title--h3.has-subtitle {
   margin-bottom: 7px;
+  color: rgb(17, 16, 16)
 }
 
 .title--h3 {
@@ -2011,7 +2012,7 @@
 }
 @media (min-width: 1200px) {
   .an_home_covid_right_header{
-      margin-top: 50%;
+      margin-top: 40%;
       margin-left: 5%;
   }
   .an_home_covid_top_head{

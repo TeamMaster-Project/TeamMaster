@@ -45,7 +45,11 @@ class App extends Component {
             <Route path="/login" component={LoginForm} />
             <Route path="/logout" component={Logout} />
             <Route path="/notFound" component={NotFound} />
-            <Route path="/home" component={Home} />
+            <Route path="/home"
+              render={(props) => (
+                <Home {...props} currentUser={this.state.currentUser} />
+              )}
+            />
             <Route path="/contact" component={ContactUs} />
             <ProtectedRoute exact path="/newproject" component={NewProject} />
             <ProtectedRoute exact path="/myprojects" component={MyProjects} />
