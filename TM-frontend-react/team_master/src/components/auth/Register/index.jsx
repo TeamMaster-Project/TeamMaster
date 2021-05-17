@@ -8,6 +8,8 @@ import { addUsers } from "../../../services/chatboxService";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 import Loader from "../../PreLoader/Loader";
+import Logo from "../../../assets/images/Logo/TMLogo1.png"
+
 
 class Register extends Form {
   state = {
@@ -38,6 +40,11 @@ class Register extends Form {
   async componentDidMount() {
       if(this.props.data)
         this.setState({data: this.props.data})
+
+      this.setState({isLoading: true});
+        setTimeout(()=>{
+            this.setState({isLoading: false});
+        },2000)
   }
 
   doSubmit = async () => {
@@ -78,6 +85,7 @@ class Register extends Form {
                   <div class="container">
                     <div class="row">
                         <div class="col-lg-10 col-xl-7 mx-auto">
+                            <h3><img src={Logo} width="110px" height="100px"/></h3>
                             <h3 class="display-4">Get an account</h3>
                             <h6 class="text-muted mb-4">Enter your email and password</h6>
                             {this.state.isLoading ? ( 
