@@ -9,6 +9,7 @@ import Chips, { Chip } from "react-chips";
 import "./index.css";
 import { toast } from "react-toastify";
 import PreLoader from "../PreLoader/PreLoader";
+import { Link } from "react-router-dom";
 
 class ProjectForm extends Form {
   state = {
@@ -46,8 +47,9 @@ class ProjectForm extends Form {
   async componentDidMount() {
     //call GetMethods
     try {
+      this.setState({isLoading: true});
+    
       const currentUser = await auth.getCurrentUser();
-
       this.setState({ currentUser: currentUser.email }); //To the purpose of appending at the end to chips
 
       const { data: users } = await getUsers();
@@ -66,6 +68,7 @@ class ProjectForm extends Form {
       if (projectId === "new") {
         const dcopy = this.state.data;
         dcopy.createrEmail = currentUser.email;
+        this.setState({isLoading: false})
         return;
       }
 
@@ -78,7 +81,9 @@ class ProjectForm extends Form {
         chipsMembers: datacopy.member_userEmail,
         ExistingChatRoomMembers: datacopy.moderater_userEmail.concat(datacopy.member_userEmail)
       });
+      this.setState({isLoading: false})
     } catch (ex) {
+      this.setState({isLoading: false})
       if (ex.response && ex.response.status === 404)
         this.props.history.replace("/not-found");
     }
@@ -223,6 +228,19 @@ class ProjectForm extends Form {
                 </div>
                 <br />
                 {this.renderButton("Save")}
+                {(this.props.match.params.id == "new") && (
+                  <React.Fragment>
+                    <Link
+                      to={{
+                        pathname: `/newproject/`,
+                      }}
+                      className="btn btn-md btn-outline-primary m-2 shadow"
+                      style={{ marginBottom: 20 }}
+                    >
+                    Cancel
+                    </Link>
+                  </React.Fragment>
+                )}
               </form>
 
               <div>

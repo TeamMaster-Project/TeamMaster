@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PreLoader from '../PreLoader/PreLoader';
+import Logo from "../../assets/images/Logo/TMLogo1.png"
 import './index.css';
 
 class NewForm extends Component {
@@ -22,7 +23,8 @@ class NewForm extends Component {
 			<div className='container'>
 				<div className='shadow-box'></div>
 				<div className='pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center'>
-					<h1 className='display-4 my-5'>Welcome to TeamMaster</h1>
+					<h3><img src={Logo} width="110px" height="100px"/></h3>
+					<h1 className='display-4 mx-5'>Welcome to TeamMaster</h1>
 					<p className='lead'>
 						It is time to quickly build an effective team working environment
 						with TeamMaster tne one task management platform for all your
@@ -31,7 +33,7 @@ class NewForm extends Component {
 					</p>
 					<Link
 						to='/myprojects/new'
-						className='btn btn-lg btn-block btn-outline-primary my-5 shadow'
+						className='btn btn-lg btn-block btn-outline-primary my-2 shadow'
 						style={{ marginBottom: 20 }}
 					>
 						Create New Project
