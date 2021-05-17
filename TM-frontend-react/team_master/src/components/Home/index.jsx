@@ -8,12 +8,28 @@ import {
 } from "reactstrap"
 import "./index.css";
 import Images from "../../assets/images"
+import ChatRoomScreenshot from "../../assets/images/Screenshots/Capture1.PNG"
+import VideoRoomScreenshot from "../../assets/images/Screenshots/Capture5.jpg"
+import StoryboarScreenshot from "../../assets/images/Screenshots/Capture3.PNG"
+import Logo from "../../assets/images/Logo/TMLogo1.png"
 import { Link } from "react-router-dom"
+import PreLoader from "../PreLoader/PreLoader";
 
 // Price List
-const priceList = ["Included bookings", "Included SMS", "Included emails", "Customer info", "Covid customer form", ""]
+const priceList = [" Number of Projects", "Number of members per project", "Video call duration", "Storyboard service", "Chat room service", "Video room service", ""]
 
 class Home extends Component {
+
+state = {
+        isLoading: false
+  };
+
+    async componentDidMount() {
+        this.setState({isLoading: true});
+        setTimeout(()=>{
+            this.setState({isLoading: false});
+        },5000)
+    };
 
   createBusinessCard(image = null, title = "", decription = "") {
       return (
@@ -28,21 +44,21 @@ class Home extends Component {
       )
   }
 
-  createFeatureCard(image = "", title = "", decription) {
+  createFeatureCard(image, title, decription) {
       return (
           <li>
               <picture>
                   <img width="100" height="100" src={image} alt="Bookings icon" />
               </picture>
               <div className="features__content">
-                  <h3 className="title title--h3 has-subtitle">{title}</h3>
+                  <h3 className="feature-title">{title}</h3>
                   <p className="p p--secondary p--small">{decription} </p>
               </div>
           </li>
       )
   }
 
-  createPriceCard(subtitle, title, price, booking, sms, emails) {
+  createPriceCard(subtitle, title, price, projects, members, videocall) {
       return (
           <div class="pricing-plans__item plan" title={title}>
               <div class="plan__header">
@@ -53,31 +69,37 @@ class Home extends Component {
               <ul class="plan__list">
                   <li class="plan__list-item">
                       <div class="plan__list-text info">
-                          Included bookings
+                          Number of Projects
                                               </div>
-                      <div class="plan__list-value"><span class="plan__list-value--month">{booking}</span><span class="divider">/</span><span class="plan__list-value--text">month</span></div>
+                      <div class="plan__list-value"><span class="plan__list-value--month">{projects}</span><span class="divider">/</span><span class="plan__list-value--text">month</span></div>
                   </li>
                   <li class="plan__list-item">
                       <div class="plan__list-text info">
-                          Included SMS
+                          Number of members per project
                                               </div>
-                      <div class="plan__list-value"><span class="plan__list-value--month">{sms}</span><span class="divider">/</span><span class="plan__list-value--text">month</span></div>
+                      <div class="plan__list-value"><span class="plan__list-value--month">{members}</span><span class="divider">/</span><span class="plan__list-value--text">month</span></div>
                   </li>
                   <li class="plan__list-item">
                       <div class="plan__list-text info">
-                          Included emails
+                          Video call duration
                                               </div>
-                      <div class="plan__list-value"><span class="plan__list-value--month">{emails}</span><span class="divider">/</span><span class="plan__list-value--text">month</span></div>
+                      <div class="plan__list-value"><span class="plan__list-value--month">{videocall}</span><span class="divider">/</span><span class="plan__list-value--text">month</span></div>
                   </li>
                   <li class="plan__list-item included">
                       <div class="plan__list-text info">
-                          Customer info
+                          Storyboard service
                                               </div>
                       <div class="plan__list-value"><i class="fal fa-check check-icon"></i></div>
                   </li>
                   <li class="plan__list-item included">
                       <div class="plan__list-text info">
-                          Covid customer form
+                          Chat room service
+                                              </div>
+                      <div class="plan__list-value"><i class="fal fa-check check-icon"></i></div>
+                  </li>
+                  <li class="plan__list-item included">
+                      <div class="plan__list-text info">
+                          Video room service
                                               </div>
                       <div class="plan__list-value"><i class="fal fa-check check-icon"></i></div>
                   </li>
@@ -88,25 +110,36 @@ class Home extends Component {
   }
 
   render() {
+    if (this.state.isLoading)
+        return <PreLoader/>
+
     return (
       <main className="an_home" >
         <Container className="pt-4 pt-sm-5 pb-5 an_home_section_1" >
-            <div className="shadow-box" ></div>
-            {window.innerWidth > 992 &&
-                <img className="an_home_section_1_flot_img" width="50" height="50" src={Images.admin_view} />
-            }
+
+            <div className="shadow-box" ></div>    
             <Row >
-                <Col md={12} lg={6} className="pt-0 pt-lg-5">
-                    <h1 className="display-5 font-weight-normal mb-1" >One task management </h1>
-                    <h1 className="display-5 font-weight-normal" >platform for<span className="an-text-info" > all your project planning needs</span></h1>
+                <Col md={12} lg={6} className="pt-0 pt-lg-1">
+                    <h1><img className="" width="50%" src={Logo} /></h1>
+                    <h1 className="" >One task management platform</h1>
+                    <h1 className="display-5 font-weight-normal" >for<span className="an-text-info" > all your project planning needs</span></h1>
                     <p className="lead font-weight-normal text-muted mb-4" >Simply define your services and providers, display their availability, and you will have clients both old and new making bookings 24/7.</p>
-                    <Button color="primary" className="rounded-pill px-5 py-3" size="lg" ><a href={`https://sss/signup`} style={{ textDecoration: "none", color: "#fff" }}>Get an Account</a></Button>
-                    <Button color="primary" className="rounded-pill px-5 py-3" size="lg" ><Link style={{ textDecoration: "none", color: "#fff" }}  to="/login" >Log in</Link></Button>
+                    
+                    {!this.props.currentUser && (
+                            <h1>
+                                <Button color="primary" className="rounded-pill px-5 py-3 m-3" size="lg" ><Link style={{ textDecoration: "none", color: "#fff" }}  to="/register" >Get an Account</Link></Button>
+                                <Button color="primary" className="rounded-pill px-5 py-3 m-3" size="lg" ><Link style={{ textDecoration: "none", color: "#fff" }}  to="/login" >Log in</Link></Button>
+                            </h1>
+                        )
+                    }
+                    {this.props.currentUser && (
+                            <h1>
+                                <Button color="primary" className="rounded-pill px-5 py-3 m-3" size="lg" ><Link style={{ textDecoration: "none", color: "#fff" }}  to="/newproject" >Get Started</Link></Button>
+                            </h1>
+                        )
+                    }
                 </Col>
                 <Col md={12} lg={6} className="pt-5 pt-lg-0 text-center pr-3 pr-md-0 an_home_section_1_mask" >
-                {window.innerWidth < 992 &&
-                <img className="an_home_section_1_flot_img" width="50" height="50" src={Images.admin_view} />
-            }
                     <UncontrolledCarousel controls={false} indicators={false} autoPlay={true} items={[
                         {
                             src: Images.carousel_1,
@@ -156,60 +189,71 @@ class Home extends Component {
         {/* Business cards */}
         <Container className="pt-5 pb-5">
             <Row className="justify-content-center" >
-                <Col md={5} ><h3 className="text-uppercase text-center" >managing made simple for your business</h3></Col>
+                <Col md={5} ><h3 className="text-uppercase text-center" >managing <span className="an-text-info" >made simple </span>for your business</h3></Col>
             </Row>
             <Row className="mt-3 justify-content-center" >
-                <Col xs={12} sm={12} md={6} lg={4} className="pb-5" >{this.createBusinessCard(Images.pet_grooming, "Project planning", "Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. ")}</Col>
-                <Col xs={12} sm={12} md={6} lg={4} className="pb-5" >{this.createBusinessCard(Images.barber_salons, "Managing storyboards", "Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. ")}</Col>
-                <Col xs={12} sm={12} md={6} lg={4} className="pb-5" >{this.createBusinessCard(Images.physiotherapy, "Team communication", "Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. ")}</Col>
+                <Col xs={12} sm={12} md={6} lg={4} className="pb-5" >{this.createBusinessCard(Images.Project_Management, "Project planning", "Create one project and add your team members into it under different access control tiers and manage all your team needs in one go.")}</Col>
+                <Col xs={12} sm={12} md={6} lg={4} className="pb-5" >{this.createBusinessCard(Images.scrumboard, "Managing storyboards", "Your team can manage story boards inside each and every project separately.")}</Col>
+                <Col xs={12} sm={12} md={6} lg={4} className="pb-5" >{this.createBusinessCard(Images.videocall, "Team communication", "Once you create a project, a separate chat room and a separate video conferencing room will be created automatically which will be 24/7 live")}</Col>
             </Row>
         </Container>
 
-        {/* We stand together image */}
+        {/* glimpse */}
         <Container className="pt-5 pb-5 an_home_covid_section"  >
             <Row className="justify-content-start" >
-                <Col md={12} ><h3 className="text-uppercase text-left an_home_covid_top_head" >We stand together against <span className="an-text-info" >COVID 19</span></h3></Col>
+                <Col md={12} ><h3 className="text-uppercase text-left an_home_covid_top_head" >  JOIN TEAM MASTER AND ENJOY THESE AMAZING SERVICES</h3><h4>IN ONE SINGLE PLATFORM </h4></Col>
             </Row>
+            
             <Row className="mt-3 " >
                 <Col sm={12} md={7} lg={8} >
-                    <div className="d-flex align-items-center" >
-                        <img className="hand_img" src={Images.phone_with_hand} />
-                        <img width={100} className="qr_img" src={Images.qr} />
-                        <p className="qr_text font-weight-bold" >
+                    <h5 style={{"text-align": "left"}}>Storyboards</h5>
+                    <div className="d-flex align-items-center mt-5" >
+                        <img className="hand_img shadow" width={120} src={StoryboarScreenshot} />
+                        {/* <img width={100} className="qr_img" src={StoryboarScreenshot} /> */}
+                        {/* <p className="qr_text font-weight-bold" >
                             Simple,<br />
                             Scan the code<br />
                             & Let customers<br />
                             send their details<br />
-                        </p>
+                        </p> */}
                     </div>
                 </Col>
                 <Col sm={12} md={5} lg={4} >
-                    <p style={{ lineHeight: "50px" }} className="h1 mb-0 text-left an_home_covid_right_header" >
-                        IT'S<br />
-                    TOUCH <span className="an-text-info" >FREE</span><br />
-                    HAZZLE <span className="an-text-info" >FREE</span><br />
+                    <p style={{ lineHeight: "50px" }} className="h1 mb-0 text-left an_home_covid_right_header mb-3" >
+                        IT<br />
+                    SAVES <span className="an-text-info" >TIME</span><br />
+                    SAVES <span className="an-text-info" >MONEY</span><br />
                     &
-                    COMPLETELTLY <span className="an-text-info" >FREE</span><br />
-                        <span className="an-text-info" >FREE TO YOU </span>
+                    COMPLETELTLY <span className="an-text-info" >ALL IN ONE</span><br />
+                        <span className="an-text-info" >FOR YOU </span>
                     </p>
+                </Col>
+            </Row>
+            <h5 style={{"text-align": "left"}}>Chat Rooms / Video Rooms</h5>
+            <Row className="mt-3" >
+                <Col sm={12} md={6} lg={6} >
+                    <img className="hand_img shadow-lg" width={100} src={ChatRoomScreenshot} />
+                </Col>
+                <Col sm={12} md={6} lg={6} >
+                    <img className="hand_img shadow-lg" width={100} src={VideoRoomScreenshot} />
                 </Col>
             </Row>
         </Container>
 
         {/* Feature cards */}
-        <Container className="">
+        <Container className="mt-5">
             <Row className="justify-content-center mb-md-5" >
                 <Col md={5} ><h3 className="text-uppercase text-center" >Our <span className="an-text-info" >Features</span></h3></Col>
             </Row>
             <Row className="mt-3 justify-content-center" >
                 <Col xs={12}>
                     <ul className="features__list features--list-main">
-                        {this.createFeatureCard(Images.feature_1, "Accept online bookings", "Your own mobile-optimised booking web")}
-                        {this.createFeatureCard(Images.feature_2, "Notifications via SMS/Email", "Reminders to staff and clients whenever appointments are booked, cancelled or rescheduled. With push notifications on your mobile for new booking information via the admin app.")}
-                        {this.createFeatureCard(Images.feature_3, "Up to 10 staff logins, Reports, Leave calendar", "Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. ")}
-                        {this.createFeatureCard(Images.feature_4, "Live HAT and Messaging", "Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. ")}
-                        {this.createFeatureCard(Images.feature_5, "Integrate to your existing wbesite or let us build you a new site", "Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. ")}
-                        {this.createFeatureCard(Images.feature_6, "Multi channel", "Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. ")}
+                        {this.createFeatureCard(Images.feature_1, "Project planning", "Manage your day to day activities")}
+                        {this.createFeatureCard(Images.feature_2, "Chat with your team", "A separate group chat room / chat channel will be created for you once you created your project with your friends")}
+                        {this.createFeatureCard(Images.feature_3, "You are safe with TeamMaster", "We do not disclose your personal data chats or video calls and they are end to end encrypted with Jitsi Video Engine and Chatengine.io")}
+                        {this.createFeatureCard(Images.feature_4, "Live Messaging / Conferencing", "Chat rooms and video rooms are 24/7 live. Join the team call / chat at any time")}
+                        {this.createFeatureCard(Images.feature_5, "Integrate to your GitHub/BitBucket version controller", "This feature is under construction")}
+                        {this.createFeatureCard(Images.feature_6, "Multi channel", "Manage multiple projects as an admin, as a moderator or as a member.")}
                     </ul>
                 </Col>
             </Row>
@@ -218,7 +262,7 @@ class Home extends Component {
         {/* Price card */}
         <Container className="py-5">
             <Row className="justify-content-center mb-md-5" >
-                <Col md={5} ><h3 className="text-uppercase text-center" >Our Pricing</h3></Col>
+                <Col md={5} ><h3 className="text-uppercase text-center" >Our <span className="an-text-info" >Pricing</span></h3></Col>
             </Row>
             <Row className="mt-3 justify-content-center" >
                 <Col xs={12}>
@@ -232,9 +276,9 @@ class Home extends Component {
                                 })}
                             </ul>
                         </div>
-                        {this.createPriceCard("", "Basic", "$12.90", "50", "100", "Unlimited")}
-                        {this.createPriceCard("Most popular", "Standard", "$29.90", "90", "300", "Unlimited")}
-                        {this.createPriceCard("", "Basic", "$59.90", "500", "500", "Unlimited")}
+                        {this.createPriceCard("", "Free", "$00.00", "2", "10", "Unlimited")}
+                        {this.createPriceCard("", "Standard", "$29.90", "20", "50", "Unlimited")}
+                        {this.createPriceCard("", "Premium", "$59.90", "Unlimited", "Unlimited", "Unlimited")}
                     </div>
                 </Col>
             </Row>
@@ -259,9 +303,9 @@ class Home extends Component {
                             <div class="col-12 col-md-5">
                                 <h5>CONTACT US</h5>
                                 <ul class="list-unstyled text-small">
-                                    <li><a class="text-muted" href="#">3rd floor, 292 High Level Rd, Nugegoda 10250, Sri Lanka</a></li>
-                                    <li><a class="text-muted" href="mailto:info@hatchyard.io"> info@hatchyard.io</a></li>
-                                    <li><a class="text-muted" href="tel:+94 0777 071 934"> +94 0777 071 934</a></li>
+                                    <li><a class="text-muted" href="#">University of Kelaniya, Dalugama, Sri Lanka</a></li>
+                                    <li><a class="text-muted" href="mailto:info@hatchyard.io">teammasterlk@gmail.com</a></li>
+                                    <li><a class="text-muted" href="tel:+94 0777 071 934"> +94 76 841 6637</a></li>
                                 </ul>
                             </div>
                         </div>

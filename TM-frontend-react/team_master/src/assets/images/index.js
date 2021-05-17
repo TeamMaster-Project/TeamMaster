@@ -6,9 +6,12 @@ const Images = {
 
     // home page
     home_backgroud_1: require('./homePage/backgroud_1.jpg'),
-    physiotherapy: require('./homePage/business/physiotherapy.jpg'),
-    pet_grooming: require('./homePage/business/pet-grooming.jpg'),
-    barber_salons: require('./homePage/business/barber-salons.jpg'),
+    communication: require('./homePage/business/communication.jpg'),
+    Project_Management: require('./homePage/business/Project-Management.jpeg'),
+    story_boards: require('./homePage/business/story-boards.jpg'),
+    scrumboard: require('./homePage/business/scrumboard.jpg'),
+    videocall: require('./homePage/business/videocall.jpg'),
+    videocall2: require('./homePage/business/videocall2.jpg'),
 
     feature_1: require('./homePage/feature/feature-icon-1.gif'),
     feature_2: require('./homePage/feature/feature-icon-2.gif'),
@@ -24,15 +27,16 @@ const Images = {
     carousel_2: require('./homePage/carousel/carousel-2.jpg'),
     carousel_3: require('./homePage/carousel/carousel-3.jpg'),
     carousel_4: require('./homePage/carousel/carousel-4.jpg'),
-    carousel_5: require('./homePage/carousel/carousel-5.jpg'),
+    carousel_5: require('./homePage/carousel/carousel-5.jpeg'),
     carousel_6: require('./homePage/carousel/carousel-6.jpg'),
-
+    
     qr: require('./homePage/qr.png'),
     admin_view: require('./homePage/admin_view.png'),
     more: require('./more.png'),
     menu: require('./menu.png'),
-
+    
     success:require('./success.gif')
+        
 };
 
 export default Images;

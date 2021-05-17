@@ -5,9 +5,7 @@
   height: 59vh;
 }
 
-.register-form-container {
-  background-color: #1029b8;
-
+.center-container {
   min-height: 94.3vh;
   display: flex;
   flex-direction: column;

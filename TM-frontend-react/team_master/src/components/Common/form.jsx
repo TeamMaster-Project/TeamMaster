@@ -74,6 +74,7 @@ class Form extends Component {
     const { data, errors } = this.state; //Destructuring
     return (
       <Input
+        data-testid={name}
         type={type}
         name={name}
         value={data[name]}
@@ -85,7 +86,7 @@ class Form extends Component {
   }
   renderButton(label) {
     return (
-      <button disabled={this.validate()} className="btn btn-primary">
+      <button data-testid={label} disabled={this.validate()} className="btn btn-primary">
         {label}
       </button>
     );

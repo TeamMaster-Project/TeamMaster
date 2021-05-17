@@ -1,5 +1,5 @@
 .newproject-container {
-  background-color: rgb(7, 68, 124);
+  /* background-color: rgb(7, 68, 124); */
   /* background-image: url("/images/bg.jpeg"); */
   background-repeat: no-repeat;
   background-size: 100vw 100vh;
@@ -9,11 +9,11 @@
   align-items: center;
   justify-content: center;
   font-size: calc(2px + 2vmin);
-  color: rgb(255, 255, 255);
+  /* color: rgb(255, 255, 255); */
 }
 
 .register-form-container {
-  background-color: #1029b8;
+  /* background-color: #1029b8; */
 
   min-height: 94.3vh;
   display: flex;
@@ -44,3 +44,19 @@
   text-align: center;
 }
 
+.story-board-con{
+  background-color: rgb(217, 161, 243);
+}
+
+.chat-room-con{
+  background-color: rgb(163, 250, 214);
+}
+
+.video-room-con{
+  background-color: rgb(244, 248, 183);
+}
+ 
+.projects-headings{
+  color: black;
+  font-weight: bold;
+}

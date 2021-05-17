@@ -17,18 +17,19 @@ import Logout from "./components/auth/logout";
 import BasketForm from "./components/MyProjects/project_page/basketForm";
 import TaskForm from "./components/MyProjects/project_page/taskForm";
 import auth from "./services/authService";
-import Chatbox from './components/Chatbox/index';
+import Chatbox from "./components/Chatbox/index";
+import ContactUs from "./components/ContactUs/index";
 
 // import logo from "./logo.svg";
 import "./App.css";
 import JitsiComponent from "./components/VideoConferenceRoom/VideoConference";
 import VideoConferenceArea from "./components/VideoConferenceRoom";
 import CallEndsThankYou from "./components/VideoConferenceRoom/CallEndsRedirect";
-
 class App extends Component {
   state = {
     currentUser: {},
   };
+  
   componentDidMount() {
     const currentUser = auth.getCurrentUser();
     this.setState({ currentUser: currentUser });
@@ -44,13 +45,30 @@ class App extends Component {
             <Route path="/login" component={LoginForm} />
             <Route path="/logout" component={Logout} />
             <Route path="/notFound" component={NotFound} />
-            <Route path="/home" component={Home} />
+            <Route path="/home"
+              render={(props) => (
+                <Home {...props} currentUser={this.state.currentUser} />
+              )}
+            />
+            <Route path="/contact" component={ContactUs} />
             <ProtectedRoute exact path="/newproject" component={NewProject} />
             <ProtectedRoute exact path="/myprojects" component={MyProjects} />
             <ProtectedRoute exact path="/chatroom" component={Chatbox} />
-            <ProtectedRoute exact path="/videoroom" component={VideoConferenceArea} />
-            <ProtectedRoute exact path="/videoroom/:projectId/:projectName" component={JitsiComponent} />
-            <ProtectedRoute exact path="/thank-you" component={CallEndsThankYou} />
+            <ProtectedRoute
+              exact
+              path="/videoroom"
+              component={VideoConferenceArea}
+            />
+            <ProtectedRoute
+              exact
+              path="/videoroom/:projectId/:projectName"
+              component={JitsiComponent}
+            />
+            <ProtectedRoute
+              exact
+              path="/thank-you"
+              component={CallEndsThankYou}
+            />
 
             <ProtectedRoute
               exact
