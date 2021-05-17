@@ -25,6 +25,13 @@ exports[`Matches Snapshot 1`] = `
             <div
               class="col-lg-10 col-xl-7 mx-auto"
             >
+              <h3>
+                <img
+                  height="100px"
+                  src="TMLogo1.png"
+                  width="110px"
+                />
+              </h3>
               <h3
                 class="display-4"
               >
@@ -34,6 +41,20 @@ exports[`Matches Snapshot 1`] = `
                 class="text-muted mb-4"
               >
                 Enter your email and password
+              </h6>
+              <h6>
+                Please wait...
+                <div
+                  className="container"
+                >
+                  <h2>
+                    <img
+                      height="100px"
+                      src="loader1.gif"
+                      width="100px"
+                    />
+                  </h2>
+                </div>
               </h6>
               <div
                 className="register-form"

@@ -5,7 +5,9 @@ name: Continuos integration and continuous testing before Pull Request
 
 on:
   pull_request: 
-    branches: [master, test-deploy, production-deploy]
+    branches: [master]
+
+    
 
 env:
   WORKING_DIRECTORY: ./TM-frontend-react/team_master
