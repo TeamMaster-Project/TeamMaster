@@ -23,7 +23,7 @@ class JitsiComponent extends Component {
         const options = {
             roomName: this.state.projectName,
             width: '100%',
-            height: 910,
+            height: 800,
             configOverwrite: { prejoinPageEnabled: false },
             interfaceConfigOverwrite: {
                 // overwrite interface properties
