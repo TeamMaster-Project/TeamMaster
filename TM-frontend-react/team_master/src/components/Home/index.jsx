@@ -44,14 +44,14 @@ state = {
       )
   }
 
-  createFeatureCard(image = "", title = "", decription) {
+  createFeatureCard(image, title, decription) {
       return (
           <li>
               <picture>
                   <img width="100" height="100" src={image} alt="Bookings icon" />
               </picture>
               <div className="features__content">
-                  <h3 className="title title--h3 has-subtitle">{title}</h3>
+                  <h3 className="feature-title">{title}</h3>
                   <p className="p p--secondary p--small">{decription} </p>
               </div>
           </li>
@@ -117,11 +117,7 @@ state = {
       <main className="an_home" >
         <Container className="pt-4 pt-sm-5 pb-5 an_home_section_1" >
 
-            <div className="shadow-box" ></div>
-            {/* {window.innerWidth > 992 &&
-                <img className="an_home_section_1_flot_img" width="50" height="50" src={Images.admin_view} />
-            } */}
-                
+            <div className="shadow-box" ></div>    
             <Row >
                 <Col md={12} lg={6} className="pt-0 pt-lg-1">
                     <h1><img className="" width="50%" src={Logo} /></h1>
@@ -144,9 +140,6 @@ state = {
                     }
                 </Col>
                 <Col md={12} lg={6} className="pt-5 pt-lg-0 text-center pr-3 pr-md-0 an_home_section_1_mask" >
-                {/* {window.innerWidth < 992 &&
-                <img className="an_home_section_1_flot_img" width="50" height="50" src={Images.admin_view} />
-                } */}
                     <UncontrolledCarousel controls={false} indicators={false} autoPlay={true} items={[
                         {
                             src: Images.carousel_1,
@@ -196,7 +189,7 @@ state = {
         {/* Business cards */}
         <Container className="pt-5 pb-5">
             <Row className="justify-content-center" >
-                <Col md={5} ><h3 className="text-uppercase text-center" >managing made simple for your business</h3></Col>
+                <Col md={5} ><h3 className="text-uppercase text-center" >managing <span className="an-text-info" >made simple </span>for your business</h3></Col>
             </Row>
             <Row className="mt-3 justify-content-center" >
                 <Col xs={12} sm={12} md={6} lg={4} className="pb-5" >{this.createBusinessCard(Images.Project_Management, "Project planning", "Create one project and add your team members into it under different access control tiers and manage all your team needs in one go.")}</Col>
@@ -269,7 +262,7 @@ state = {
         {/* Price card */}
         <Container className="py-5">
             <Row className="justify-content-center mb-md-5" >
-                <Col md={5} ><h3 className="text-uppercase text-center" >Our Pricing</h3></Col>
+                <Col md={5} ><h3 className="text-uppercase text-center" >Our <span className="an-text-info" >Pricing</span></h3></Col>
             </Row>
             <Row className="mt-3 justify-content-center" >
                 <Col xs={12}>
