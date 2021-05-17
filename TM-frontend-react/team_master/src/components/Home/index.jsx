@@ -40,14 +40,14 @@ state = {
       )
   }
 
-  createFeatureCard(image = "", title = "", decription) {
+  createFeatureCard(image, title, decription) {
       return (
           <li>
               <picture>
                   <img width="100" height="100" src={image} alt="Bookings icon" />
               </picture>
               <div className="features__content">
-                  <h3 className="title title--h3 has-subtitle">{title}</h3>
+                  <h3 className="feature-title">{title}</h3>
                   <p className="p p--secondary p--small">{decription} </p>
               </div>
           </li>
@@ -107,15 +107,11 @@ state = {
       <main className="an_home" >
         <Container className="pt-4 pt-sm-5 pb-5 an_home_section_1" >
 
-            <div className="shadow-box" ></div>
-            {/* {window.innerWidth > 992 &&
-                <img className="an_home_section_1_flot_img" width="50" height="50" src={Images.admin_view} />
-            } */}
-                
+            <div className="shadow-box" ></div>    
             <Row >
                 <Col md={12} lg={6} className="pt-0 pt-lg-5">
-                    <h1 className="" >One task management platform</h1>
-                    <h1 className="display-5 font-weight-normal" >for<span className="an-text-info" > all your project planning needs</span></h1>
+                    <h1 className="" >One platform</h1>
+                    <h1 className="display-5 font-weight-normal" >for<span className="an-text-info" > all your project managing </span>needs</h1>
                     <p className="lead font-weight-normal text-muted mb-4" >Simply define your services and providers, display their availability, and you will have clients both old and new making bookings 24/7.</p>
                     <h1>
                     <Button color="primary" className="rounded-pill px-5 py-3 m-3" size="lg" ><a href={`https://sss/signup`} style={{ textDecoration: "none", color: "#fff" }}>Get an Account</a></Button>
@@ -123,9 +119,6 @@ state = {
                     </h1>
                 </Col>
                 <Col md={12} lg={6} className="pt-5 pt-lg-0 text-center pr-3 pr-md-0 an_home_section_1_mask" >
-                {/* {window.innerWidth < 992 &&
-                <img className="an_home_section_1_flot_img" width="50" height="50" src={Images.admin_view} />
-                } */}
                     <UncontrolledCarousel controls={false} indicators={false} autoPlay={true} items={[
                         {
                             src: Images.carousel_1,
@@ -175,7 +168,7 @@ state = {
         {/* Business cards */}
         <Container className="pt-5 pb-5">
             <Row className="justify-content-center" >
-                <Col md={5} ><h3 className="text-uppercase text-center" >managing made simple for your business</h3></Col>
+                <Col md={5} ><h3 className="text-uppercase text-center" >managing <span className="an-text-info" >made simple </span>for your business</h3></Col>
             </Row>
             <Row className="mt-3 justify-content-center" >
                 <Col xs={12} sm={12} md={6} lg={4} className="pb-5" >{this.createBusinessCard(Images.pet_grooming, "Project planning", "Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. ")}</Col>
@@ -184,37 +177,6 @@ state = {
             </Row>
         </Container>
 
-        {/* We stand together image */}
-        {/* <Container className="pt-5 pb-5 an_home_covid_section"  >
-            <Row className="justify-content-start" >
-                <Col md={12} ><h3 className="text-uppercase text-left an_home_covid_top_head" >We stand together against <span className="an-text-info" >COVID 19</span></h3></Col>
-            </Row>
-            <Row className="mt-3 " >
-                <Col sm={12} md={7} lg={8} >
-                    <div className="d-flex align-items-center" >
-                        <img className="hand_img" src={Images.phone_with_hand} />
-                        <img width={100} className="qr_img" src={Images.qr} />
-                        <p className="qr_text font-weight-bold" >
-                            Simple,<br />
-                            Scan the code<br />
-                            & Let customers<br />
-                            send their details<br />
-                        </p>
-                    </div>
-                </Col>
-                <Col sm={12} md={5} lg={4} >
-                    <p style={{ lineHeight: "50px" }} className="h1 mb-0 text-left an_home_covid_right_header" >
-                        IT'S<br />
-                    TOUCH <span className="an-text-info" >FREE</span><br />
-                    HAZZLE <span className="an-text-info" >FREE</span><br />
-                    &
-                    COMPLETELTLY <span className="an-text-info" >FREE</span><br />
-                        <span className="an-text-info" >FREE TO YOU </span>
-                    </p>
-                </Col>
-            </Row>
-        </Container> */}
-
         {/* Feature cards */}
         <Container className="">
             <Row className="justify-content-center mb-md-5" >
@@ -222,14 +184,14 @@ state = {
             </Row>
             <Row className="mt-3 justify-content-center" >
                 <Col xs={12}>
-                    <ul className="features__list features--list-main">
-                        {this.createFeatureCard(Images.feature_1, "Accept online bookings", "Your own mobile-optimised booking web")}
-                        {this.createFeatureCard(Images.feature_2, "Notifications via SMS/Email", "Reminders to staff and clients whenever appointments are booked, cancelled or rescheduled. With push notifications on your mobile for new booking information via the admin app.")}
-                        {this.createFeatureCard(Images.feature_3, "Up to 10 staff logins, Reports, Leave calendar", "Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. ")}
-                        {this.createFeatureCard(Images.feature_4, "Live HAT and Messaging", "Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. ")}
-                        {this.createFeatureCard(Images.feature_5, "Integrate to your existing wbesite or let us build you a new site", "Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. ")}
-                        {this.createFeatureCard(Images.feature_6, "Multi channel", "Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. ")}
-                    </ul>
+                <ul className="features__list features--list-main">
+                    {this.createFeatureCard(Images.feature_1, "Accept online bookings", "Your own mobile-optimised booking web")}
+                    {this.createFeatureCard(Images.feature_2, "Notifications via SMS/Email", "Reminders to staff and clients whenever appointments are booked, cancelled or rescheduled. With push notifications on your mobile for new booking information via the admin app.")}
+                    {this.createFeatureCard(Images.feature_3, "Up to 10 staff logins, Reports, Leave calendar", "Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. ")}
+                    {this.createFeatureCard(Images.feature_4, "Live HAT and Messaging", "Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. ")}
+                    {this.createFeatureCard(Images.feature_5, "Integrate to your existing wbesite or let us build you a new site", "Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. ")}
+                    {this.createFeatureCard(Images.feature_6, "Multi channel", "Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. ")}
+                </ul>
                 </Col>
             </Row>
         </Container>
@@ -237,7 +199,7 @@ state = {
         {/* Price card */}
         <Container className="py-5">
             <Row className="justify-content-center mb-md-5" >
-                <Col md={5} ><h3 className="text-uppercase text-center" >Our Pricing</h3></Col>
+                <Col md={5} ><h3 className="text-uppercase text-center" >Our <span className="an-text-info" >Pricing</span></h3></Col>
             </Row>
             <Row className="mt-3 justify-content-center" >
                 <Col xs={12}>
