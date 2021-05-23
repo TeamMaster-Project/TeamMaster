@@ -104,7 +104,7 @@ state = {
                       <div class="plan__list-value"><i class="fal fa-check check-icon"></i></div>
                   </li>
               </ul>
-              <Button className="mx-2 my-2" style={{ backgroundColor: '#47c2f387', border: "none", color: "#000000ba" }} ><a href={`https:///signup`} style={{ textDecoration: "none", color: "#fff" }}>Subscribe</a></Button>
+              <Button className="mx-2 my-2" disabled={true} style={{ backgroundColor: '#47c2f387', border: "none", color: "#000000ba" }} ><a href={`https:///signup`} style={{ textDecoration: "none", color: "#fff" }}>Subscribe</a></Button>
           </div>
       )
   }
@@ -123,7 +123,7 @@ state = {
                     <h1><img className="" width="50%" src={Logo} /></h1>
                     <h1 className="" >One task management platform</h1>
                     <h1 className="display-5 font-weight-normal" >for<span className="an-text-info" > all your project planning needs</span></h1>
-                    <p className="lead font-weight-normal text-muted mb-4" >Simply define your services and providers, display their availability, and you will have clients both old and new making bookings 24/7.</p>
+                    <p className="lead font-weight-normal text-muted mb-4" >TeamMaster saves time and money while boosting the productivity of your team work.</p>
                     
                     {!this.props.currentUser && (
                             <h1>
@@ -248,12 +248,12 @@ state = {
             <Row className="mt-3 justify-content-center" >
                 <Col xs={12}>
                     <ul className="features__list features--list-main">
+                    {this.createFeatureCard(Images.feature_6, "Multi channel", "Manage multiple projects as an admin, as a moderator or as a member.")}
                         {this.createFeatureCard(Images.feature_1, "Project planning", "Manage your day to day activities")}
+                        {this.createFeatureCard(Images.feature_4, "Live Messaging / Conferencing", "Chat rooms and video rooms are 24/7 live. Join the team call / chat at any time")}
                         {this.createFeatureCard(Images.feature_2, "Chat with your team", "A separate group chat room / chat channel will be created for you once you created your project with your friends")}
                         {this.createFeatureCard(Images.feature_3, "You are safe with TeamMaster", "We do not disclose your personal data chats or video calls and they are end to end encrypted with Jitsi Video Engine and Chatengine.io")}
-                        {this.createFeatureCard(Images.feature_4, "Live Messaging / Conferencing", "Chat rooms and video rooms are 24/7 live. Join the team call / chat at any time")}
                         {this.createFeatureCard(Images.feature_5, "Integrate to your GitHub/BitBucket version controller", "This feature is under construction")}
-                        {this.createFeatureCard(Images.feature_6, "Multi channel", "Manage multiple projects as an admin, as a moderator or as a member.")}
                     </ul>
                 </Col>
             </Row>
@@ -291,13 +291,13 @@ state = {
                     <footer class="pt-4 my-md-5 pt-md-5 border-top">
                         <div class="row">
                             <div class="col-12 col-md-2">
-                                <img class="mb-2" src='' alt="" height="24" />
-                                <small class="d-block mb-3 text-muted">© 2020</small>
+                                <img class="mb-2" src={Logo} alt="" height="24" />
+                                <small class="d-block mb-3 text-muted">© 2021</small>
                             </div>
                             <div class="col-12 col-md-5">
                                 <h5>Team Master</h5>
                                 <p>
-                                    We are a group of experienced, young and energetic individuals who believe in making the Sri Lankan IT and mobile app space, an exciting and innovative place to be. We combine years of experience, both nationally and internationally, with the best of the brains in the country to develop disruptive products both locally and internationally.
+                                    We are a group of experienced, young and energetic individuals who believe in making the Sri Lankan IT space, an exciting and innovative place to be. We combine years of experience, with the best of the brains in the country to develop disruptive products both locally and internationally.
                                 </p>
                             </div>
                             <div class="col-12 col-md-5">
