@@ -3,6 +3,7 @@ import "./index.css";
 import TeamMasterImg from "../../assets/images/Logo/Success.jpg";
 import Logo from "../../assets/images/Logo/TMLogo1.png";
 import Mihindu from "../../assets/images/Team/mihindu.jpg";
+import Sanjula from "../../assets/images/Team/sanjula.jpeg";
 import Darshana from "../../assets/images/Team/Darshana.jpeg";
 import Kasun from "../../assets/images/Team/Kasun.jpg";
 import PreLoader from "../PreLoader/PreLoader";
@@ -78,7 +79,7 @@ class ContactUs extends Component {
 
                                       <div class="col-xl-3 col-md-6 mb-4">
                                         <div class="card border-0 shadow">
-                                          <img src="https://source.unsplash.com/9UVmlIb0wJU/500x350" class="card-img-top" alt="..." />
+                                          <img src={Sanjula} class="card-img-top" alt="..." />
                                           <div class="card-body text-center">
                                             <h6 class="card-title mb-0">Sanjula</h6>
                                             <div class="card-text text-black-50">Software Engineer</div>
